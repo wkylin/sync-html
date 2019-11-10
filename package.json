@@ -1,0 +1,13 @@
+{
+  "name": "sync-html",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wkylin",
+  "license": "MIT",
+  "scripts": {
+    "start": "browser-sync start --server --files '*.css, *.html, *.js'"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}

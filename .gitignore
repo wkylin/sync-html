@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+
+# Project exclude paths
+/node_modules/
