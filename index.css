@@ -9,4 +9,15 @@ body, html{
 }
 h3{
   margin: 30px;
+  font-size:30px;
+  text-shadow:1px 1px 0 palegoldenrod;
+  /*background-image: -webkit-gradient(linear, 0% 0%, 25% 100%, from(#ff2c2c), to(#7a5e91));*/
+  background-image: linear-gradient(to right, dimgrey 50%, darkgray 50%);
+  background-size: 200%;
+  /*-webkit-text-fill-color: transparent;*/
+  transition: background-position 0.5s;
 }
+h3:hover{
+  background-position: -100%;
+}
+
