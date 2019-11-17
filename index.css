@@ -1,12 +1,171 @@
-*{
-  padding:0;
-  margin:0;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
 }
-body, html{
-  height: 100%;
-  width: 100%;
-  text-align:center;
+
+body {
+  line-height: 1;
 }
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+:focus {
+  outline: 0;
+}
+
+ins {
+  text-decoration: none;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  color: #252527;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background: #fff;
+}
+
+h1, h2 {
+  color: #252527;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+p {
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+}
+
+a, a:visited {
+  color: #252527;
+  text-decoration: none;
+  border-bottom: 2px solid #ecd018;
+}
+
+a:hover, a:active {
+  color: #252527;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+strong {
+  font-weight: bold;
+}
+
+small {
+  font-size: 11px;
+  font-weight: normal;
+}
+
+label {
+  color: #252527;
+  clear: left;
+  float: left;
+}
+
+em {
+  font-style: italic;
+}
+
+.black {
+  color: #252527;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
+
+.clearMargins {
+  margin: 0;
+  padding: 0;
+}
+
+.clearBoth {
+  clear: both;
+}
+
+.alignLeft {
+  float: left;
+}
+
+.alignRight {
+  float: right;
+}
+
+img.alignLeft {
+  float: left;
+  padding: 0 15px 5px 0;
+}
+
+img.alignRight {
+  float: right;
+  padding: 0 0 5px 15px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
 h3{
   margin: 30px;
   font-size:30px;
@@ -16,8 +175,84 @@ h3{
   background-size: 200%;
   /*-webkit-text-fill-color: transparent;*/
   transition: background-position 0.5s;
+  text-align:center;
+  padding: 20px 0;
 }
 h3:hover{
   background-position: -100%;
 }
 
+span.flash {
+  background: #ecd018;
+  padding: 1px 1px;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  position: relative;
+}
+
+span.flash i {
+  visibility: hidden;
+}
+
+span.flash span {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background: #ecd018;
+  transition: top 0.2s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  line-height: 50px;
+}
+
+span.flash span:first-child {
+  display: inline;
+  z-index: 1;
+}
+
+span.flash:hover, span.flash.open {
+  background: none;
+}
+
+span.flash:hover span, span.flash.open span {
+  transition: all 0.2s;
+  top: auto;
+}
+
+span.flash:hover span.designer, span.flash.open span.designer {
+  top: -96px;
+  -webkit-transform: perspective(100px) rotateX(20deg);
+   transform:perspective(100px) rotateX(20deg);
+}
+
+span.flash:hover span.developer, span.flash.open span.developer {
+  top: -44px;
+  -webkit-transform: perspective(100px) rotateX(-20deg);
+  transform: perspective(100px) rotateX(-20deg);
+}
+
+span.flash:hover span.entrepreneur, span.flash.open span.entrepreneur {
+  -webkit-transform: perspective(100px) rotateX(20deg);
+  transform: perspective(100px) rotateX(20deg);
+  top: 0;
+}
+
+span.flash:hover span.speaker, span.flash.open span.speaker {
+  top: 52px;
+  -webkit-transform: perspective(100px) rotateX(-20deg);
+  transform: perspective(100px) rotateX(-20deg);
+}
+
+span.flash:hover span.teacher, span.flash.open span.teacher {
+  -webkit-transform: perspective(200px) rotateX(40deg);
+  transform: perspective(200px) rotateX(40deg);
+  top: 92px;
+}
+
+p.text{
+  height: 49px;
+  line-height:49px;
+  text-align:center;
+}
