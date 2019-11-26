@@ -256,3 +256,39 @@ p.text{
   line-height:49px;
   text-align:center;
 }
+
+
+.snake{
+  width: 90px;
+  height: 90px;
+  margin:0 auto;
+  position:relative;
+  background:aqua;
+}
+
+.snake:before{
+  content:'';
+  position: absolute;
+  top:-5px;
+  right:-5px;
+  bottom: -5px;
+  left:-5px;
+  border:5px solid #ff00ff88;
+  /*background:pink;*/
+  animation: move 5s linear infinite;
+}
+
+@keyframes move {
+  0%, 100%{
+    clip: rect(0, 100px, 5px, 0);
+  }
+  25%{
+    clip: rect(0, 100px, 100px, 95px);
+  }
+  50%{
+    clip: rect(95px, 100px, 100px, 0);
+  }
+  75%{
+    clip: rect(0, 5px, 100px, 0);
+  }
+}
