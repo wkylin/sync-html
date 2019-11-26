@@ -1,3 +1,83 @@
+function *generator(i){
+  yield i;
+  yield i*2;
+}
+const gen = generator(10);
+// console.log(gen.next().value);
+// console.log(gen.next().value);
+
+const firstPromise = new Promise((res, rej) => {
+  setTimeout(res, 500, 'one');
+});
+
+const secondPromise = new Promise((res, rej) => {
+  setTimeout(res, 100, 'two');
+});
+
+// Promise.race([firstPromise, secondPromise]).then(res => console.log(res));
+
+
+let personItem = { name: "Lydia"};
+const members = [personItem];
+personItem = null;
+// console.log(members);
+
+const studentItem = {
+  name: 'Lydia',
+  age: 21
+};
+
+for(const item in studentItem){
+  // console.log(item);
+}
+
+// console.log(3 + 4 + '5');
+
+// const num = parseInt('7*6', 10);
+
+
+const arrMap = [1, 2, 3].map((num) => {
+  // if(typeof num === 'number') return;
+  return num * 2;
+});
+// console.log(arrMap);
+
+function getInfo(member, year){
+  member.name = "Lydia";
+  year = '1998';
+}
+
+const dogName = {name: 'Sarah'};
+const dogYear = '1997';
+getInfo(dogName, dogYear);
+
+console.log(dogName, dogYear);
+
+const nest = (items, id = null, link = 'parent_id') =>{
+  return items.filter(item => item[link] === id)
+    .map(item => ({ ...item, children: nest(items, item.id) }));
+};
+
+const comments = [
+  { id: 2, parent_id: 1 },
+  { id: 3, parent_id: 1 },
+  { id: 4, parent_id: 2 },
+  { id: 5, parent_id: 4 },
+  { id: 1, parent_id: null },
+];
+const nestedComments = nest(comments);
+
+console.log(nestedComments);
+
+
+
+
+
+
+
+
+
+
 function parseQueryString(url) {
   let obj = {};
   let keyValue = [];
@@ -13,7 +93,7 @@ function parseQueryString(url) {
   return obj;
 }
 
-console.log(parseQueryString('http://www.baidu.com?a=1&b=2'));
+// console.log(parseQueryString('http://www.baidu.com?a=1&b=2'));
 
 
 // console.log(typeof fn);
