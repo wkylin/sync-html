@@ -1,3 +1,101 @@
+function parseQueryString(url) {
+  let obj = {};
+  let keyValue = [];
+  let key = "",
+    value = "";
+  let paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+  for (let i in paraString) {
+    keyValue = paraString[i].split("=");
+    key = keyValue[0];
+    value = keyValue[1];
+    obj[key] = value;
+  }
+  return obj;
+}
+
+console.log(parseQueryString('http://www.baidu.com?a=1&b=2'));
+
+
+// console.log(typeof fn);
+// function fn(){
+//
+// }
+// let fn;
+
+function query(str){
+  let obj = {};
+  for(let i=0; i< str.length; i++){
+    
+    if(!obj[str.charAt(i)]){
+      obj[str.charAt(i)] = 1;
+    } else {
+      obj[str.charAt(i)] = obj[str.charAt(i)]++;
+    }
+  }
+  let max = 0;
+  let maxStr = '';
+  for (let item in obj) {
+    if (obj[item] > max) {
+      max = obj[item];
+      maxStr = item;
+    }
+  }
+  return {
+    max,
+    maxStr
+  }
+}
+
+// const maxStrs = query('aabbccccccc');
+// console.log('maxStrs',maxStrs);
+
+// let a = new String('hello');
+// a.pro = 'world';
+
+
+// let a = new Number(10);
+// a.pro = 10;
+
+// console.log(a);
+// console.log(a.pro);
+// console.log(a.pro + a);
+
+
+
+
+// console.log('a' in window);
+// if('a' in window){
+//   let a = 10;
+// }
+// console.log(a);
+
+// let f = true;
+// if(f=== true){
+//   let a = 10;
+// }
+//
+// function fn(){
+//   let b = 20;
+//   c = 30;
+// }
+//
+// fn();
+
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+// function fn(a){
+//   console.log(a);
+//   let a = 2;
+//   function a(){}
+//   console.log(a);
+// }
+
+// fn(1);
+
+
+
 let array = [
   { rand: 1, id: 2 },
   { rand: 1, id: 1 },
@@ -22,13 +120,13 @@ function outer(){
     let b = 2;
     function innermost(){
       let c = 3;
-      console.log(a, b, c);
+      // console.log(a, b, c);
     }
     innermost();
-    console.log(a,b);
+    // console.log(a,b);
   }
   inner();
-  console.log(a)
+  // console.log(a)
 }
 
 // outer();
@@ -230,8 +328,8 @@ function add(a, b) {
   return a + b;
 }
 
-console.log(add.call(null, ...[1, 2])); // 3
-console.log(add.apply(null, [1, 2])); // 3
+// console.log(add.call(null, ...[1, 2])); // 3
+// console.log(add.apply(null, [1, 2])); // 3
 
 // 深冻结函数.
 function deepFreeze(obj) {
@@ -267,8 +365,8 @@ let wills = {
     name: "developer"
   }
 };
-deepFreeze(person);
-wills.profession.name = "doctor"; // TypeError: Cannot assign to read only property 'name' of object
+// deepFreeze(person);
+// wills.profession.name = "doctor"; // TypeError: Cannot assign to read only property 'name' of object
 
 let toString = Object.prototype.toString;
 // console.log(toString.call(new Date));
@@ -296,7 +394,7 @@ function distinctObj(arr, key) {
   return result;
 }
 
-console.log(distinctObj([{ a: 1 },{a: 3}, { a: 2 }, { a: 3 }, { a: 1 }], 'a'))
+// console.log(distinctObj([{ a: 1 },{a: 3}, { a: 2 }, { a: 3 }, { a: 1 }], 'a'))
 
 let arrObj = [{
   "name": "ZYTX",
@@ -327,6 +425,6 @@ let arrObj = [{
 //   }, [])
 // }
 
-console.log(distinctObj(arrObj, 'name'));
-console.log(distinctObj([{ "name": 1, 'b':2 }, { "name": 3, "c":2 }, { "name": 2 }, { "name": 3 }, { "name": 1 }], 'name'));
+// console.log(distinctObj(arrObj, 'name'));
+// console.log(distinctObj([{ "name": 1, 'b':2 }, { "name": 3, "c":2 }, { "name": 2 }, { "name": 3 }, { "name": 1 }], 'name'));
 
