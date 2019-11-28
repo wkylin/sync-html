@@ -1,7 +1,174 @@
-function *generator(i){
-  yield i;
-  yield i*2;
+// 浏览器模式决定：1）发送给服务端的UA；2）默认的文本模式；3）如何解析条件注释。它在请求发送前就已经确定，且不受服务端控制。
+// 文本模式决定：1）排版引擎；2）JS引擎。它在浏览器得到响应后最终确定，服务端可通过doctype或X-UA-Compatible来控制。
+
+// <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+// Window.getComputedStyle() Element.currentStyle
+
+// virtual DOM不一样,vue会跟踪每一个组件的依赖关系, 不需要重新渲染整个组件树.​​
+// 而对于React而言,每当应用的状态被改变时,全部组件都会重新渲染,所以react中会需要shouldComponentUpdate这个生命周期函数方法来进行控制。
+
+// setState是一个异步的过程，它会集齐一批需要更新的组件然后一起更新。 isBatchingUpdates
+
+
+// this.setState({
+//     total: 0
+// })
+// this.setState((prevState, props) => ({
+//     total: prevState.total + 1
+//  }))
+
+//setTimeout(this.showTotal, 0);
+//
+// showTotal(){
+//     console.log(this.state.total) // 这里可以获取到更新值
+// }
+
+
+
+
+function createRandomNumber(num, maxNum) {
+  if (!maxNum || !num) {
+    alert("please input two Number");
+    return false;
+  }
+  let flag = 0, arr = [];
+  if (maxNum - num < 0) {
+    flag = maxNum;
+    maxNum = num;
+    num = flag;
+  }
+  for (let i = 0; i < maxNum; i++) {
+    arr[i] = i - 0 + 1;
+  }
+  
+  arr.sort(function (p1, p2) {
+    return 0.5 - Math.random();
+  });
+  arr.length = num;
+  return arr;
 }
+
+console.log(createRandomNumber(100, 100));
+
+function randomHexColor() { //随机生成十六进制颜色
+  let hex = Math.floor(Math.random() * 16777216).toString(16); //生成ffffff以内16进制数
+  while (hex.length < 6) { //while循环判断hex位数，少于6位前面加0凑够6位
+    hex = '0' + hex;
+  }
+  return '#' + hex; //返回‘#’开头16进制颜色
+}
+
+function randomRgbColor() { //随机生成RGB颜色
+  let r = Math.floor(Math.random() * 256); //随机生成256以内r值
+  let g = Math.floor(Math.random() * 256); //随机生成256以内g值
+  let b = Math.floor(Math.random() * 256); //随机生成256以内b值
+  return `rgb(${r},${g},${b})`; //返回rgb(r,g,b)格式颜色
+}
+
+function randomRgbaColor() { //随机生成RGBA颜色
+  let r = Math.floor(Math.random() * 256); //随机生成256以内r值
+  let g = Math.floor(Math.random() * 256); //随机生成256以内g值
+  let b = Math.floor(Math.random() * 256); //随机生成256以内b值
+  let alpha = Math.random(); //随机生成1以内a值
+  return `rgb(${r},${g},${b},${alpha})`; //返回rgba(r,g,b,a)格式颜色
+}
+
+
+let series = ['a1', 'a3', 'a1', 'a5', 'a7', 'a1', 'a3', 'a4', 'a2', 'a1'];
+
+let results = series.reduce(function (accumulator, current) {
+  if (current in accumulator) {
+    accumulator[current]++;
+  } else {
+    accumulator[current] = 1;
+  }
+  return accumulator;
+}, {});
+
+// console.log(JSON.stringify(results));
+
+
+// for (let i= 0; i<5; i++){
+//   setTimeout(function(){
+//     console.log(i);
+//   }, i*1000)
+// }
+// for (var i= 0; i<5; i++){
+//   setTimeout(function(){
+//     console.log(i);
+//   }, i*1000)
+// }
+
+
+function gtn(listArr) {
+  let getObjType = Object.prototype.toString;
+  let res = {};
+  listArr.forEach((item) => {
+    let key = getObjType.call(item).split(' ')[1].slice(0, -1);
+    res[key] = (res[key] || 0) + 1;
+  });
+  return res;
+}
+
+let ress = gtn(['1', 2, { a: 3 }, '22', 333, { b: 33 }, ['22', 22]]);
+// console.log(ress);
+
+
+// (function() {
+//   console.log(1);
+//   setTimeout(function(){ console.log(2);}, 0);
+//   new Promise(function(resolve,reject){
+//     console.log(3);
+//     resolve(4);
+//   }).then(function(val){
+//     console.log(val);
+//   });
+//
+//   console.log(5);
+// })();
+
+function abc(str) {
+  return str.replace(/(.)\1+/g, '$1');
+}
+
+// console.log(abc('1223'));
+// console.log(removeRepetition('ddccd'));
+function removeRepetition(str) {
+  let result = '';
+  if (str != '') {
+    result = str[0];
+    for (let i = 1; i < str.length; i++) {
+      if (str[i] != str[i - 1]) {
+        result += str[i];
+      }
+    }
+  }
+  return result;
+}
+
+let timer1 = (cb, time) => {
+  (function loop() {
+    cb();
+    setTimeout(loop, time);
+  })();
+};
+
+let timer2 = (cb, time) => {
+  cb();
+  setInterval(cb, time);
+};
+
+// timer1(()=> console.log('aaa'), 1000);
+
+// timer2(() => console.log('bbb'), 1000);
+
+
+function* generator(i) {
+  yield i;
+  yield i * 2;
+}
+
 const gen = generator(10);
 // console.log(gen.next().value);
 // console.log(gen.next().value);
@@ -17,7 +184,7 @@ const secondPromise = new Promise((res, rej) => {
 // Promise.race([firstPromise, secondPromise]).then(res => console.log(res));
 
 
-let personItem = { name: "Lydia"};
+let personItem = { name: "Lydia" };
 const members = [personItem];
 personItem = null;
 // console.log(members);
@@ -27,7 +194,7 @@ const studentItem = {
   age: 21
 };
 
-for(const item in studentItem){
+for (const item in studentItem) {
   // console.log(item);
 }
 
@@ -40,20 +207,21 @@ const arrMap = [1, 2, 3].map((num) => {
   // if(typeof num === 'number') return;
   return num * 2;
 });
+
 // console.log(arrMap);
 
-function getInfo(member, year){
+function getInfo(member, year) {
   member.name = "Lydia";
   year = '1998';
 }
 
-const dogName = {name: 'Sarah'};
+const dogName = { name: 'Sarah' };
 const dogYear = '1997';
 getInfo(dogName, dogYear);
 
-console.log(dogName, dogYear);
+// console.log(dogName, dogYear);
 
-const nest = (items, id = null, link = 'parent_id') =>{
+const nest = (items, id = null, link = 'parent_id') => {
   return items.filter(item => item[link] === id)
     .map(item => ({ ...item, children: nest(items, item.id) }));
 };
@@ -63,19 +231,11 @@ const comments = [
   { id: 3, parent_id: 1 },
   { id: 4, parent_id: 2 },
   { id: 5, parent_id: 4 },
-  { id: 1, parent_id: null },
+  { id: 1, parent_id: null }
 ];
 const nestedComments = nest(comments);
 
-console.log(nestedComments);
-
-
-
-
-
-
-
-
+// console.log(nestedComments);
 
 
 function parseQueryString(url) {
@@ -102,11 +262,11 @@ function parseQueryString(url) {
 // }
 // let fn;
 
-function query(str){
+function query(str) {
   let obj = {};
-  for(let i=0; i< str.length; i++){
+  for (let i = 0; i < str.length; i++) {
     
-    if(!obj[str.charAt(i)]){
+    if (!obj[str.charAt(i)]) {
       obj[str.charAt(i)] = 1;
     } else {
       obj[str.charAt(i)] = obj[str.charAt(i)]++;
@@ -123,7 +283,7 @@ function query(str){
   return {
     max,
     maxStr
-  }
+  };
 }
 
 // const maxStrs = query('aabbccccccc');
@@ -139,8 +299,6 @@ function query(str){
 // console.log(a);
 // console.log(a.pro);
 // console.log(a.pro + a);
-
-
 
 
 // console.log('a' in window);
@@ -175,12 +333,11 @@ function query(str){
 // fn(1);
 
 
-
 let array = [
   { rand: 1, id: 2 },
   { rand: 1, id: 1 },
   { rand: 1, id: 3 },
-  { rand: 1, id: 3 },
+  { rand: 1, id: 3 }
 ];
 
 let aRaa = array.sort((a, b) => a.id - b.id > 0 ? 1 : -1);
@@ -194,17 +351,21 @@ let aRaa = array.sort((a, b) => a.id - b.id > 0 ? 1 : -1);
 
 // boolean 转成number string 转成number
 
-function outer(){
+function outer() {
   let a = 1;
-  function inner(){
+  
+  function inner() {
     let b = 2;
-    function innermost(){
+    
+    function innermost() {
       let c = 3;
       // console.log(a, b, c);
     }
+    
     innermost();
     // console.log(a,b);
   }
+  
   inner();
   // console.log(a)
 }
@@ -224,11 +385,13 @@ let g2 = 'g2';
 // console.log(g1); // no run
 // console.log(g2); // no run
 
-function sayHi(name){
+function sayHi(name) {
   let message = `Hi, ${name}`;
-  function greeting(){
+  
+  function greeting() {
     console.log(message);
   }
+  
   return greeting;
 }
 
@@ -244,55 +407,62 @@ const arr = [10, 12, 15, 21];
 // }
 
 let param = 1;
-function myScope(){
+
+function myScope() {
   let param = 2;
   console.log(param);
 }
 
 this.prop = 1;
-function myContext(){
 
+function myContext() {
+  
   this.prop = 2;
   // console.log(this);
   console.log(prop);
-
+  
 }
+
 // let myInstance = new myContext();
 // console.log('my:',myInstance);
 // console.log('win', new myContext())
 // myScope();
 
-function Dinosaur(name){
+function Dinosaur(name) {
   this.name = name;
   let self = this;
   inner();
-  function inner(){
+  
+  function inner() {
     console.log(this);
     console.log(self);
   }
 }
+
 // let myDinosaur = new Dinosaur('Dino');
 // console.log(myDinosaur)
 
 
 function Bird() {
-  this. wings = 2;
+  this.wings = 2;
 }
+
 let fakeBird = Bird();
 // console.log(fakeBird);
 
 let realBird = new Bird();
+
 // console.log(realBird);
 
 
-function Dog(breed, name){
+function Dog(breed, name) {
   this.breed = breed;
   this.name = name;
 }
 
-Dog.prototype.describe = function(){
-  console.log(`${this.name} is a ${this.breed}`)
-}
+Dog.prototype.describe = function () {
+  console.log(`${this.name} is a ${this.breed}`);
+};
 const rusty = new Dog('Beagle', 'Rusty');
 
 // console.log(Dog.prototype);
@@ -310,7 +480,9 @@ const rusty = new Dog('Beagle', 'Rusty');
 
 // for/in 不能找到继承的属性，因为是不可枚举的
 
-function Car(){}
+function Car() {
+}
+
 Car.prototype.wheels = 4;
 Car.prototype.airbags = 1;
 let myCar = new Car();
@@ -322,7 +494,7 @@ myCar.color = 'black';
 // console.log(myCar.hasOwnProperty('airbags'));
 // console.log(myCar.hasOwnProperty('color'));
 
-let dog = {legs: 4}
+let dog = { legs: 4 };
 let myDog = Object.create(dog);
 // console.log(myDog.hasOwnProperty('legs'));
 // console.log(myDog.__proto__ === dog);
@@ -330,26 +502,26 @@ let myDog = Object.create(dog);
 // console.log(Object.getOwnPropertyNames(myDog));
 // console.log(Object.getOwnPropertySymbols(myDog));
 
-let objProto = { text: 'original'}
+let objProto = { text: 'original' };
 let objAttToProto = Object.create(objProto);
 // objProto.text = 'prototype changed';
 // console.log(objAttToProto.text);
-objProto = { text: 'replacing property'};
+objProto = { text: 'replacing property' };
 // console.log(objAttToProto.text);
 
-const person = function (name){
-  const message =  `Hello! My name is ${name}`;
+const person = function (name) {
+  const message = `Hello! My name is ${name}`;
   return {
     greeting: () => {
       console.log(this);
       console.log(message);
     },
-    foo: function() {
+    foo: function () {
       console.log(this);
       console.log(message);
     }
-  }
-}
+  };
+};
 
 const will = person('Will');
 // will.greeting();
@@ -361,19 +533,19 @@ const will = person('Will');
 const isGreater = (a, b) => {
   return new Promise((resolve, reject) => {
     if (a > b) {
-      resolve(true)
+      resolve(true);
     } else {
-      reject(false)
+      reject(false);
     }
-  })
-}
+  });
+};
 isGreater(1, 2)
   .then(result => {
     // console.log('greater')
   })
   .catch(result => {
     // console.log('smaller')
-  })
+  });
 
 function putDookieInAnyArray(arr) {
   return [...arr, 'dookie'];
@@ -383,25 +555,28 @@ const result = putDookieInAnyArray(['I', 'really', "don't", 'like']);
 // console.log(result);
 const persons = {
   name: 'Todd',
-  age: 29,
+  age: 29
 };
 
 const copyOfTodd = { ...persons };
+
 // console.log(copyOfTodd)
 
-function Person(name){
+function Person(name) {
   this.name = name;
 }
 
-function Student(name, studentId){
+function Student(name, studentId) {
   Person.call(this, name);
   this.studentId = studentId;
 }
+
 // Student.prototype = new Person();
 Student.prototype = Object.create(Person.prototype);
 Student.prototype.constructor = Student;
 
 let student = new Student('wkylin', '001');
+
 // console.log(student);
 
 function add(a, b) {
@@ -415,16 +590,16 @@ function add(a, b) {
 function deepFreeze(obj) {
   // 取回定义在obj上的属性名
   let propNames = Object.getOwnPropertyNames(obj);
-
+  
   // 在冻结自身之前冻结属性
   propNames.forEach(function (name) {
     let prop = obj[name];
-
+    
     // 如果prop是个对象，冻结它
     if (typeof prop == 'object' && prop !== null)
       deepFreeze(prop);
   });
-
+  
   // 冻结自身(no-op if already frozen)
   return Object.freeze(obj);
 }
