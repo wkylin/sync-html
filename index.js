@@ -1,3 +1,68 @@
+for(var i = 0; i<5; i++){
+  // console.log(i);
+  // setTimeout(()=> console.log(i), 1000);
+}
+// console.log('iii', i);
+
+const firstCharUpper = (str) =>{
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+console.log(firstCharUpper('wkylin'));
+
+
+
+function myLocalScope() {
+  var myVar = 5;
+  console.log(myVar);
+}
+// myLocalScope();
+// console.log(myVar);
+
+
+var myGlobal= 10;
+function fun1() {
+  // oopsGlobal = 5;
+  var oopsGlobal = 5;
+}
+
+function fun2(){
+  var output = "";
+  if(typeof myGlobal != 'undefined'){
+    output += 'myGlobal: ' + myGlobal;
+  }
+  if(typeof oopsGlobal != 'undefined'){
+    output += 'oopsGlobal: ' + oopsGlobal;
+  }
+  console.log(typeof oopsGlobal);
+  console.log(output);
+}
+
+// fun1();
+// fun2();
+
+function get_object_first_attribute(data){
+  for (let key in data)
+    return data[key];
+}
+
+
+function myFibonacci(n) {
+  if (n < 0) {
+    console.log('You Should input a Positive integer!');
+    return;
+  }
+  if (n === 0) {
+    return 0;
+  }
+  if (n === 1) {
+    return 1;
+  }
+  if (n > 1) {
+    return myFibonacci(n - 1) + myFibonacci(n - 2);
+  }
+}
+
 // 浏览器模式决定：1）发送给服务端的UA；2）默认的文本模式；3）如何解析条件注释。它在请求发送前就已经确定，且不受服务端控制。
 // 文本模式决定：1）排版引擎；2）JS引擎。它在浏览器得到响应后最终确定，服务端可通过doctype或X-UA-Compatible来控制。
 
@@ -49,7 +114,7 @@ function createRandomNumber(num, maxNum) {
   return arr;
 }
 
-console.log(createRandomNumber(100, 100));
+// console.log(createRandomNumber(100, 100));
 
 function randomHexColor() { //随机生成十六进制颜色
   let hex = Math.floor(Math.random() * 16777216).toString(16); //生成ffffff以内16进制数
