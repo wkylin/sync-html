@@ -1,3 +1,21 @@
+// let age = '6';
+// console.log(window.age);
+
+
+
+
+var str='aabb bb';
+var strCopy = str.split();
+str = 'aaa ccc';
+// console.log(str);
+// console.log(strCopy);
+
+
+
+// var age = prompt('What is your age');
+
+// console.log(age);
+
 for(var i = 0; i<5; i++){
   // console.log(i);
   // setTimeout(()=> console.log(i), 1000);
@@ -8,7 +26,7 @@ const firstCharUpper = (str) =>{
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-console.log(firstCharUpper('wkylin'));
+// console.log(firstCharUpper('wkylin'));
 
 
 
