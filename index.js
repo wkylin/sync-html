@@ -2,54 +2,81 @@
 // console.log(window.age);
 
 
+// for in 可枚举的属性
+// for of 可迭代对象的生成器的值
+let arrs = [1, 2, 3, 4];
+let strs = 'wkylin';
+for (let value of arrs) {
+  console.log(value);
+}
+
+for(let value of strs){
+  console.log(value);
+}
 
 
-var str='aabb bb';
+function getNumberParts(number) {
+  const regNumber = /(\d+)\.(\d+)/;
+  const matches = number.toString().match(regNumber);
+  if (matches === null) {
+    return null;
+  }
+  const [, integer, fractional] = matches;
+  return {
+    integer,
+    fractional
+  };
+}
+
+// console.log(getNumberParts(1234.56));
+
+
+var str = 'aabb bb';
 var strCopy = str.split();
 str = 'aaa ccc';
 // console.log(str);
 // console.log(strCopy);
 
 
-
 // var age = prompt('What is your age');
 
 // console.log(age);
 
-for(var i = 0; i<5; i++){
+for (var i = 0; i < 5; i++) {
   // console.log(i);
   // setTimeout(()=> console.log(i), 1000);
 }
 // console.log('iii', i);
 
-const firstCharUpper = (str) =>{
+const firstCharUpper = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 // console.log(firstCharUpper('wkylin'));
 
 
-
 function myLocalScope() {
   var myVar = 5;
   console.log(myVar);
 }
+
 // myLocalScope();
 // console.log(myVar);
 
 
-var myGlobal= 10;
+var myGlobal = 10;
+
 function fun1() {
   // oopsGlobal = 5;
   var oopsGlobal = 5;
 }
 
-function fun2(){
+function fun2() {
   var output = "";
-  if(typeof myGlobal != 'undefined'){
+  if (typeof myGlobal != 'undefined') {
     output += 'myGlobal: ' + myGlobal;
   }
-  if(typeof oopsGlobal != 'undefined'){
+  if (typeof oopsGlobal != 'undefined') {
     output += 'oopsGlobal: ' + oopsGlobal;
   }
   console.log(typeof oopsGlobal);
@@ -59,7 +86,7 @@ function fun2(){
 // fun1();
 // fun2();
 
-function get_object_first_attribute(data){
+function get_object_first_attribute(data) {
   for (let key in data)
     return data[key];
 }
@@ -106,8 +133,6 @@ function myFibonacci(n) {
 // showTotal(){
 //     console.log(this.state.total) // 这里可以获取到更新值
 // }
-
-
 
 
 function createRandomNumber(num, maxNum) {
