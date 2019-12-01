@@ -1,5 +1,178 @@
+
+class Parent{
+  constructor(fname, lname) {
+    this.fname = fname;
+    this.lname = lname;
+  }
+}
+
+class child extends Parent{
+  constructor(age) {
+    super('Harry', 'Dim');
+    this.age = age;
+  }
+  
+  showUp() {
+    console.log(this.fname);
+    console.log(`Your age is ${this.age}`);
+  }
+}
+
+const children  = new child(23);
+// console.log(children.showUp());
+// console.log(children.fname);
+// console.log(children.lname);
+
+
+class oClass {
+  
+  constructor() {
+    // console.log(oClass.onCall());
+    // console.log(this.constructor.onCall());
+  }
+  static onCall(){
+    return 'this is a static Method';
+  }
+  
+  static onCall2(){
+    return `${this.onCall()} called using another static method`;
+  }
+}
+const st = new oClass();
+// st.onCall();
+// console.log(oClass.onCall());
+// console.log(oClass.onCall2());
+
+
+let f = function(){
+  this.a = 1;
+  this.b = 2;
+};
+
+let o = new f();
+o.d = 5;
+
+f.prototype.b = 3;
+f.prototype.c = 4;
+
+// console.log(o.a);
+// console.log(o.b);
+// console.log(o.c);
+// console.log(o.d);
+// console.log(o);
+// console.log(f);
+// console.log(f.prototype);
+
+
+
+class Model{
+  constructor(Mno, Mname) {
+    this.Mno = Mno;
+    this.Mname = Mname;
+  }
+  
+  show() {
+    console.log('Model Number',this.Mno);
+  }
+}
+const obj1 = new Model(550, 'BMW');
+const obj2 = new Model(660, 'Fort');
+
+// console.log(obj1 instanceof Model);
+// console.log(obj2.show());
+
+// Object = Properties + Methods
+
+
+const objA = {
+  f1: 'a',
+  f2: 'b',
+  f3: 'c',
+};
+
+for(let k in objA){
+  // console.log(objA[k]);
+}
+// for(let k of objA){
+//   // console.log(k); // not iterable
+// }
+
+
+const aa = [1, 2, 3, 4, 5];
+// console.log(aa.copyWithin(1, 2, 4));
+// console.log(aa);
+
+// console.log(aa.slice(-2));
+// console.log(aa.slice(2));
+//
+// console.log(aa.splice(1, 0, 6,7));
+// console.log(aa);
+
+
+// 持续集成指的是，频繁地（一天多次）将代码集成到主干。
+// 持续集成的目的，就是让产品可以快速迭代，同时还能保持高质量。它的核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。
+// 持续交付（Continuous delivery）指的是，频繁地将软件的新版本，交付给质量团队或者用户，以供评审。
+// 持续部署（continuous deployment）是持续交付的下一步，指的是代码通过评审以后，自动部署到生产环境。
+// 持续集成强调开发人员提交了新代码之后，立刻进行构建、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。
+// 持续交付在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境的「类生产环境」（production-like environments）中。比如，我们完成单元测试后，可以把代码部署到连接数据库的 Staging 环境中更多的测试。如果代码没有问题，可以继续手动部署到生产环境中。
+// 持续部署则是在持续交付的基础上，把部署到生产环境的过程自动化。
+
+
+for (let i = 1; i < 5; i++) {
+  // if(i==3) break;
+  if (i == 3) continue;
+  // console.log(i);
+}
+
+
+function promiseAll(promises) {
+  return new Promise(function (resolve, reject) {
+    if (!Array.isArray(promises)) {
+      return reject(new TypeError('arguments must be an array'));
+    }
+    let resolvedCounter = 0;
+    let promiseNum = promises.length;
+    let resolvedValues = new Array(promiseNum);
+    for (let i = 0; i < promiseNum; i++) {
+      Promise.resolve(promises[i]).then(function (value) {
+        resolvedCounter++;
+        resolvedValues[i] = value;
+        if (resolvedCounter === promiseNum) {
+          return resolve(resolvedValues);
+        }
+      }, function (reason) {
+        return reject(reason);
+      });
+    }
+  });
+}
+
+
+function wait(delay) {
+  return new Promise(resolve => setTimeout(() => resolve(), delay));
+}
+
+// console.log(wait(1000).then(()=> console.log('wait')));
+
+
 // let age = '6';
 // console.log(window.age);
+
+
+const pistol = {
+  caliber: 50,
+  trigger() {
+    let self = this;
+    setTimeout(function () {
+      console.log(`${self.caliber} pistol`);
+    }, 1000);
+  }
+  // trigger() {
+  //   setTimeout(() => console.log(`${this.caliber} pistol`), 1000)
+  // }
+};
+
+// pistol.trigger();
 
 
 // for in 可枚举的属性
@@ -7,11 +180,11 @@
 let arrs = [1, 2, 3, 4];
 let strs = 'wkylin';
 for (let value of arrs) {
-  console.log(value);
+  // console.log(value);
 }
 
-for(let value of strs){
-  console.log(value);
+for (let value of strs) {
+  // console.log(value);
 }
 
 
