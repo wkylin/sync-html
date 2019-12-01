@@ -1,4 +1,199 @@
 
+const weakSets = new WeakSet();
+// weakSets.add(1);
+weakSets.add({});
+weakSets.add(()=>{});
+weakSets.add([1]);
+// console.log([...weakSets]);
+
+const wSets = new Set([{}, ()=> {}, new Date()])
+// console.log(wSets.entries);
+// console.log([...wSets]);
+
+// const regNull = Object.create(null);
+const regNull = Object.create({name:'Dim'});
+
+regNull[Symbol.iterator] = () => {
+  const keys = Object.keys(regNull);
+
+  return {
+    next(){
+      const done = keys.length === 0;
+      const key = keys.shift();
+      const value =[key, regNull[key]];
+      return {
+        done, value
+      }
+    }
+  }
+};
+// regNull.age =2;
+// console.log([...regNull]);
+// regNull.age =2;
+// console.log(regNull.name);
+// console.log(regNull.age);
+// console.log(regNull.hasOwnProperty('name'));
+// console.log(regNull.hasOwnProperty('age'));
+// console.log(regNull.__proto__);
+
+const objEmpty= {};
+// console.log(objEmpty);
+const listMap = function(){
+  // return Object.keys(objEmpty).map((item) => [item, regNull[key]])
+  return Object.keys(regNull).map((item) => [item, regNull[key]])
+};
+// console.log(listMap());
+
+
+
+// insertAdjacentHTML()
+// insertAdjacentText()
+
+
+
+
+
+//dataset
+// className
+// classList
+
+
+
+function $ (selector, el) {
+  if (!el) {el = document;}
+  return el.querySelector(selector);
+}
+function $$ (selector, el) {
+  if (!el) {el = document;}
+  return el.querySelectorAll(selector);
+}
+
+// console.log('123456'.split(''));
+
+
+let strReg = 'Welcome to daily tuition';
+let reg= /daily/;
+
+// console.log(strReg.search(reg));
+// console.log([1, 2, 3].join(''));
+
+
+// console.log([...new Set([1, 2, 2, 3,4])]);
+let aSet = new Set();
+let weakSet = new WeakSet();
+// weakSet.add('2');
+// weakSet.add([1, 2]);
+let objSet = {a:'22'};
+let objSet2 = {b: '33'};
+weakSet.add(objSet);
+weakSet.add(objSet2);
+aSet.add(objSet);
+aSet.add('2');
+// console.log(weakSet);
+// console.log(aSet);
+// for(let value of weakSet){
+//   console.log(value);
+// }
+
+// for(let value of aSet){
+//   console.log(value);
+// }
+
+
+let user = {
+  name: 'Daily'
+};
+// console.log(user.name);
+user = null;
+// console.log(user.name);
+
+let weakMap = new WeakMap();
+let obj = {};
+
+weakMap.set(obj, 'Private');
+// console.log(weakMap.get(obj));
+
+// for(let [key, value] of weakMap){
+  // console.log(key);
+  // console.log(value);
+// }
+
+
+const myMaps = new Map();
+let keyString = 'KeyString',
+  keyObj = {},
+  keyFun = function(){};
+myMaps.set(keyString, 'KeyString');
+myMaps.set(keyObj, 'KeyObj');
+myMaps.set(keyFun, "keyFun");
+// console.log(myMaps);
+// console.log(myMaps.get(keyObj));
+
+myMaps.set(NaN, 'Not a Number');
+
+for(let[key, value] of myMaps){
+  // console.log(`Map Keys：${key}, value: ${value}`);
+}
+
+
+
+
+class Em{
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  getEm(){
+    console.log(`Em name: ${this.name}`);
+  }
+}
+
+class Me extends Em{
+  constructor(name,age, salary) {
+    super(name, age);
+    this.salary = salary;
+  }
+  
+  // getEm(){
+  //   console.log(`Me name: ${this.name}, salary: ${this.salary}`);
+  // }
+}
+
+// const mes = new Me('w', 23, 2300);
+// console.log(mes.getEm());
+
+
+let car = {
+  wheel: 'four',
+  model: 'tesla',
+  show(){
+    console.log(`Car model ${this.model}`);
+  }
+};
+
+let bike = {
+  cc: 250,
+  __proto__: car,
+};
+
+let bicycle = {
+  gear:5,
+  __proto__: bike,
+};
+
+// console.log(bicycle.model);
+
+// let bike = {
+//   cc: 250
+// };
+// bike.__proto__ = car;
+// console.log(bike);
+// console.log(bike.cc);
+// console.log(bike.wheel);
+// console.log(bike.model);
+// console.log(bike.show());
+
+
 class Parent{
   constructor(fname, lname) {
     this.fname = fname;
@@ -55,6 +250,9 @@ o.d = 5;
 f.prototype.b = 3;
 f.prototype.c = 4;
 
+for(let key in o){
+  // console.log(o[key]);
+}
 // console.log(o.a);
 // console.log(o.b);
 // console.log(o.c);
