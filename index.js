@@ -1,31 +1,120 @@
+// Immutable 实现的原理是 Persistent Data Structure（持久化数据结构），也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变。同时为了避免 deepCopy 把所有节点都复制一遍带来的性能损耗，Immutable 使用了 Structural Sharing（结构共享），即如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享。
+// 首先需要明白的是React组件状态必须是一个原生JavaScript对象，而不能是一个Immutable对象，因为React的setState方法期望接受一个对象然后使用Object.assign方法将其与之前的状态对象合并。
+// Redux中讲状态（state）主要是指应用状态，而不是组件状态。
+
+
+
+let fName='fName';
+let john = {
+  fName: 'John',
+  lName: 'Doe',
+  driverCar(){
+    let self = this;
+    let ads = () => {
+      console.log(this);
+    };
+    // function ads(){
+    //   console.log(self);
+    //   console.log(self.fName);
+    //   return `${self.fName}`;
+    // }
+    ads();
+    // console.log(`fName: ${this.fName}`);
+  }
+};
+console.log(john.driverCar());
+
+
+
+
+const target ={};
+const handlerAab = {
+  get(){
+    return Reflect.get(target, key);
+  }
+};
+const {proxyAb, revoke} = Proxy.revocable(target, handlerAab)
+
+// console.log(Proxy.revocable(target, handlerAab));
+
+// proxyAb.isUsable = true;
+
+// console.log(proxyAb);
+// revoke();
+
+// console.log(proxyAb);
+
+
+const per = {};
+const handler = {
+  get(target, key) {
+    console.log(`Get on property "${key}"`);
+    if (!key.startsWith('_')) {
+      throw new Error(`Property ${key} is inaccessible`);
+    }
+    return Reflect.get(target, key);
+  }
+};
+const proxy = new Proxy(per, handler);
+
+proxy.number = [1, 2, 3, 4];
+proxy._glo = { a: 'b' };
+
+// console.log(proxy._glo);
+
+
+function mul(mul) {
+  return function (x) {
+    return x * mul;
+  };
+}
+
+let du = mul(2);
+let dx = mul(3);
+// console.log(du(2));
+// console.log(dx(3));
+
+
+let myWords = ['red', 'orange', 'yellow'];
+
+// console.log(myWords.splice(0, 1, 'blue'));
+// console.log(myWords);
+
+// console.log(myWords.splice(0,2));
+
+// 服务器回应的 HTTP 头的Content-Type属性要设为application/json
+// 客户端请求时，也要明确告诉服务器，可以接受 JSON 格式，即请求的 HTTP 头的ACCEPT属性也要设成application/json。
+
 
 const weakSets = new WeakSet();
 // weakSets.add(1);
 weakSets.add({});
-weakSets.add(()=>{});
+weakSets.add(() => {
+});
 weakSets.add([1]);
-// console.log([...weakSets]);
+// console.log([...weakSets]);d
 
-const wSets = new Set([{}, ()=> {}, new Date()])
+const wSets = new Set([{}, () => {
+}, new Date()]);
 // console.log(wSets.entries);
 // console.log([...wSets]);
 
 // const regNull = Object.create(null);
-const regNull = Object.create({name:'Dim'});
+const regNull = Object.create({ name: 'Dim' });
 
 regNull[Symbol.iterator] = () => {
   const keys = Object.keys(regNull);
-
+  
   return {
-    next(){
+    next() {
       const done = keys.length === 0;
       const key = keys.shift();
-      const value =[key, regNull[key]];
+      const value = [key, regNull[key]];
       return {
         done, value
-      }
+      };
     }
-  }
+  };
 };
 // regNull.age =2;
 // console.log([...regNull]);
@@ -36,21 +125,17 @@ regNull[Symbol.iterator] = () => {
 // console.log(regNull.hasOwnProperty('age'));
 // console.log(regNull.__proto__);
 
-const objEmpty= {};
+const objEmpty = {};
 // console.log(objEmpty);
-const listMap = function(){
+const listMap = function () {
   // return Object.keys(objEmpty).map((item) => [item, regNull[key]])
-  return Object.keys(regNull).map((item) => [item, regNull[key]])
+  return Object.keys(regNull).map((item) => [item, regNull[key]]);
 };
 // console.log(listMap());
 
 
-
 // insertAdjacentHTML()
 // insertAdjacentText()
-
-
-
 
 
 //dataset
@@ -58,13 +143,17 @@ const listMap = function(){
 // classList
 
 
-
-function $ (selector, el) {
-  if (!el) {el = document;}
+function $(selector, el) {
+  if (!el) {
+    el = document;
+  }
   return el.querySelector(selector);
 }
-function $$ (selector, el) {
-  if (!el) {el = document;}
+
+function $$(selector, el) {
+  if (!el) {
+    el = document;
+  }
   return el.querySelectorAll(selector);
 }
 
@@ -72,7 +161,7 @@ function $$ (selector, el) {
 
 
 let strReg = 'Welcome to daily tuition';
-let reg= /daily/;
+let reg = /daily/;
 
 // console.log(strReg.search(reg));
 // console.log([1, 2, 3].join(''));
@@ -83,8 +172,8 @@ let aSet = new Set();
 let weakSet = new WeakSet();
 // weakSet.add('2');
 // weakSet.add([1, 2]);
-let objSet = {a:'22'};
-let objSet2 = {b: '33'};
+let objSet = { a: '22' };
+let objSet2 = { b: '33' };
 weakSet.add(objSet);
 weakSet.add(objSet2);
 aSet.add(objSet);
@@ -114,15 +203,16 @@ weakMap.set(obj, 'Private');
 // console.log(weakMap.get(obj));
 
 // for(let [key, value] of weakMap){
-  // console.log(key);
-  // console.log(value);
+// console.log(key);
+// console.log(value);
 // }
 
 
 const myMaps = new Map();
 let keyString = 'KeyString',
   keyObj = {},
-  keyFun = function(){};
+  keyFun = function () {
+  };
 myMaps.set(keyString, 'KeyString');
 myMaps.set(keyObj, 'KeyObj');
 myMaps.set(keyFun, "keyFun");
@@ -131,25 +221,24 @@ myMaps.set(keyFun, "keyFun");
 
 myMaps.set(NaN, 'Not a Number');
 
-for(let[key, value] of myMaps){
+for (let [key, value] of myMaps) {
   // console.log(`Map Keys：${key}, value: ${value}`);
 }
 
 
-
-
-class Em{
+class Em {
   constructor(name, age) {
     this.name = name;
     this.age = age;
   }
-  getEm(){
+  
+  getEm() {
     console.log(`Em name: ${this.name}`);
   }
 }
 
-class Me extends Em{
-  constructor(name,age, salary) {
+class Me extends Em {
+  constructor(name, age, salary) {
     super(name, age);
     this.salary = salary;
   }
@@ -166,19 +255,19 @@ class Me extends Em{
 let car = {
   wheel: 'four',
   model: 'tesla',
-  show(){
+  show() {
     console.log(`Car model ${this.model}`);
   }
 };
 
 let bike = {
   cc: 250,
-  __proto__: car,
+  __proto__: car
 };
 
 let bicycle = {
-  gear:5,
-  __proto__: bike,
+  gear: 5,
+  __proto__: bike
 };
 
 // console.log(bicycle.model);
@@ -194,14 +283,14 @@ let bicycle = {
 // console.log(bike.show());
 
 
-class Parent{
+class Parent {
   constructor(fname, lname) {
     this.fname = fname;
     this.lname = lname;
   }
 }
 
-class child extends Parent{
+class child extends Parent {
   constructor(age) {
     super('Harry', 'Dim');
     this.age = age;
@@ -213,7 +302,7 @@ class child extends Parent{
   }
 }
 
-const children  = new child(23);
+const children = new child(23);
 // console.log(children.showUp());
 // console.log(children.fname);
 // console.log(children.lname);
@@ -225,21 +314,23 @@ class oClass {
     // console.log(oClass.onCall());
     // console.log(this.constructor.onCall());
   }
-  static onCall(){
+  
+  static onCall() {
     return 'this is a static Method';
   }
   
-  static onCall2(){
+  static onCall2() {
     return `${this.onCall()} called using another static method`;
   }
 }
+
 const st = new oClass();
 // st.onCall();
 // console.log(oClass.onCall());
 // console.log(oClass.onCall2());
 
 
-let f = function(){
+let f = function () {
   this.a = 1;
   this.b = 2;
 };
@@ -250,7 +341,7 @@ o.d = 5;
 f.prototype.b = 3;
 f.prototype.c = 4;
 
-for(let key in o){
+for (let key in o) {
   // console.log(o[key]);
 }
 // console.log(o.a);
@@ -262,17 +353,17 @@ for(let key in o){
 // console.log(f.prototype);
 
 
-
-class Model{
+class Model {
   constructor(Mno, Mname) {
     this.Mno = Mno;
     this.Mname = Mname;
   }
   
   show() {
-    console.log('Model Number',this.Mno);
+    console.log('Model Number', this.Mno);
   }
 }
+
 const obj1 = new Model(550, 'BMW');
 const obj2 = new Model(660, 'Fort');
 
@@ -285,10 +376,10 @@ const obj2 = new Model(660, 'Fort');
 const objA = {
   f1: 'a',
   f2: 'b',
-  f3: 'c',
+  f3: 'c'
 };
 
-for(let k in objA){
+for (let k in objA) {
   // console.log(objA[k]);
 }
 // for(let k of objA){
