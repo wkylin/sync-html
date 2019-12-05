@@ -2,6 +2,16 @@
 // 首先需要明白的是React组件状态必须是一个原生JavaScript对象，而不能是一个Immutable对象，因为React的setState方法期望接受一个对象然后使用Object.assign方法将其与之前的状态对象合并。
 // Redux中讲状态（state）主要是指应用状态，而不是组件状态。
 
+let str = "get-element-by-id";
+
+function stringToCamel(str) {
+  let temp = str.split("-");
+  for (let i = 1; i < temp.length; i++) {
+    temp[i] = temp[i][0].toUpperCase() + temp[i].slice(1);
+  }
+  return temp.join("");
+}
+
 // new ClassA
 // 第一步： obj = {}
 // 第二步： 设置新对象的constructor属性为构造函数， 设置对象的__proto__属性指向构造函数的prototype
@@ -13,11 +23,11 @@
 // 若返回值是引用类型的值，则实际返回值为这个引用类型
 
 function objectFactory() {
-  var obj = new Object(),
+  let obj = new Object(),
     Constructor = [].shift().call(arguments);
   
   obj.__proto__ = Constructor.prototype;
-  var ret = Constructor.apply(obj, arguments);
+  let ret = Constructor.apply(obj, arguments);
   
   return typeof ret === 'object' ? ret : obj;
 }
@@ -54,10 +64,10 @@ function f1() {
 // console.log('f2.age:', f2.age);
 
 
-var a = 10;
+let a = 10;
 (function () {
     // console.log(a);
-    var a = b = 1000;
+    let a = b = 1000;
     // console.log(a);
   }
 )();
