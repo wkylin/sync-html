@@ -5,28 +5,27 @@
 // new ClassA
 // 第一步： obj = {}
 // 第二步： 设置新对象的constructor属性为构造函数， 设置对象的__proto__属性指向构造函数的prototype
-  // obj.__proto__ = ClassA.prototype;
+// obj.__proto__ = ClassA.prototype;
 // 第三步：新对象调用函数，this 指向新实例对象
-  // ClassA.call(obj)
+// ClassA.call(obj)
 // 第四步： 返回新对象
 // 注意： 构造函数中返回this或者是基本类型的值，则返回新实例对象;
 // 若返回值是引用类型的值，则实际返回值为这个引用类型
 
-function objectFactory(){
+function objectFactory() {
   var obj = new Object(),
     Constructor = [].shift().call(arguments);
   
   obj.__proto__ = Constructor.prototype;
   var ret = Constructor.apply(obj, arguments);
   
-  return typeof ret ===   'object'? ret : obj;
+  return typeof ret === 'object' ? ret : obj;
 }
 
 
-
-function f2(){
-  this.name='name';
-  return {}
+function f2() {
+  this.name = 'name';
+  return {};
 }
 
 function f1() {
@@ -53,7 +52,6 @@ function f1() {
 //
 // console.log('new f2().age:', new f2().age);
 // console.log('f2.age:', f2.age);
-
 
 
 var a = 10;
