@@ -2,13 +2,76 @@
 // 首先需要明白的是React组件状态必须是一个原生JavaScript对象，而不能是一个Immutable对象，因为React的setState方法期望接受一个对象然后使用Object.assign方法将其与之前的状态对象合并。
 // Redux中讲状态（state）主要是指应用状态，而不是组件状态。
 
+// new ClassA
+// 第一步： obj = {}
+// 第二步： 设置新对象的constructor属性为构造函数， 设置对象的__proto__属性指向构造函数的prototype
+  // obj.__proto__ = ClassA.prototype;
+// 第三步：新对象调用函数，this 指向新实例对象
+  // ClassA.call(obj)
+// 第四步： 返回新对象
+// 注意： 构造函数中返回this或者是基本类型的值，则返回新实例对象;
+// 若返回值是引用类型的值，则实际返回值为这个引用类型
+
+function objectFactory(){
+  var obj = new Object(),
+    Constructor = [].shift().call(arguments);
+  
+  obj.__proto__ = Constructor.prototype;
+  var ret = Constructor.apply(obj, arguments);
+  
+  return typeof ret ===   'object'? ret : obj;
+}
 
 
-let fName='fName';
+
+function f2(){
+  this.name='name';
+  return {}
+}
+
+function f1() {
+  this.name = 'name';
+}
+
+// console.log('new f1().name:', new f1().name);
+// console.log('f1.name:', f1.name);
+//
+// console.log('new f2().name:', new f2().name);
+// console.log('f2.name:', f2.name);
+
+// function f2(){
+//   this.age='name';
+//   return {}
+// }
+//
+// function f1() {
+//   this.age = 'name';
+// }
+//
+// console.log('new f1().age:', new f1().age);
+// console.log('f1.age:', f1.age);
+//
+// console.log('new f2().age:', new f2().age);
+// console.log('f2.age:', f2.age);
+
+
+
+var a = 10;
+(function () {
+    // console.log(a);
+    var a = b = 1000;
+    // console.log(a);
+  }
+)();
+
+// console.log(a + b);
+
+
+let fName = 'fName';
 let john = {
   fName: 'John',
   lName: 'Doe',
-  driverCar(){
+  driverCar() {
     let self = this;
     let ads = () => {
       console.log(this);
@@ -22,18 +85,16 @@ let john = {
     // console.log(`fName: ${this.fName}`);
   }
 };
-console.log(john.driverCar());
+// console.log(john.driverCar());
 
 
-
-
-const target ={};
+const target = {};
 const handlerAab = {
-  get(){
+  get() {
     return Reflect.get(target, key);
   }
 };
-const {proxyAb, revoke} = Proxy.revocable(target, handlerAab)
+const { proxyAb, revoke } = Proxy.revocable(target, handlerAab);
 
 // console.log(Proxy.revocable(target, handlerAab));
 
