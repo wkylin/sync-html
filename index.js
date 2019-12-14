@@ -1,16 +1,443 @@
+// redux-saga是个非常强大处理副作用的工具。它提供了对异步流程更细粒度的控制，对每个异步流程他可以实现暂停、停止、启动三种状态。此外redux-saga利用了generator，对每个saga，其测试方式可以非常简单。
+// 更重要的是其异步处理逻辑放在了saga中，我们可以监听action触发，然后产生副作用。
+// action依然是普通的redux action，不破坏redux对action的定义。
+
+
+let longestPalindrome = function(s) {
+  let len = s.length;
+  let result;
+  let i,j,L;
+  let dp=Array(len).fill(0).map(x=>Array(len).fill(0));
+  //console.log(dp);
+  if(len<=1){
+    return s
+  }
+  // 只有一个字符的情况是回文
+  for(i = 0;i<len;i++){
+    dp[i][i] = 1;
+    result = s[i]
+  }
+  
+  // L是i和j之间的间隔数（因为间隔数从小到大渐增，所以大的间隔数总能包含小的间隔数）
+  // i     j
+  // abcdcba.length = L   所以 L = j-i+1; => j = i+L-1;
+  for ( L = 2; L <= len; L++) {
+    // 从0开始
+    for ( i = 0; i <= len - L; i++) {
+      j = i + L - 1;
+      if(L == 2 && s[i] == s[j]) {
+        dp[i][j] = 1;
+        result = s.slice(i, i + L);
+      }else if(s[i] == s[j] && dp[i + 1][j - 1] == 1) {
+        dp[i][j] = 1
+        result = s.slice(i, i + L);
+      }
+      
+    }
+  }
+  //console.log(result);
+  return result;
+};
+
+// let longestPalindrome = function(s) {
+//   let n = s.length;
+//   let result = '';
+//   for(let i = 0;i<n;i++){
+//     for(let j=i+1;j<=n;j++){
+//       let str = s.slice(i,j);
+//       let f = str.split('').reverse().join('');
+//
+//       if(str == f){
+//         result = str.length > result.length ? str : result;
+//       }
+//     }
+//   }
+//   console.log(result);
+//
+//   return result;
+// };
+
+
+console.log(longestPalindrome('abcbamoneaaenom'));
+
+
+function isCardNo(number) {
+  let regx = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+  return regx.test(number);
+}
+
+let strNumber = "abcabcabcbbccccc";
+let num = 0;
+let char = '';
+
+// 使其按照一定的次序排列
+strNumber = strNumber.split('').sort().join('');
+// "aaabbbbbcccccccc"
+
+// 定义正则表达式
+let re = /(\w)\1+/g;
+strNumber.replace(re,($0,$1) => {
+  if(num < $0.length){
+    num = $0.length;
+    char = $1;
+  }
+});
+// console.log(`字符最多的是${char}，出现了${num}次`);
+
+function parseToMoney(num) {
+  num = parseFloat(num.toFixed(3));
+  let [integer, decimal] = String.prototype.split.call(num, '.');
+  integer = integer.replace(/\d(?=(\d{3})+$)/g, '$&,');
+  return integer + '.' + (decimal ? decimal : '');
+}
+
+
+
+
+let url = 'http://www.domain.com/?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&enabled';
+// console.log(parseParam(url));
+
+function parseParam(url) {
+  const paramsStr = /.+\?(.+)$/.exec(url)[1]; // 将 ? 后面的字符串取出来
+  const paramsArr = paramsStr.split('&'); // 将字符串以 & 分割后存到数组中
+  let paramsObj = {};
+  // 将 params 存到对象中
+  paramsArr.forEach(param => {
+    if (/=/.test(param)) { // 处理有 value 的参数
+      let [key, val] = param.split('='); // 分割 key 和 value
+      val = decodeURIComponent(val); // 解码
+      val = /^\d+$/.test(val) ? parseFloat(val) : val; // 判断是否转为数字
+      
+      if (paramsObj.hasOwnProperty(key)) { // 如果对象有 key，则添加一个值
+        paramsObj[key] = [].concat(paramsObj[key], val);
+      } else { // 如果对象没有这个 key，创建 key 并设置值
+        paramsObj[key] = val;
+      }
+    } else { // 处理没有 value 的参数
+      paramsObj[param] = true;
+    }
+  });
+  
+  return paramsObj;
+}
+
+
+let s1 = "get-element-by-id";
+let ff = function (s) {
+  return s.replace(/-\w/g, function (x) {
+    return x.slice(1).toUpperCase();
+  });
+};
+// console.log(ff(s1));
+
+
+// Vue自身实现一个Watcher，作为连接Observer和Compile的桥梁。
+// 闭包是有权限访问其他函数作用域内的变量的一个函数。
+// 在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+// all会立即决议，决议结果是fullfilled，值是undefined
+// race会永远都不决议，程序卡住……
+// 传统的try/catch捕获异常方式是无法捕获异步的异常的。
+// 进行数字类型转换时，null返回0，undefined返回NaN
+// 对象转成原始数据类型时，先调用对象的valueOf方法，如果返回结果不是原始数据类型的值，再调用toString方法。
+// vue实现响应式并不是数据发生变化后dom立即变化，而是按照一定的策略来进行dom更新。
+// $nextTick 是在下次 DOM 更新循环结束之后执行延迟回调，在修改数据之后使用 $nextTick，则可以在回调中获取更新后的 DOM
+// ref 被用来给元素或子组件注册引用信息。
+// Vue.set( target, key, value )
+// mounted 不会承诺所有的子组件也都一起被挂载。
+// 每个实例可以维护一份被返回对象的独立的拷贝
+// 计算属性是基于它们的依赖进行缓存的
+// 每当触发重新渲染时，调用方法(methods)将总会再次执行函数。
+//  nextTick: Vue 中数据的变化到 DOM 的更新渲染是一个异步过程。
+// 此方法便用于在 DOM 更新循环结束之后执行延迟回调
+// cb 函数经处理压入 callbacks 数组，执行 timerFunc 函数，延迟调用 flushCallbacks 函数，遍历执行 callbacks 数组中的所有函数。
+// 延迟调用优先级如下：
+// Promise > MutationObserver > setImmediate > setTimeout
+
+// 1.commonjs输出的，是一个值的拷贝，而es6输出的是值的引用；
+// 2.commonjs是运行时加载，es6是编译时输出接口；
+
+// console.log((0.1*10 + 0.2*10)/10 == 0.3); //true
+
+let arrSet = [1, '1', 2, '2', 1, 2, 'x', 'y', 'f', 'x', 'y', 'f'];
+
+function unique1(arrSet) {
+  let result = [arrSet[0]];
+  for (let i = 1; i < arrSet.length; i++) {
+    let item = arrSet[i];
+    if (result.indexOf(item) == -1) {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+// console.log(unique1(arrSet));
+
+// console.log([...new Set(arrSet)]);
+
+
+// const a = {counter: 1},
+//   b = {counter: 2},
+//   c = { counter: 3};
+// const d = Object.assign({}, a, b, c);
+// console.log(d); // {counter: 3}
+
+let s = new Set(['foo', window]);
+Array.from(s);
+let m = new Map([[1, 2], [2, 4], [4, 8]]);
+Array.from(m);
+// [[1, 2], [2, 4], [4, 8]]
+
+// function f() {
+//   return Array.from(arguments);
+// }
+// f(1, 2, 3);
+// [1, 2, 3]
+
+Array.from([1, 2, 3], x => x + x);
+// [2, 4, 6]
+Array.from({ length: 5 }, (v, i) => i);
+
+// [0, 1, 2, 3, 4]
+
+function Archiver() {
+  var temperature = null;
+  var archive = [];
+  
+  Object.defineProperty(this, 'temperature', {
+    get: function () {
+      // console.log('get!');
+      return temperature;
+    },
+    set: function (value) {
+      temperature = value;
+      archive.push({ val: temperature });
+    }
+  });
+  this.getArchive = function () {
+    return archive;
+  };
+}
+
+var arc = new Archiver();
+arc.temperature;
+arc.temperature = 11;
+arc.temperature = 13;
+arc.temperature = 14;
+// console.log(arc.getArchive());
+
+// var a=[1,2,3,4];
+// var b=[1,2,3,4];
+// delete a[1];
+// console.log(a); // empty 长度不变
+
+let objs = {
+  name: 'wkylin',
+  age: 22
+};
+delete objs.age;
+// console.log(objs);
+
+
+// 箭头函数内部的this总是指向定义时所在的对象。上面代码中，箭头函数位于构造函数内部，它的定义生效的时候，是在构造函数执行的时候。
+// 这时，箭头函数所在的运行环境，肯定是实例对象，所以this会总是指向实例对象。
+// 如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，
+// 而是直接通过类来调用，这就称为“静态方法”。
+// 父类的静态方法，可以被子类继承。
+// 注意，如果静态方法包含this关键字，这个this指的是类，而不是实例。
+
+
+class A {
+  print() {
+    console.log('print a');
+  }
+}
+
+class C extends A {
+  print() {
+    super.print();
+    console.log('print c');
+  }
+}
+
+const c = new C();
+
+// c.print();
+
+
+class B {
+  print = () => {
+    console.log('print b');
+  };
+}
+
+class D extends B {
+  print() {
+    super.print();
+    console.log('print d');
+  }
+}
+
+const d = new D();
+
+// d.print();
+
+class Logger {
+  constructor() {
+    this.printName = this.printName.bind(this);
+  }
+  
+  printName(name = 'there') {
+    console.log('this>>', this);
+    this.print(`Hello ${name}`);
+  }
+  
+  print(text) {
+    console.log(text);
+  }
+}
+
+const logger = new Logger();
+const { printName } = logger;
+// console.log(printName());
+// console.log(logger.printName());
+
+
+class Fooss {
+  constructor(...args) {
+    console.log(typeof (args));
+    this.args = args;
+    console.log(this.args);
+  }
+  
+  // * [Symbol.iterator]() {
+  //   for (let arg of this.args) {
+  //     yield arg;
+  //   }
+  // }
+}
+
+// for (let x of new Fooss('hello', 'world')) {
+//   console.log(x);
+// }
+
+
+// 类不存在变量提升（hoist），这一点与 ES5 完全不同。
+// new Foo(); // ReferenceError
+// class Foo {}
+const MyClass = class Me {
+  // constructor(name) {
+  //   this.name = name;
+  // }
+  
+  getClassName() {
+    return Me.name;
+  }
+};
+// const MyClass = class Me{
+//   getClassName() {
+//     return Me.name;
+//   }
+// };
+
+let inst = new MyClass('name');
+// console.log(MyClass.name);
+// console.log(inst.getClassName()); // Me
+// console.log(Me.name);
+// console.log(Me.getClassName());
+
+
+class PointClass {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  toString() {
+    return `${this.x}, ${this.y}`;
+  }
+}
+
+let pointClass = new PointClass(2, 3);
+// console.log(pointClass.toString());
+
+// console.log(pointClass.hasOwnProperty('x'));
+// console.log(pointClass.hasOwnProperty('y'));
+// console.log(pointClass.hasOwnProperty('toString'));
+// console.log(pointClass.__proto__.hasOwnProperty('toString'));
+
+
+class Foo {
+  constructor() {
+    // return Object.create(null);
+  }
+}
+
+// console.log(new Foo() instanceof Foo);
+
+
+class Points {
+  constructor(x, y) {
+    // ...
+  }
+  
+  toString() {
+    // ...
+  }
+}
+
+// console.log(Points.prototype);
+// console.log(Object.keys(Points.prototype));
+// []
+// console.log(Object.getOwnPropertyNames(Points.prototype));
+// ["constructor","toString"]
+
+
+class Bar {
+  doStuff() {
+    console.log('stuff');
+  }
+}
+
+var b = new Bar();
+
+// console.log(b.doStuff()); // "stuff"
+
+
+class Point {
+  // ...
+}
+
+// console.log(typeof Point); // "function"
+// console.log(Point === Point.prototype.constructor );// true
+
+
+// ES6 明确规定， Class 内部只有静态方法， 没有静态属性。
+// 我们定义实例属性， 只能写在类的constructor方法里面。
+// ES7 有一个静态属性的提案， 目前 Babel 转码器支持。
+
+// //  老写法
+// class Foo {}
+// Foo.prop = 1;
+// //  新写法
+// class Foo {
+//   static prop = 1;
+// }
+
+
 // Immutable 实现的原理是 Persistent Data Structure（持久化数据结构），也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变。同时为了避免 deepCopy 把所有节点都复制一遍带来的性能损耗，Immutable 使用了 Structural Sharing（结构共享），即如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享。
 // 首先需要明白的是React组件状态必须是一个原生JavaScript对象，而不能是一个Immutable对象，因为React的setState方法期望接受一个对象然后使用Object.assign方法将其与之前的状态对象合并。
 // Redux中讲状态（state）主要是指应用状态，而不是组件状态。
 
-let str = "get-element-by-id";
-
-function stringToCamel(str) {
-  let temp = str.split("-");
-  for (let i = 1; i < temp.length; i++) {
-    temp[i] = temp[i][0].toUpperCase() + temp[i].slice(1);
-  }
-  return temp.join("");
-}
+// let str = "get-element-by-id";
+//
+// function stringToCamel(str) {
+//   let temp = str.split("-");
+//   for (let i = 1; i < temp.length; i++) {
+//     temp[i] = temp[i][0].toUpperCase() + temp[i].slice(1);
+//   }
+//   return temp.join("");
+// }
 
 // new ClassA
 // 第一步： obj = {}
