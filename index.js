@@ -1,3 +1,20 @@
+function getSum(arr,sum) {
+  if (arr == '' || arr.length == 0) {
+    return false;
+  }
+  
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] == sum) {
+        console.log(arr[i] + " + " + arr[j] + " = " + sum);
+      }
+    }
+  }
+}
+
+// getSum([1,3,7,9, 10, 0], 10);
+
+
 // redux-saga是个非常强大处理副作用的工具。它提供了对异步流程更细粒度的控制，对每个异步流程他可以实现暂停、停止、启动三种状态。此外redux-saga利用了generator，对每个saga，其测试方式可以非常简单。
 // 更重要的是其异步处理逻辑放在了saga中，我们可以监听action触发，然后产生副作用。
 // action依然是普通的redux action，不破坏redux对action的定义。
@@ -201,8 +218,8 @@ Array.from({ length: 5 }, (v, i) => i);
 // [0, 1, 2, 3, 4]
 
 function Archiver() {
-  var temperature = null;
-  var archive = [];
+  let temperature = null;
+  let archive = [];
   
   Object.defineProperty(this, 'temperature', {
     get: function () {
@@ -219,15 +236,15 @@ function Archiver() {
   };
 }
 
-var arc = new Archiver();
+let arc = new Archiver();
 arc.temperature;
 arc.temperature = 11;
 arc.temperature = 13;
 arc.temperature = 14;
 // console.log(arc.getArchive());
 
-// var a=[1,2,3,4];
-// var b=[1,2,3,4];
+// let a=[1,2,3,4];
+// let b=[1,2,3,4];
 // delete a[1];
 // console.log(a); // empty 长度不变
 
@@ -399,7 +416,7 @@ class Bar {
   }
 }
 
-var b = new Bar();
+let b = new Bar();
 
 // console.log(b.doStuff()); // "stuff"
 
@@ -989,18 +1006,18 @@ function getNumberParts(number) {
 // console.log(getNumberParts(1234.56));
 
 
-var str = 'aabb bb';
-var strCopy = str.split();
+let str = 'aabb bb';
+let strCopy = str.split();
 str = 'aaa ccc';
 // console.log(str);
 // console.log(strCopy);
 
 
-// var age = prompt('What is your age');
+// let age = prompt('What is your age');
 
 // console.log(age);
 
-for (var i = 0; i < 5; i++) {
+for (let i = 0; i < 5; i++) {
   // console.log(i);
   // setTimeout(()=> console.log(i), 1000);
 }
@@ -1014,23 +1031,23 @@ const firstCharUpper = (str) => {
 
 
 function myLocalScope() {
-  var myVar = 5;
-  console.log(myVar);
+  let mylet = 5;
+  console.log(mylet);
 }
 
 // myLocalScope();
-// console.log(myVar);
+// console.log(mylet);
 
 
-var myGlobal = 10;
+let myGlobal = 10;
 
 function fun1() {
   // oopsGlobal = 5;
-  var oopsGlobal = 5;
+  let oopsGlobal = 5;
 }
 
 function fun2() {
-  var output = "";
+  let output = "";
   if (typeof myGlobal != 'undefined') {
     output += 'myGlobal: ' + myGlobal;
   }
@@ -1160,7 +1177,7 @@ let results = series.reduce(function (accumulator, current) {
 //     console.log(i);
 //   }, i*1000)
 // }
-// for (var i= 0; i<5; i++){
+// for (let i= 0; i<5; i++){
 //   setTimeout(function(){
 //     console.log(i);
 //   }, i*1000)

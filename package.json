@@ -5,9 +5,15 @@
   "author": "wkylin",
   "license": "MIT",
   "scripts": {
-    "start": "browser-sync start --server --files '*.css, *.html, *.js'"
+    "start": "browser-sync start --server --files '*.css, *.html, *.js'",
+    "start-main": "node main.js",
+    "ts-start": "tsc main.ts --outFile main.js --watch"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "^2.26.7",
+    "concurrently": "^5.0.1"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.2"
   }
 }
