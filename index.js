@@ -1,3 +1,135 @@
+
+// SVG 是一个基于文本的开放 Web 标准。可缩放矢量图形（Scalable Vector Graphics，SVG），是一种用于描述基于二维的矢量图形的，基于 XML 的标记语言。本质上，SVG 相对于图像，就好比 HTML 相对于文本。
+// https://webglreport.com/
+// WebGL（全写Web Graphics Library）是一种3D绘图协议，
+// WebGL可以为HTML5 Canvas提供硬件3D加速渲染，这样Web开发人员就可以借助系统显卡来在浏览器里更流畅地展示3D场景和模型了，还能创建复杂的导航和数据视觉化。
+// 简单说来，WebGL绘制过程包括以下三步：
+// 1、获取顶点坐标
+// 2、图元装配（即画出一个个三角形）
+// 3、光栅化（生成片元，即一个个像素点）
+
+function fetchWithTimeout(fetch_promise, timeout) {
+  let abortFn = null;
+  
+  //这是一个可以被reject的promise
+  let abortPromise = new Promise(function(resolve, reject) {
+    abortFn = function() {
+      reject('abort promise');
+    };
+  });
+  
+  //这里使用Promise.race，以最快 resolve 或 reject 的结果来传入后续绑定的回调
+  let aborTablePromise = Promise.race([
+    fetch_promise,
+    abortPromise
+  ]);
+  
+  setTimeout(function() {
+    abortFn();
+  }, timeout);
+  
+  return aborTablePromise;
+}
+
+
+function fetchWithTimeout () {
+  const FETCH_TIMEOUT = 5000;
+  let didTimeOut = false;
+  
+  new Promise(function(resolve, reject) {
+    const timeout = setTimeout(function() {
+      didTimeOut = true;
+      reject(new Error('Request timed out'));
+    }, FETCH_TIMEOUT);
+    
+    fetch('https://davidwalsh.name/?xx1')
+      .then(function(response) {
+        // Clear the timeout as cleanup
+        clearTimeout(timeout);
+        if(!didTimeOut) {
+          console.log('fetch good! ', response);
+          resolve(response);
+        }
+      })
+      .catch(function(err) {
+        console.log('fetch failed! ', err);
+        
+        // Rejection already happened with setTimeout
+        if(didTimeOut) return;
+        // Reject with error
+        reject(err);
+      });
+  })
+    .then(function() {
+      // Request success and no timeout
+      console.log('good promise, no timeout! ');
+    })
+    .catch(function(err) {
+      // Error: response error, request timeout or runtime error
+      console.log('promise error! ', err);
+    });
+}
+
+
+console.log('1');
+
+setTimeout(function () {
+  console.log('2');
+}, 100);
+
+console.log('3');
+
+async function test() {
+  console.log('4');
+  await Promise.resolve();
+  console.log('5');
+}
+test();
+
+let abcc = new Promise(function (resolve) {
+  setTimeout(() => {
+    resolve();
+    console.log('6');
+  });
+});
+
+console.log('7');
+
+abcc.then(function () {
+  console.log('8');
+});
+
+// 13 47 8652
+
+
+
+
+
+
+let isValid = function(s) {
+  let stack = [];
+  let map = {
+    '(' : ')',
+    '[': ']',
+    '{': '}'
+  };
+  
+  for (let char of s) {
+    if(char in map) {
+      stack.push(char)
+    } else {
+      if( !stack.length || char != map[stack.pop()]) {
+        return false
+      }
+    }
+  }
+  
+  // 如果最后stack 里没有元素了， 就一定是匹配的
+  return !stack.length
+};
+
+console.log(isValid('{(){}[]}'));
+
 function getSum(arr,sum) {
   if (arr == '' || arr.length == 0) {
     return false;
