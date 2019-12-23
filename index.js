@@ -1,3 +1,145 @@
+// var print = console.log.bind(console, '>')
+
+
+// subl sub
+// /* globals Vue*/
+
+// /* eslint-disable -- */
+// /* eslint-enable -- */
+// CommonJS的特点
+//
+// 所有代码都运行在模块作用域，不会污染全局作用域；
+// 模块是同步加载的，即只有加载完成，才能执行后面的操作；
+// 模块在首次执行后就会缓存，再次加载只返回缓存结果，如果想要再次执行，可清除缓存
+// require返回的值是被输出的值的拷贝，模块内部的变化也不会影响这个值。
+
+// ES6 Module的特点(对比CommonJS)
+//
+// CommonJS模块是运行时加载，ES6 Module是编译时输出接口；
+// CommonJS加载的是整个模块，将所有的接口全部加载进来，ES6 Module可以单独加载其中的某个接口；
+// CommonJS输出是值的拷贝，ES6 Module输出的是值的引用，被输出模块的内部的改变会影响引用的改变；
+// CommonJS this指向当前模块，ES6 Module this指向undefined;
+
+
+const classRoom = {
+  [Symbol('lily')]:{ grade:60, gender:'female'},
+  [Symbol('nina')]:{ grade:30, gender:'male'},
+  [Symbol('nina')]:{ grade:90, gender:'female'},
+};
+
+for(let key in classRoom){
+  console.log(key);
+}
+
+const syms = Object.getOwnPropertySymbols(classRoom).map((room) => classRoom[room]);
+
+// console.log(syms); 不能遍历，可以内部使用
+
+
+
+const fruitss =['apple', 'banana', 'pear'];
+const newFruits = ['orange', 'mongo'];
+
+// fruitss.push.apply(fruitss, newFruits);
+// fruitss.push(...newFruits);
+// console.log(fruitss);
+
+const iKeys=['name', 'age', 'birthday'];
+const iValues=['wkylin', 2, '2015-09-03'];
+const wObj = {
+  [iKeys.shift()]: iValues.shift(),
+  [iKeys.shift()]: iValues.shift(),
+  [iKeys.shift()]: iValues.shift(),
+};
+// console.log(wObj);
+
+
+
+
+// 可迭代对象 接口/ [Symbol.iterator]
+
+function sums() {
+  let total = 0;
+  console.log(arguments);
+  for(let num of arguments){
+    total = total + num;
+  }
+  
+  console.log(total);
+  return total;
+}
+
+// sums(1, 2, 3);
+// for of 不支持对象/ 支持string nodeList
+
+const objb = {
+  a:1,
+  b:2
+};
+// for(let value of objb){
+//   // console.log(value);
+// }
+
+
+
+// Array.prototype.myPro = 'my prototype'
+const fruits = ['apple', 'Banana','Orange', 'Mango']
+fruits.myFruits = ' my fruits';
+
+for(let [index, fruit] of fruits.entries()){
+  // console.log(`${index} is ${fruit}`);
+}
+
+for(let i=0; i<fruits.length; i++){
+  // console.log(fruits[i]);
+}
+
+fruits.forEach((fruit) => {
+  
+  // if(fruit == 'apple'){
+  //   break;
+  // }
+  // console.log(fruit);
+  
+});
+
+for (let fruit in fruits){
+  // console.log(fruit);
+  // console.log(fruits[fruit]);
+}
+
+for(let fruit of fruits){
+  // console.log(fruit);
+}
+
+
+
+const obja = {
+  // sister:0,
+  // sister:null,
+  sister:undefined,
+  father: 'wkylin'
+};
+
+const {sister='aa', father} = obja;
+
+// console.log(sister);
+// console.log(father);
+
+const sum = function() {
+  return Array.from(arguments)
+    .reduce((prevSum, value) => {
+      return prevSum + value;
+  }, 0)
+};
+
+// const sum = (...args) => {
+//   return args.reduce((prevSum, value) => {
+//       return prevSum + value;
+//   }, 0)
+// };
+// console.log(sum(1,2,3));
+// sum(1,2,3);
 
 function multiply(a = 3,b =5){
   return a * b;
