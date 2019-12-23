@@ -1,4 +1,36 @@
 
+function multiply(a = 3,b =5){
+  return a * b;
+}
+
+// console.log(multiply(1, 2));
+// console.log(multiply(undefined, 2));
+// console.log(multiply(null, 2));
+
+
+
+function highlight(strings, ...values){
+  // console.log('strings', strings);
+  // console.log('values', values);
+}
+
+const users = 'Mary';
+const topic = 'Learn to uses markdown';
+const sentence = highlight`Jhone ${users} has commmened on your topic ${topic} aa`;
+
+// console.log(sentence);
+
+// var name = 'wkylin';
+// console.log(window.name);
+
+(function() {
+  var a = 'aaa';
+  // console.log(a);
+})();
+
+// console.log(a);
+
+
 // SVG 是一个基于文本的开放 Web 标准。可缩放矢量图形（Scalable Vector Graphics，SVG），是一种用于描述基于二维的矢量图形的，基于 XML 的标记语言。本质上，SVG 相对于图像，就好比 HTML 相对于文本。
 // https://webglreport.com/
 // WebGL（全写Web Graphics Library）是一种3D绘图协议，
@@ -7,6 +39,12 @@
 // 1、获取顶点坐标
 // 2、图元装配（即画出一个个三角形）
 // 3、光栅化（生成片元，即一个个像素点）
+
+async function ffa() {
+  // await Promise.reject('出错了');
+}
+
+ffa().then(v => console.log(v)).catch(e => console.log(e));
 
 function fetchWithTimeout(fetch_promise, timeout) {
   let abortFn = null;
@@ -71,35 +109,35 @@ function fetchWithTimeout () {
 }
 
 
-console.log('1');
+// console.log('1');
 
 setTimeout(function () {
-  console.log('2');
+  // console.log('2');
 }, 100);
 
-console.log('3');
+// console.log('3');
 
 async function test() {
   console.log('4');
   await Promise.resolve();
   console.log('5');
 }
-test();
+// test();
 
 let abcc = new Promise(function (resolve) {
   setTimeout(() => {
     resolve();
-    console.log('6');
+    // console.log('6');
   });
 });
 
-console.log('7');
+// console.log('7');
 
 abcc.then(function () {
-  console.log('8');
+  // console.log('8');
 });
 
-// 13 47 8652
+// 13475862
 
 
 
@@ -128,7 +166,7 @@ let isValid = function(s) {
   return !stack.length
 };
 
-console.log(isValid('{(){}[]}'));
+// console.log(isValid('{(){}[]}'));
 
 function getSum(arr,sum) {
   if (arr == '' || arr.length == 0) {
@@ -138,7 +176,7 @@ function getSum(arr,sum) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++) {
       if (arr[i] + arr[j] == sum) {
-        console.log(arr[i] + " + " + arr[j] + " = " + sum);
+        // console.log(arr[i] + " + " + arr[j] + " = " + sum);
       }
     }
   }
@@ -207,7 +245,7 @@ let longestPalindrome = function(s) {
 // };
 
 
-console.log(longestPalindrome('abcbamoneaaenom'));
+// console.log(longestPalindrome('abcbamoneaaenom'));
 
 
 function isCardNo(number) {
