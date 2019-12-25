@@ -1,3 +1,60 @@
+
+// 注：在 constructor 中必须调用 super 方法，因为子类没有自己的 this 对象，而是继承父类的 this 对象，然后对其进行加工,而 super 就代表了父类的构造函数。super 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 super 内部的 this 指的是 B，因此 super() 在这里相当于 ```A.prototype.constructor.call(this, props)``。
+
+
+var line1 = ['ab', 'cd'];
+// console.log(typeof(line1));
+// console.log(...line1);
+
+
+const newMap = new Map();
+// newMap.set('jelly', 23);
+// newMap.set({name: 'wk'}, 23);
+
+// console.log(newMap);
+
+let jelly = {name:'jelly', age: 20};
+let mary = {name:'mary', age: 25};
+
+const people = new WeakSet([jelly, mary]);
+
+// console.log(people);
+// 对象 不能for of 无clear 自动清理
+
+// const arrayPeople = [jelly, mary];
+
+mary = null;
+
+// console.log(mary);
+// console.log(arrayPeople);
+// console.log(people);
+
+
+const newSet = new Set();
+newSet.add(1);
+newSet.add(2);
+newSet.add(3);
+newSet.add(4);
+
+// console.log(newSet);
+
+const phoneHandler = {
+  set(target, key, value){
+    target[key] = value.match(/[0-9]/g).join('');
+  },
+  get(target, key){
+    return target[key].replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
+  }
+};
+
+const phoneNumber = new Proxy({}, phoneHandler);
+
+phoneNumber.home='139 1553 1553';
+
+// console.log(phoneNumber);
+// console.log(phoneNumber.home);
+
+
 // var print = console.log.bind(console, '>')
 
 

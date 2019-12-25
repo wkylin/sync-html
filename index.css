@@ -166,19 +166,20 @@ img {
 }
 
 
-h3{
+h3 {
   margin: 30px;
-  font-size:30px;
-  text-shadow:1px 1px 0 palegoldenrod;
+  font-size: 30px;
+  text-shadow: 1px 1px 0 palegoldenrod;
   /*background-image: -webkit-gradient(linear, 0% 0%, 25% 100%, from(#ff2c2c), to(#7a5e91));*/
   background-image: linear-gradient(to right, dimgrey 50%, darkgray 50%);
   background-size: 200%;
   /*-webkit-text-fill-color: transparent;*/
   transition: background-position 0.5s;
-  text-align:center;
+  text-align: center;
   padding: 20px 0;
 }
-h3:hover{
+
+h3:hover {
   background-position: -100%;
 }
 
@@ -224,7 +225,7 @@ span.flash:hover span, span.flash.open span {
 span.flash:hover span.designer, span.flash.open span.designer {
   top: -96px;
   -webkit-transform: perspective(100px) rotateX(20deg);
-   transform:perspective(100px) rotateX(20deg);
+  transform: perspective(100px) rotateX(20deg);
 }
 
 span.flash:hover span.developer, span.flash.open span.developer {
@@ -251,44 +252,71 @@ span.flash:hover span.teacher, span.flash.open span.teacher {
   top: 92px;
 }
 
-p.text{
+p.text {
   height: 49px;
-  line-height:49px;
-  text-align:center;
+  line-height: 49px;
+  text-align: center;
 }
 
 
-.snake{
+.snake {
   width: 90px;
   height: 90px;
-  margin:0 auto;
-  position:relative;
-  background:aqua;
+  margin: 0 auto;
+  position: relative;
+  background: aqua;
 }
 
-.snake:before{
-  content:'';
+.snake:before {
+  content: '';
   position: absolute;
-  top:-5px;
-  right:-5px;
+  top: -5px;
+  right: -5px;
   bottom: -5px;
-  left:-5px;
-  border:5px solid #ff00ff88;
+  left: -5px;
+  border: 5px solid #ff00ff88;
   /*background:pink;*/
   animation: move 5s linear infinite;
 }
 
 @keyframes move {
-  0%, 100%{
+  0%, 100% {
     clip: rect(0, 100px, 5px, 0);
   }
-  25%{
+  25% {
     clip: rect(0, 100px, 100px, 95px);
   }
-  50%{
+  50% {
     clip: rect(95px, 100px, 100px, 0);
   }
-  75%{
+  75% {
     clip: rect(0, 5px, 100px, 0);
   }
+}
+
+
+.t1 {
+  /*width: 400px;*/
+  /*height: 200px;;*/
+  /*background: red;*/
+}
+
+.t2 {
+  width: 25%;
+  background: #ccc;
+  position: relative;
+  float: left;
+  border: 2px solid #000;
+}
+
+.t2:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.aaaa {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
