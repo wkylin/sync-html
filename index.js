@@ -1,8 +1,170 @@
+class foosss {
+  bar = 'hello';
+  baz = 'world';
+  
+  constructor() {
+    // ...
+  }
+  
+  getBar() {
+    console.log(this.bar);
+  }
+}
+
+const fo= new foosss();
+console.log(fo.getBar());
+
+
+
+const aArray=['1', '2'];
+// console.log(typeof(aArray));
+
+class Fooo {
+  constructor(...args) {
+    // console.log('args', args);
+    // console.log(typeof(args));
+    this.args = args;
+  }
+  * [Symbol.iterator]() {
+    for (let arg of this.args) {
+      yield arg;
+    }
+  }
+}
+
+for (let x of new Fooo('hello', 'world')) {
+  // console.log(x);
+}
+
+
+
+class PointCl {
+  constructor(x, y) {
+    // ...
+  }
+  
+  toString() {
+    // ...
+  }
+}
+
+// console.log(Object.keys(PointCl.prototype));
+// console.log(Object.getOwnPropertyNames(PointCl.prototype));
+
+
+class Animal {
+  move(distanceInMeters = 0) {
+    console.log(`Animal moved ${distanceInMeters}m.`);
+  }
+}
+
+class Dogs extends Animal {
+  // constructor() {
+  //   super();
+  //   // this.name = name;
+  // }
+  bark() {
+    // console.log('Woof! Woof!');
+    // console.log(this.name);
+  }
+}
+
+const dogs = new Dogs();
+// dogs.bark();
+// dogs.move(10);
+// dogs.bark();
+
+
+// constructor方法默认返回实例对象（即this），完全可以指定返回另外一个对象。
+// 类必须使用new调用，否则会报错。这是它跟普通构造函数的一个主要区别，后者不用new也可以执行。
+// 与 ES5 一样，类的所有实例共享一个原型对象。
+// 类不存在变量提升（hoist），这一点与 ES5 完全不同。
+// 而let命令是不提升的
+// 对象展开还有其它一些意想不到的限制。 首先，它仅包含对象 自身的可枚举属性。
+
+const objAa={
+  name:'wkylin',
+  age: 23,
+  getName: function (){
+    return (() => console.log(this.name))();
+    // console.log(this.name);
+  }
+};
+
+objAa.getAge = function(){
+  console.log(this.age);
+};
+// console.log(objAa);
+// objAa.getName();
+const objAb = {...objAa};
+// console.log(objAb);
+// objAb.getName();
+
+class classA {
+  constructor(name) {
+    this.name = name;
+  }
+  
+  getName() {
+    console.log(this.name);
+  }
+
+}
+
+let ca = new classA('wkylin');
+let caClone = {...ca};
+// console.log(ca.getName());
+// console.log(caClone.getName());
+
+
+function fak() {
+  var a = 1;
+  
+  a = 2;
+  var b = g();
+  a = 3;
+  
+  return b;
+  
+  function g() {
+    return a;
+  }
+}
+
+// console.log(fak()); // returns 2
+
+
+
+function fff() {
+  var a = 10;
+  return function g() {
+    var b = a + 1;
+    return b;
+  }
+}
+
+var g = fff();
+// console.log(g()); // returns 11;
+// console.log(a);
+
+let strss = "The rain in SPAIN stays mainly in the plain";
+// let res = strss.match(/ain/gi);
+// let res = strss.search(/ain/gi);
+
+let str1 = "ab";
+let str2 = "ab";
+let obj3 = {name:'wkylin', age: 23};
+let n = str1.localeCompare(str2);
+// console.log(n);
+// console.log(obj3.valueOf());
+
+
+// console.log(res);
 
 // 注：在 constructor 中必须调用 super 方法，因为子类没有自己的 this 对象，而是继承父类的 this 对象，然后对其进行加工,而 super 就代表了父类的构造函数。super 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 super 内部的 this 指的是 B，因此 super() 在这里相当于 ```A.prototype.constructor.call(this, props)``。
 
 
-var line1 = ['ab', 'cd'];
+let line1 = ['ab', 'cd'];
 // console.log(typeof(line1));
 // console.log(...line1);
 
@@ -55,7 +217,7 @@ phoneNumber.home='139 1553 1553';
 // console.log(phoneNumber.home);
 
 
-// var print = console.log.bind(console, '>')
+// let print = console.log.bind(console, '>')
 
 
 // subl sub
@@ -219,11 +381,11 @@ const sentence = highlight`Jhone ${users} has commmened on your topic ${topic} a
 
 // console.log(sentence);
 
-// var name = 'wkylin';
+// let name = 'wkylin';
 // console.log(window.name);
 
 (function() {
-  var a = 'aaa';
+  let a = 'aaa';
   // console.log(a);
 })();
 
