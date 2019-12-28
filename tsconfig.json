@@ -1,5 +1,4 @@
 {
-  //"extends": "./tsconfig",
   "compileOnSave": true,
   "compilerOptions": {
     /* Basic Options */

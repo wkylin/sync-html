@@ -1,3 +1,70 @@
+// 中间件----它提供的是位于 action 被发起之后，到达 reducer 之前的扩展点。
+// middleware 的函数签名是 ({ getState, dispatch }) => next => action
+
+// const store = createStore(
+//   reducer,
+//   preloadedState,
+//   applyMiddleware(...middleware)
+// )
+
+function logger({ getState }) {
+  return next => action => {
+    console.log('will dispatch', action);
+    
+    // 调用 middleware 链中下一个 middleware 的 dispatch。
+    const returnValue = next(action);
+    
+    console.log('state after dispatch', getState());
+    
+    // 一般会是 action 本身，除非
+    // 后面的 middleware 修改了它。
+    return returnValue
+  }
+}
+
+// console.log(Math.random().toString(36).substr(2));
+console.log(Math.random().toString(36).substring(2, 15));
+
+// Mixin（混入）是一种通过扩展收集功能的方式，它本质上是将一个对象的属性拷贝到另一个对象上面去，
+Object.assign({}, {name: 'wkylin', age:23});
+
+// 不过你可以拷贝任意多个对象的任意个方法到一个新对象上去，这是继承所不能实现的。
+
+// 装饰器(decorator)模式能够在不改变对象自身的基础上，在程序运行期间给对像动态的添加职责。
+// 与继承相比，装饰器是一种更轻便灵活的做法。
+// 调用高阶组件的时候并不能获取到原组件的真实ref，需要手动进行传递，
+
+
+const compose = (...fns) => fns.reduce((f, g) => (...args) => g(f(...args)));
+// compose(logger,visible,style)(Input);
+
+//高阶组件并不能像透传props那样将refs透传，我们可以用一个回调函数来完成ref的传递：
+
+function passthru(literals, ...values) {
+  
+  console.log(literals);
+  console.log(values);
+  let output = "";
+  let index;
+  for (index = 0; index < values.length; index++) {
+    output += literals[index] + values[index];
+  }
+  
+  output += literals[index];
+  return output;
+}
+// let total = 30;
+// let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
+// console.log(msg);
+
+function func(a) {
+  arguments[0] = 99;   // 更新了arguments[0] 同样更新了a
+  console.log(a);
+  console.log(typeof arguments);
+}
+
+// func(10);
+
 
 // 组件设计原则:
 // 单一功能：不要让你的组件做太多事
@@ -135,10 +202,10 @@ let caClone = {...ca};
 
 
 function fak() {
-  var a = 1;
+  let a = 1;
   
   a = 2;
-  var b = g();
+  let b = g();
   a = 3;
   
   return b;
@@ -153,14 +220,14 @@ function fak() {
 
 
 function fff() {
-  var a = 10;
+  let a = 10;
   return function g() {
-    var b = a + 1;
+    let b = a + 1;
     return b;
   }
 }
 
-var g = fff();
+let g = fff();
 // console.log(g()); // returns 11;
 // console.log(a);
 
