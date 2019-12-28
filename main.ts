@@ -1,3 +1,49 @@
+
+
+class Base{
+  public method1() { return 1;};
+  public method2() { return 2;};
+}
+
+class Derived extends Base{
+  public method2(){ return 3;};
+  public method3(){ return 4;}
+}
+
+const derived = new Derived();
+console.log(derived.method1());
+console.log(derived.method2());
+console.log(derived.method3());
+// console.log(derived.method4());
+
+
+module CustomException{
+  export declare class Error{
+    name:string;
+    message:string;
+    stack:string;
+    constructor(message?: string);
+  }
+
+
+  export class Exception extends Error{
+    constructor(message:string) {
+      super(message);
+      this.name='Exception';
+      this.message = message;
+      this.stack =(<any>new Error).stack;
+    }
+
+    toString() {
+      return `${this.name}: ${this.message}`
+    }
+  }
+}
+
+
+
+
+
 // enum Color {Red = 1, Green = 2, Blue = 4}
 // let c: Color = Color.Green;
 // let colorName: string = Color[2];

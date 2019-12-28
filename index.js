@@ -1,29 +1,132 @@
+
+
+
+
+
+
+
+
+function MathHelper() {
+}
+
+MathHelper.PI = 3.1415926;
+
+MathHelper.areaOfCircle = function(radius){
+  // return radius * radius * this.constructor.PI;
+  console.log(this);
+  console.log(this === MathHelper.prototype);
+  console.log(MathHelper.prototype);
+  return radius * radius * this.constructor.PI;
+};
+
+let math = new MathHelper();
+
+// console.log(math.areaOfCircle(5));
+
+
+
+
+
+function ObjPerson(age, sex) {
+  this.age = age;
+  this.sex = sex;
+}
+let me = new ObjPerson('wk', 'man');
+me.email = 'wkylin@qq.com';
+
+// console.log(me);
+// for(let key in me){
+//   console.log(`${key}: ${me[key]}`);
+// }
+
+
+
+
+const v1 = "abc";
+const v2 = true;
+const v3 = 10;
+const v4 = Symbol("foo")
+
+const objaa = Object.assign({}, v1, null, v2, undefined, v3, v4);
+// console.log(objaa);
+
+const aas = { name: 'json', things:[1,2,3], age: 2};
+const bb = Object.assign(aas, {sex:1});
+// console.log(bb);
+// console.log(aas === bb);
+// console.log(bb.things.push(111));
+// console.log(aas.things);
+// console.log(aas);
+// console.log(bb);
+
+
+
+// https://medium.com/@fastphrase/when-to-use-redux-f0aa70b5b1e2
+// 1. 需要将相同的应用程序状态映射到多个容器组件。
+// 2. 可以从任何地方访问的全局组件。
+// 3. 属性在多个层级组件中传递
+// 4. 使用set State的状态管理正在浮动组件。
+// 5. 缓存页面状态
+
+// app.get('/*', (req, res) => {
+//   res.sendfile(path.join(__dirname, 'index.html'))
+// })
+// devServer: {
+//   historyApiFallback: true,
+// }
+
+
+// 猴子补丁主要有以下几个用处：
+// 1.在运行时替换方法、属性等
+// 2.在不修改第三方代码的情况下增加原来不支持的功能
+// 3.在运行时为内存中的对象增加patch而不是在磁盘的源代码中增加
+
+// middleware 拓展了 Redux dispatch 函数的功能；enhancer 拓展了 Redux store 的功能
 // 中间件----它提供的是位于 action 被发起之后，到达 reducer 之前的扩展点。
 // middleware 的函数签名是 ({ getState, dispatch }) => next => action
-
+//可以使用任意多异步的 middleware 去做你想做的事情，但是需要使用普通对象作为最后一个被 dispatch 的 action ，来将处理流程带回同步方式）
 // const store = createStore(
 //   reducer,
 //   preloadedState,
 //   applyMiddleware(...middleware)
 // )
 
-function logger({ getState }) {
-  return next => action => {
-    console.log('will dispatch', action);
-    
-    // 调用 middleware 链中下一个 middleware 的 dispatch。
-    const returnValue = next(action);
-    
-    console.log('state after dispatch', getState());
-    
-    // 一般会是 action 本身，除非
-    // 后面的 middleware 修改了它。
-    return returnValue
+const timeoutScheduler = store => next => action => {
+  if (!action.meta || !action.meta.delay) {
+    return next(action)
   }
-}
+  
+  const timeoutId = setTimeout(() => next(action), action.meta.delay)
+  
+  return function cancel() {
+    clearTimeout(timeoutId)
+  }
+};
+const crashReporter = store => next => action => {
+  try {
+    return next(action)
+  } catch (err) {
+    console.error('Caught an exception!', err);
+    throw err
+  }
+};
+// function logger({ getState }) {
+//   return next => action => {
+//     console.log('will dispatch', action);
+//
+//     // 调用 middleware 链中下一个 middleware 的 dispatch。
+//     const returnValue = next(action);
+//
+//     console.log('state after dispatch', getState());
+//
+//     // 一般会是 action 本身，除非
+//     // 后面的 middleware 修改了它。
+//     return returnValue
+//   }
+// }
 
 // console.log(Math.random().toString(36).substr(2));
-console.log(Math.random().toString(36).substring(2, 15));
+// console.log(Math.random().toString(36).substring(2, 15));
 
 // Mixin（混入）是一种通过扩展收集功能的方式，它本质上是将一个对象的属性拷贝到另一个对象上面去，
 Object.assign({}, {name: 'wkylin', age:23});
@@ -96,7 +199,7 @@ class foosss {
 }
 
 const fo= new foosss();
-console.log(fo.getBar());
+// console.log(fo.getBar());
 
 
 
