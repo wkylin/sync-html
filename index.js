@@ -1,4 +1,32 @@
 
+
+
+function middle1(api){
+  return (next) => (num3) => {
+    return next(num3)
+  }
+}
+//这里改写   不在中间件的地方求值
+function middle2(api){
+  return (num2) => (num) => {
+    return num2(num);
+  }
+}
+//将处理函数封装
+function applyMiddleware(arg1,arg2){
+  const api = {};
+  let b = arg2(api)(function(num){
+    console.log(num+'：我是外面传来的数据')
+  });
+  let newDispatch = arg1(api)(b);
+  return {
+    dispatch:newDispatch
+  }
+}
+applyMiddleware(middle1,middle2).dispatch(6); //=>6：我是外面传来的数据
+
+
+
 function createStore (stateChanger) {
   let state = null;
   const listeners = [];
@@ -70,6 +98,20 @@ const objX = {
 // console.log(addPlus(objX,2)); //5
 // console.log(objX.x) ; // 3
 
+// function add(num1, num2, num3){
+//   return num1 + num2 + num3;
+// }
+// add(1, 2, 3) //=>6
+//改为柯里化形式
+function addCre(num1){
+  return (num2) => (num3) => {
+    return num1 + num2 + num3
+  }
+}
+
+// console.log(addCre(1)(2)(3));  //=>6
+
+
 // createPortal：将组件渲染到 React 组件树以外的 DOM 节点中。
 // hydrate：类似 render，如果有使用 reactDomServer 渲染，可以一起使用避免页面闪动，它会尽可能复用已有的 DOM 元素。
 // React 是引用传值 可以修改props的属性, 不建议
@@ -97,6 +139,7 @@ const objX = {
 // 当节点类型相同时，去看一下属性是否相同，产生一个属性的补丁包{type: 'ATTR', attr: {class: 'list-group'}}
 // 节点类型不相同，直接采用替换模式{type: 'REPLACE', newNode}
 // 执行中间件的一个关键途径是信息传递。
+// //creatStore(reducer,middelewareFun)  只有两个参数时（第二个参数为中间件函数，preloadState可选） 将第二个参数视为enhancer增强函数
 
 function MathHelper() {
 }
@@ -227,7 +270,8 @@ Object.assign({}, {name: 'wkylin', age:23});
 
 // 装饰器(decorator)模式能够在不改变对象自身的基础上，在程序运行期间给对像动态的添加职责。
 // 与继承相比，装饰器是一种更轻便灵活的做法。
-// 调用高阶组件的时候并不能获取到原组件的真实ref，需要手动进行传递，
+// 调用高阶组件的时候并不能获取到原组件的真实ref，需要手动进行传递
+// forwardedRef
 
 
 const compose = (...fns) => fns.reduce((f, g) => (...args) => g(f(...args)));

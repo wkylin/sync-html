@@ -1,7 +1,85 @@
+// 为什么不扩展 Error、Array、Map 内置函数
+//在 ES2015 中，返回一个对象的构造函数将 this 的值隐式替换为 super(...) 的任何调用者。这对于构造函数代码捕获 super(...) 的任何潜在返回值并将其替换为 this 是必要的。
+
+class MyError extends Error {
+  constructor(m: string) {
+    super(m);
+    // Set the prototype explicitly.
+    Object.setPrototypeOf(this, MyError.prototype);
+  }
+  sayHello() {
+    return 'hello ' + this.message;
+  }
+}
+
+const myError = new MyError('my error');
+console.log(myError.sayHello());
+// TypeError: myError.sayHello is not a function
+
+//
+// function f({ x }: { x: number }) {
+//   // OK
+//   console.log(x);
+// }
+
+// function f({ x: number }) {
+//   // Error, x is not defined?
+//   console.log(x);
+// }
+
+class Empty {
+  /* empty */
+}
+
+let e2: Empty = 22;
+
+// console.log(e2);
+
+//库本身没有类型定义, 也没有相关的@type 那只能自己声明一个了. 随便举个栗子.
+//declare module “lodash”  环境声明
+// 类型声明空间
+// declare type JQuery = any;
+// declare var $: JQuery;
+// 快速的定义一个全局模块
+// declare module 'jquery';
+
+// 别名
+type StrOrNum = string | number;
+type Text = string | { text: string };
+type Coordinates = [number, number];
+type Callback = (data: string) => void;
+
+let arr : Coordinates;
+arr = [3, 2]
+
+let text: Text;
+text = '111';
+
+let text2 = {
+  text: '22'
+};
+
+// 使用
+let sample: StrOrNum;
+sample = 123;
+sample = '123';
+
+// 会检查类型
+// sample = true; // Error
+
+
+
+
+import {someType, someVar} from './foo';
+
+const bar = someVar;
+
+console.log(bar);
+// console.log(someType)
 
 function logClass(target:any){
   let original = target;
-  console.log('target>>:', target);
+  // console.log('target>>:', target);
 
   // function construct(constructor:any, args:any){
   //   let c:any = function(this: any){
@@ -32,7 +110,7 @@ class Base{
   public method2() { return 2;};
 }
 
-let base = new Base('w', 1);
+// let base = new Base('w', 1);
 
 // class Base{
 //   public method1() { return 1;};
@@ -198,6 +276,6 @@ class Teacher extends Person{
 }
 
 let teacher = new Teacher('remo', 'jansen', ['math', 'physics']);
-teacher.greet();
-teacher.teach();
+// teacher.greet();
+// teacher.teach();
 
