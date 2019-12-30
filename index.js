@@ -1,51 +1,17 @@
 
-
-const stateAll = {
-  people:{
-    eyes: '有点不舒服',
-    color: 'red'
-  }
-};
-
-// //创建一个仓库
-// function createStore () {
-//   //需要订阅的函数集合
-//   let listeners = [];
-//   //外部每调用一次subscribe就往被订阅的集合中存入  listener参数必须为一个函数
-//   const subscribe = (listener) => {
-//     listeners.push(listener)
-//   };
-//   //dispatch执行就是让被订阅的函数执行
-//   const dispatch = (action) => {
-//     listeners.forEach((listener) => listener())
-//   };
-//   //通过闭包的形式返回 外部可调用内部方法
-//   return { dispatch, subscribe }
-// }
-//增加了两个参数state, stateChanger
 function createStore (stateChanger) {
   let state = null;
   const listeners = [];
-  //这样可以直接从store中取数据
   const getState = () => state;
   const subscribe = (listener) => {
     listeners.push(listener)
   };
   const dispatch = (action) => {
-    //这里新数据处理的地方  就是之前的dispatch({type: "EYES_COLOR_LOG",data: "lightcoral"}) 只不过这里换成参数的方式
-    // stateChanger(state, action);
-    state = stateChanger(state, action)
+    state = stateChanger(state, action);
     listeners.forEach((listener) => listener())
   };
-  dispatch({})
+  dispatch({});
   return { getState, dispatch, subscribe }
-}
-
-
-function render(data){
-  let ele = document.getElementById('cont')
-  ele.innerHTML = data.people.eyes;
-  ele.style.color = data.people.color;
 }
 function reducer(state, action){
   if(!state){
@@ -77,61 +43,19 @@ function reducer(state, action){
       break;
   }
 }
-// function reducer(state, action){
-//     switch (action.type){
-//     case 'EYES_QUESTION_LOG':
-//       state.people.eyes = action.data
-//       break;
-//     case 'EYES_COLOR_LOG':
-//       state.people.color = action.data
-//       break;
-//     default:
-//       break;
-//   }
-// }
-// function dispatch(action){
-//   switch (action.type){
-//     case 'EYES_QUESTION_LOG':
-//       stateAll.people.eyes = action.data
-//       break;
-//     case 'EYES_COLOR_LOG':
-//       stateAll.people.color = action.data
-//       break;
-//     default:
-//       break;
-//   }
-// }
-// dispatch({
-//   type: "EYES_QUESTION_LOG",
-//   data: "眼睛有点红"
-// });
-// dispatch({
-//   type: "EYES_COLOR_LOG",
-//   data: "lightcoral"
-// });
-// stateAll.people.eyes = '还是有点不舒服';
-// stateAll.people.eyes = '感觉差不多了';
-// stateAll.people.eyes = '没问题了';
-// stateAll.people.color = 'green';
-// console.log(stateAll);
-// render(stateAll);
-// const store = createStore();
-// store.subscribe(()=>{
-//   //把渲染函数订阅上
-//   render(stateAll)
-// });
-// store.dispatch(); //通知结果
-
+function render(data){
+  let ele = document.getElementById('cont')
+  ele.innerHTML = data.people.eyes;
+  ele.style.color = data.people.color;
+}
 //将现有的数据集合和处理方式传入进去
 const store = createStore(reducer);
 store.subscribe(()=>{
-  //通过store的方式获取数据 不用管全局变量的名称了
   render(store.getState())
 });
-//派发数据  action
 store.dispatch({
   type: "EYES_QUESTION_LOG",
-  data: "好点了"
+  data: "差不多了哦"
 });
 
 
@@ -172,7 +96,7 @@ const objX = {
 // 文本的变化{type: 'TEXT', text: 1}
 // 当节点类型相同时，去看一下属性是否相同，产生一个属性的补丁包{type: 'ATTR', attr: {class: 'list-group'}}
 // 节点类型不相同，直接采用替换模式{type: 'REPLACE', newNode}
-
+// 执行中间件的一个关键途径是信息传递。
 
 function MathHelper() {
 }
