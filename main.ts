@@ -1,19 +1,53 @@
 
+function logClass(target:any){
+  let original = target;
+  console.log('target>>:', target);
 
+  // function construct(constructor:any, args:any){
+  //   let c:any = function(this: any){
+  //     return constructor.apply(this, args);
+  //   };
+  //   c.prototype = constructor.prototype;
+  //   return new c();
+  // }
+
+  // let f: any = function(...args:any){
+  //   console.log("New>>:", original.name);
+  //   return construct(original, args);
+  // };
+  //
+  // f.prototype = original.prototype;
+  // return f;
+}
+
+@logClass
 class Base{
+  name:string;
+  sex: number;
+  constructor(name:string, sex:number) {
+    this.name = name;
+    this.sex = sex;
+  }
   public method1() { return 1;};
   public method2() { return 2;};
 }
 
-class Derived extends Base{
-  public method2(){ return 3;};
-  public method3(){ return 4;}
-}
+let base = new Base('w', 1);
 
-const derived = new Derived();
-console.log(derived.method1());
-console.log(derived.method2());
-console.log(derived.method3());
+// class Base{
+//   public method1() { return 1;};
+//   public method2() { return 2;};
+// }
+//
+// class Derived extends Base{
+//   public method2(){ return 3;};
+//   public method3(){ return 4;}
+// }
+//
+// const derived = new Derived();
+// console.log(derived.method1());
+// console.log(derived.method2());
+// console.log(derived.method3());
 // console.log(derived.method4());
 
 

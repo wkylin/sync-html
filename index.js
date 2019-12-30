@@ -1,9 +1,177 @@
 
 
+const stateAll = {
+  people:{
+    eyes: '有点不舒服',
+    color: 'red'
+  }
+};
+
+// //创建一个仓库
+// function createStore () {
+//   //需要订阅的函数集合
+//   let listeners = [];
+//   //外部每调用一次subscribe就往被订阅的集合中存入  listener参数必须为一个函数
+//   const subscribe = (listener) => {
+//     listeners.push(listener)
+//   };
+//   //dispatch执行就是让被订阅的函数执行
+//   const dispatch = (action) => {
+//     listeners.forEach((listener) => listener())
+//   };
+//   //通过闭包的形式返回 外部可调用内部方法
+//   return { dispatch, subscribe }
+// }
+//增加了两个参数state, stateChanger
+function createStore (stateChanger) {
+  let state = null;
+  const listeners = [];
+  //这样可以直接从store中取数据
+  const getState = () => state;
+  const subscribe = (listener) => {
+    listeners.push(listener)
+  };
+  const dispatch = (action) => {
+    //这里新数据处理的地方  就是之前的dispatch({type: "EYES_COLOR_LOG",data: "lightcoral"}) 只不过这里换成参数的方式
+    // stateChanger(state, action);
+    state = stateChanger(state, action)
+    listeners.forEach((listener) => listener())
+  };
+  dispatch({})
+  return { getState, dispatch, subscribe }
+}
+
+
+function render(data){
+  let ele = document.getElementById('cont')
+  ele.innerHTML = data.people.eyes;
+  ele.style.color = data.people.color;
+}
+function reducer(state, action){
+  if(!state){
+    return {
+      people:{
+        eyes: '有点疼',
+        color: 'red'
+      }
+    }
+  }
+  switch (action.type){
+    case 'EYES_QUESTION_LOG':
+      return Object.assign({}, state, {
+        people: {
+          ...state.people,
+          eyes: action.data
+        }
+      });
+      break;
+    case 'EYES_COLOR_LOG':
+      return Object.assign({}, state, {
+        people: {
+          ...state.people,
+          color: action.data
+        }
+      });
+      break;
+    default:
+      break;
+  }
+}
+// function reducer(state, action){
+//     switch (action.type){
+//     case 'EYES_QUESTION_LOG':
+//       state.people.eyes = action.data
+//       break;
+//     case 'EYES_COLOR_LOG':
+//       state.people.color = action.data
+//       break;
+//     default:
+//       break;
+//   }
+// }
+// function dispatch(action){
+//   switch (action.type){
+//     case 'EYES_QUESTION_LOG':
+//       stateAll.people.eyes = action.data
+//       break;
+//     case 'EYES_COLOR_LOG':
+//       stateAll.people.color = action.data
+//       break;
+//     default:
+//       break;
+//   }
+// }
+// dispatch({
+//   type: "EYES_QUESTION_LOG",
+//   data: "眼睛有点红"
+// });
+// dispatch({
+//   type: "EYES_COLOR_LOG",
+//   data: "lightcoral"
+// });
+// stateAll.people.eyes = '还是有点不舒服';
+// stateAll.people.eyes = '感觉差不多了';
+// stateAll.people.eyes = '没问题了';
+// stateAll.people.color = 'green';
+// console.log(stateAll);
+// render(stateAll);
+// const store = createStore();
+// store.subscribe(()=>{
+//   //把渲染函数订阅上
+//   render(stateAll)
+// });
+// store.dispatch(); //通知结果
+
+//将现有的数据集合和处理方式传入进去
+const store = createStore(reducer);
+store.subscribe(()=>{
+  //通过store的方式获取数据 不用管全局变量的名称了
+  render(store.getState())
+});
+//派发数据  action
+store.dispatch({
+  type: "EYES_QUESTION_LOG",
+  data: "好点了"
+});
 
 
 
+const addPlus = (obj, y) => {
+  obj.x = 3;
+  return obj.x + y
+};
+const objX = {
+  x:1
+};
+// console.log(addPlus(objX,2)); //5
+// console.log(objX.x) ; // 3
 
+// createPortal：将组件渲染到 React 组件树以外的 DOM 节点中。
+// hydrate：类似 render，如果有使用 reactDomServer 渲染，可以一起使用避免页面闪动，它会尽可能复用已有的 DOM 元素。
+// React 是引用传值 可以修改props的属性, 不建议
+// 第一，你的修改 React 本身并不知道，所以不会有组件的重新渲染；
+// 第二，你修改后的值可能会被父级的变化重新覆盖。
+// 即应该总是认为props中的数据是不可变的，immutable data；
+// 另外 Ref 不可作用于函数定义式组件上，因为它没有实例。
+// HOC 可以用来实现代码复用、解决交叉组件的数据、状态共享等，用以处理跨层级的数据传递。
+//  React，则既没有脏检查，也没有 Getter/Setter。它是主动式的，即用户需要更新 view 了，则需要主动去调用 setState（或者 forceUpdate），来告诉 React 来重新 render，然后 React 会启动虚拟 DOM 渲染、差值比较，计算出变动的部分，然后更新 DOM 树。
+// 所谓的对外部有副作用，就是我们在函数中进行了：
+// 发出 HTTP 调用
+// 改变外部数据或者 Dom 状态
+// console.log()
+// Math.random()
+// 获取的当前时间
+
+// 虚拟DOM
+// type: 指定元素的标签类型，如'li', 'div', 'a'等
+// props: 表示指定元素身上的属性，如class, style, 自定义属性等
+// children: 表示指定元素是否有子节点，参数以数组的形式传入
+// 比较规则
+//
+// 新的DOM节点不存在{type: 'REMOVE', index}
+// 文本的变化{type: 'TEXT', text: 1}
+// 当节点类型相同时，去看一下属性是否相同，产生一个属性的补丁包{type: 'ATTR', attr: {class: 'list-group'}}
+// 节点类型不相同，直接采用替换模式{type: 'REPLACE', newNode}
 
 
 function MathHelper() {
