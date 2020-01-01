@@ -1,3 +1,160 @@
+const asyncFunction = async () => {};
+console.log(typeof asyncFunction); // 'function'
+console.log(asyncFunction.constructor.name); //"AsyncFunction"
+console.log(Object.getPrototypeOf(async function(){}).constructor);
+
+
+// 首先回顾下构造函数、原型、和实例之间的关系：
+// 每一个构造函数都有一个原型对象 F.prototype，原型对象都包含一个指向构造构造的指针 constructor，
+// 而实例都包含一个指向原型对象的内部指针 __proto__。
+
+function F() {}
+let newF = new F();
+// console.log(F.prototype.constructor === F);
+// console.log(newF.__proto__ === F.prototype);
+
+
+// 使用 new 操作符来调用函数时，会自动执行下面的操作：
+// 1.创建一个新的空对象；
+// 2.这个对象会被执行 [[prototpye]] 连接；
+// 3.这个新对象会绑定到函数调用的 this；
+// 4.如果函数没用返回其他对象，那么 new 调用的函数会自动返回这个新对象。
+
+function _new() {
+  let o = {}; // 创建一个空对象
+  let C = arguments[0];  // 获得构造函数
+  o.constructor = C;     // 将空对象的 constructor 默认指向构造函数
+  o.__proto___ = C.prototype;  // 进行 [[prototype]] 连接
+  let res = C.apply(o, arguments);  // 进行 this 绑定 并获得构造函数返回值
+  // 返回处理
+  return typeof res === "object" ? res : o;
+}
+// 测试
+function Person() {
+  this.name = "my person"
+}
+let p = _new(Person);
+// console.log(p.name); // my person
+// console.log(p.constructor);  // Person
+
+
+// {} + {} 		// "[object Object][object Object]"
+// [1,2,3] + [] 	//	 "1,2,3" + "" -> "1,2,3"
+// [] + {} 		// "" + "[object Object]" -> "[object Object]"
+// {} + []		    // 0 -> {} 被当做一个块（表达式），相当于执行 ({},+[])，返回值为小括号最后面的表达式的返回值。
+// {q:1} + [] 		// 0
+// var a = {q:1};
+// a + []	 //  "[object Object]"     变量形式运算正常
+// [] + a 	 // "[object Object]"
+// {} == []  => 报错   ({}, ==[]) -> 报错
+// [] == 0   => true	[] -> "" -> 0
+// ![] == 0  => true   ![] -> false -> 0
+// [] == ![] => true   [] -> "" -> 0    ![] -> false -> 0
+// [] == []  => false  比较引用地址
+// {} == {}  => false  比较引用地址
+// {} == !{} => false  !{} -> false -> 0    {} -> "[object Object]" -> NaN
+
+
+
+
+
+
+//单元测试、功能测试 集成测试
+// xxx starter kit
+
+const debounce = (cb, delay) => {
+  let timer = null;
+  return function(...args){
+    const context = this;
+    if(timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      cb.apply(context, args);
+      timer = null;
+    }, delay)
+  }
+};
+
+const throttleUserTimer = (cb, delay) => {
+  let timer = null;
+  return function(...args){
+    const context = this;
+    if(!timer){
+      timer = setTimeout(() => {
+        cb.apply(context, args);
+        timer = null;
+      },delay)
+    }
+  }
+};
+
+
+// 首先执行script(整体代码)宏任务，从上往下执行，遇到宏任务放入宏任务队列，
+// 遇到微任务放入微任务队列 => 执行微任务队列的任务，然后执行宏任务队列的第一个任务
+// console.log("script start");
+// setTimeout(function () {
+//   console.log("a");
+//   setTimeout(function () {
+//     console.log("b")
+//   });
+//   new Promise(function (resolve) {
+//     console.log("c");
+//     resolve();
+//   }).then(function () {
+//     console.log("d");
+//     setTimeout(function () {
+//       console.log("e")
+//     })
+//   })
+// });
+// new Promise(function (resolve) {
+//   console.log("f");
+//   resolve()
+// }).then(function () {
+//   console.log("g")
+// });
+// setTimeout(function () {
+//   console.log("h")
+//   setTimeout(function () {
+//     console.log("i")
+//   });
+//   new Promise(function (resolve) {
+//     console.log("j");
+//     resolve();
+//   }).then(function () {
+//     console.log("k");
+//     setTimeout(function () {
+//       console.log("l");
+//       new Promise(function (resolve) {
+//         console.log("m");
+//         resolve()
+//       }).then(function () {
+//         console.log("n");
+//         setTimeout(function () {
+//           console.log("o")
+//         })
+//       })
+//     })
+//   })
+// });
+//第一次宏任务打印: "script start" "f"
+//第一次微任务打印: "g"
+//第二次宏任务打印: "a" "c"
+//第二次微任务打印: "d"
+//第三次宏任务打印: "h" "j"
+//第三次微任务打印: "k"
+//第四次宏任务打印: "b"
+//第四次微任务打印: 无
+//第五次宏任务打印: "e"
+//第五次微任务打印: 无
+//第六次宏任务打印: "i"
+//第六次微任务打印: 无
+//第七次宏任务打印: "l" "m"
+//第七次微任务打印: "n"
+//第八次宏任务打印: "o"
+
+//最终打印顺序为:
+//"script start" "f" "g" "a" "c" "d" "h" "j" "k" "b" "e" "i" "l" "m" "n" "o"
+
 
 
 
@@ -23,7 +180,7 @@ function applyMiddleware(arg1,arg2){
     dispatch:newDispatch
   }
 }
-applyMiddleware(middle1,middle2).dispatch(6); //=>6：我是外面传来的数据
+// applyMiddleware(middle1,middle2).dispatch(6); //=>6：我是外面传来的数据
 
 
 

@@ -1,3 +1,10 @@
+
+// 每个对象都有__proto__ ( 除了 var obj = Object.create(null) )
+// 每个函数对象都有 prototype。这个属性用于实现“实例化”（函数对象也是对象所以也有__proto__，即 Func.__proto__ = Function.prototype）
+// 函数对象的 prototype 所指向的也是对象，所以也有 __proto__，即 Func.prototype.__proto__。这个属性用于实现“继承”
+
+
+
 // 为什么不扩展 Error、Array、Map 内置函数
 //在 ES2015 中，返回一个对象的构造函数将 this 的值隐式替换为 super(...) 的任何调用者。这对于构造函数代码捕获 super(...) 的任何潜在返回值并将其替换为 this 是必要的。
 
