@@ -295,28 +295,52 @@ p.text {
 }
 
 
-.t1 {
+.wrapper {
   /*width: 400px;*/
   /*height: 200px;;*/
   /*background: red;*/
+  margin: 20px;
+  /*box-sizing: border-box;*/
+  overflow: hidden;
 }
 
-.t2 {
-  width: 25%;
+.item {
+  box-sizing: border-box;
+  width: 24%;
+  margin: 2px;
   background: #ccc;
   position: relative;
   float: left;
   border: 2px solid #000;
 }
 
-.t2:after {
+.item:after {
   content: "";
   display: block;
   padding-bottom: 100%;
+  clear:both;
 }
 
-.aaaa {
+.inner {
   position: absolute;
   width: 100%;
   height: 100%;
 }
+
+/*.box{*/
+/*  margin: 20px auto;*/
+/*  overflow: hidden;*/
+/*  box-sizing: border-box;*/
+/*  padding: 20px;*/
+/*}*/
+
+/*.placeholder {*/
+/*  width: 25%;*/
+/*  float:left;*/
+/*  border:2px solid #000000;*/
+/*}*/
+/*.placeholder:after {*/
+/*  content: '';*/
+/*  display: block;*/
+/*  margin-top: 100%; !* margin 百分比相对父元素宽度计算 *!*/
+/*}*/

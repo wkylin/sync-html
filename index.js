@@ -1,4 +1,91 @@
+// 正向代理 理解为vpn
+// 反向代理 借钱-->> A--没有>> A从A朋友那借了之后再给到 B, A 反向代理
 
+// new lifecycle
+// 挂载
+// constructor
+// getDerivedStateFromProps
+// render
+// componentDidMount
+// 更新
+// getDerivedStateFromProps
+// shouldComponentUpdate
+// render
+// getSnapshotBeforeUpdate
+// componentDidUpdate
+//
+// 卸载
+// componentWillUnmount
+
+// 组件树的生命周期调用栈走的是一个Z字形。
+// app.render();
+// child.render();
+// grandson.render();
+// // divide
+// grandson.componentDidMount();
+// child.componentDidMount();
+// app.componentDidMount();
+
+// React里面传递props有一种写法，如果传递的是一个对象，可以用扩展运算符很方便的传递。
+// this.state并不是一个不可变对象，你(非得较劲的话)是可以直接改变它的属性的。但是它不会触发render生命周期钩子，也就不会渲染到UI上。
+// 而且合并是浅合并。Object.assign
+// 只有第一层的属性才会合并，更深层的属性都会覆盖。
+// 它不是真正的异步，只是React有意识的将状态攒在一起批量更新。
+// this.setState()会触发render生命周期钩子，也就会运行组件的diff算法。如果每次setState都要走这一套流程，不仅浪费性能，而且是完全没有必要的。
+// 真正异步回调和原生事件回调中的setState不是批量更新的, 是同步的。
+// 加上React也没有this.setProps方法，所以不需要开发者自我约束，this.props就是不可变的。
+// Consumer的children必须是一个函数。
+// <Consumer>
+//   {({ lang }) => <div>{lang === 'en' ? 'todo' : '要做'}</div>}
+// </Consumer>
+// 关于React摒弃了表单双向数据绑定的问题，它只是想把单向数据流做的更彻底一点。其实表单的状态，归根结底是组件内部的状态，跟单向数据流无关。
+// 什么是双向数据绑定？就是表单输入，与之绑定的变量自动获取到输入的值，变量的值改变，与之绑定的表单的值随即改变，两种流向都自动绑定了。
+// 但其实双向数据绑定不就是value的单向绑定加onChange事件监听么！React也可以通过两步做到。
+// 总结：双向数据绑定不影响单向数据流，React也可以实现双向的同步。
+// 函数组件没有办法实例化，除了一些逻辑判断之外，它的功能只是返回UI。
+// 正确的做法是永远不修改原数据，生成新数据时依赖于原数据的浅拷贝，避免新数据和老数据指向同一个引用。
+// 不过React早就预测到你会这么干的，所以它只能随你的脾气，只要组件里定义了shouldComponentUpdate生命周期钩子，PureComponent类的自动优化就不再起作用了。
+// connect方法是用来将redux中的state作为props传给组件的。
+// 基于Event对象创建了一个合成事件对象
+// 这回stopImmediatePropagation不仅不能阻止body事件，body事件还会先于button触发。铁证，React所有事件都是由document统一分发的。
+// event.persist()
+// event.nativeEvent.stopImmediatePropagation() stopImmediatePropagation不仅会阻止顶层事件的冒泡，连自身元素绑定的其他事件也会阻止。因为同一个元素可以绑定多个事件，而事件触发顺序是根据绑定顺序来的，
+// event.nativeEvent.stopPropagation();
+
+// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+let objArrow = {
+  i: 10,
+  b: () => console.log(this.i, this),
+  c: function() {
+    console.log( this.i, this)
+  }
+};
+// objArrow.b();
+// undefined, Window{...}
+// objArrow.c();
+// 10, Object {...}
+let FooArrow = () => {};
+// console.log(FooArrow.prototype); // undefined
+
+let FooArrowNew = () => {};
+// let foo = new FooArrowNew(); // TypeError: Foo is not a constructor
+let callback;
+// callback = callback || (() => {});
+// let empty = () => {};
+// console.log((() => 'foobar')());
+
+// sessionStorage是页面级别的，仅在一个标签页生效，如果同一个浏览器同时打开多个标签页，且都访问同一个域名，
+// sessionStorage是不会在这多个标签页共用的，即每个标签页都有自己的sessionStorage。
+// window.addEventListener("storage", function(ev){
+// 1. 该Cookie是服务器自动颁发给浏览器的，不用我们手工创建的。该Cookie的maxAge值默认是-1，也就是说仅当前浏览器使用，不将该Cookie存在硬盘中，并且各浏览器窗口间不共享，关闭浏览器就会失效。
+// 产生 sessionID：session 是基于 cookie 的一种方案，所以，首先要产生 cookie。client 第一次访问 server，server 生成一个随机数，命名为 sessionID，并将其放在响应头里，以 cookie 的形式返回给 client，client 以处理其他 cookie 的方式处理这段 cookie。
+// 保存 sessionID： server 将要保存的数据保存在相对应的 sessionID 之下，再将 sessionID 保存到服务器端的特定的保存 session 的内存中保存 sessionID： server 将要保存的数据保存在相对应的 sessionID 之下，
+// 再将 sessionID 保存到服务器端的特定的保存 session 的内存中
+// 使用 session： client 再次访问 server，会带上首次访问时获得的 值为 sessionID 的cookie，server 读取 cookie 中的 sessionID，根据 sessionID 到保存 session 的内存寻找与 sessionID 匹配的数据，若寻找成功就将数据返回给 client
+// 为防止内存溢出，服务器会把长时间内没有活跃的Session从内存删除。
+// 这个时间就是Session的超时时间。如果超过了超时时间没访问过服务器，Session就自动失效了。
+// Session 的运行依赖Session ID，而 Session ID 是存在 Cookie 中的，也就是说，如果浏览器禁用了 Cookie，Session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 Session ID，也就是地址重写）
+//
 
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
 // https://medium.com/@szantoboldizsar/es6-fetch-with-timeout-and-abort-45476bcf6880
@@ -113,7 +200,7 @@ let p = _new(Person);
 // [] + {} 		// "" + "[object Object]" -> "[object Object]"
 // {} + []		    // 0 -> {} 被当做一个块（表达式），相当于执行 ({},+[])，返回值为小括号最后面的表达式的返回值。
 // {q:1} + [] 		// 0
-// var a = {q:1};
+// let a = {q:1};
 // a + []	 //  "[object Object]"     变量形式运算正常
 // [] + a 	 // "[object Object]"
 // {} == []  => 报错   ({}, ==[]) -> 报错
