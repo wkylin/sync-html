@@ -1,4 +1,49 @@
 
+
+// https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
+// https://medium.com/@szantoboldizsar/es6-fetch-with-timeout-and-abort-45476bcf6880
+/**
+ * Timeout function
+ * @param {Integer} time (miliseconds)
+ * @param {Promise} promise
+ */
+const timeout = (time, promise) => {
+  return new Promise(function(resolve, reject) {
+    setTimeout(() => {
+      reject(new Error('Request timed out.'))
+    }, time);
+    promise.then(resolve, reject);
+  });
+};
+
+// Create an instance.
+const controller = new AbortController();
+const signal = controller.signal;
+
+// Our timeout function
+const urlFetch = 'https://my-json-server.typicode.com/wkylin/angular-json-server/posts';
+const data = {};
+// timeout(200, fetch(urlFetch, {
+//   method: 'POST',
+//   signal: signal,
+//   body: data
+// }))
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('fetchData', data);
+//   })
+//   .catch(error => {
+//     // Error Log
+//     console.error('error>>',error);
+//
+//     // This can be because of request timed out
+//     // so we abort the request for any case
+//     controller.abort();
+//   });
+
+
+
+
 function isPromise(val) {
   return val && typeof val.then === 'function';
 }
