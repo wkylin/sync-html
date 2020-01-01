@@ -1,8 +1,32 @@
-const asyncFunction = async () => {};
-console.log(typeof asyncFunction); // 'function'
-console.log(asyncFunction.constructor.name); //"AsyncFunction"
-console.log(Object.getPrototypeOf(async function(){}).constructor);
 
+function isPromise(val) {
+  return val && typeof val.then === 'function';
+}
+// const array = [1, 2, 3, 4];
+// const reducer = (accumulator, currentValue) => accumulator + currentValue;
+// 1 + 2 + 3 + 4
+// console.log(array.reduce(reducer));  // 10
+
+// let array = [[1, 2], [3, 4], [5, 6]];
+// const reducer = (acc, cur) => acc.concat(cur);
+// let result = array.reduce(reducer, [])   // 将 [] 作为回到函数第一个参数
+// console.log(result); //[1, 2, 3, 4, 5, 6]
+
+// let names = ['jser', 'jser', 'javaer', 'javaer', 'phper', 'pythener']
+// let obj = {};
+// names.reduce((acc, cur) => {
+//   acc[cur]? acc[cur]++ : acc[cur] = 1;
+//   return acc;
+// }, obj);  // 将 obj 作为回到函数第一个参数 obj
+// console.log(obj);
+
+
+const asyncFunction = async () => {};
+// console.log(typeof asyncFunction); // 'function'
+// console.log(asyncFunction.constructor.name); //"AsyncFunction"
+// console.log(Object.getPrototypeOf(async function(){}).constructor);
+// 不应该在 async function，中 return await。因为 async function 的返回值总是封装在 Promise.resolve，return await 实际上并没有做任何事情，
+// 只是在 Promise resolve 或 reject 之前增加了额外的时间。
 
 // 首先回顾下构造函数、原型、和实例之间的关系：
 // 每一个构造函数都有一个原型对象 F.prototype，原型对象都包含一个指向构造构造的指针 constructor，
@@ -12,8 +36,9 @@ function F() {}
 let newF = new F();
 // console.log(F.prototype.constructor === F);
 // console.log(newF.__proto__ === F.prototype);
+// console.log(Object.prototype.__proto__ === null);
 
-
+// 从 instanceof 能够判断出 [].__proto__ 指向 Array.prototype，而 Array.prototype.__proto__ 又指向了 Object.prototype，最终 Object.prototype.__proto__指向了 null，标志着原型链的结束。
 // 使用 new 操作符来调用函数时，会自动执行下面的操作：
 // 1.创建一个新的空对象；
 // 2.这个对象会被执行 [[prototpye]] 连接；
