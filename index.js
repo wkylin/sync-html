@@ -1,3 +1,123 @@
+
+let objArr = [{
+  name: '小王',
+  age: 14
+},{
+  name: '大王',
+  age: 41
+},{
+  name: '老王',
+  age: 61
+}];
+
+function objFn(obj, objIndex, objs){
+  console.log('obj', obj);
+  console.log('objIndex', objIndex);
+  console.log('objs', objs);
+  return obj.age > 20;
+}
+
+// console.log(objArr.findIndex(objFn));
+
+
+
+
+// window.onhashchange = function(event){
+//   console.log(event.oldURL, event.newURL);
+//   let hash = location.hash.slice(1);
+//   document.body.style.color = hash;
+// };
+//
+// history.pushState({color:'red'}, 'red', 'red')
+// history.back();
+// setTimeout(function(){
+//   history.forward();
+// },0);
+// window.onpopstate = function(event){
+//   console.log(event.state);
+//   if(event.state && event.state.color === 'red'){
+//     document.body.style.color = 'red';
+//   }
+// };
+
+// 挂载阶段：
+// constructor(props): 实例化。
+// static getDeriverdStateFromProps 从 props 中获取 state。
+// render 渲染。
+// componentDidMount: 完成挂载。
+//
+// 更新阶段：
+// static getDeriverdStateFromProps 从 props 中获取 state。
+// shouldComponentUpdate 判断是否需要重绘。
+// render 渲染。
+// getSnapshotBeforeUpdate 获取快照。
+// componentDidUpdate 渲染完成后回调。
+//
+// 卸载阶段：
+// componentWillUnmount 即将卸载。
+//
+// 错误处理：
+// static getDerivedStateFromError 从错误中获取 state。
+// componentDidCatch 捕获错误并进行处理。
+
+
+
+function duplicates(arr) {
+  let newArr = [];
+  for(let j = 0;j < arr.length;j++){
+    for(let i = j+1;i < arr.length;i++){
+      console.log(arr[i], arr[j]);
+      if(arr[i].a == arr[j].a){
+        newArr.push(arr[i]);
+      }
+      // if(arr[j] == arr[i]){
+      //   newarr.push(arr[i]);
+      // }
+    }
+  }
+  return newArr;
+}
+
+// console.log(duplicates([{a:1}, {a:2}, {a:1}, {a:2}, {a:3}]));
+
+
+function fnTime(){
+  for(let i=0; i<5; i++){
+    setTimeout(() => {
+      console.log('innerI',i);
+      console.log('inner',new Date());
+    }, 5000);
+  }
+}
+
+// fnTime();
+// console.log(i);
+// console.log('outer',new Date());
+
+
+// 'use strict';
+function Person() {}
+
+// console.log(Person.prototype);
+// console.log(Person.__proto__);
+// console.log(Person.prototype.constructor === Person);
+
+
+// (() => {}).prototype; // undefined
+// (function() {}).prototype; // {constructor: f}
+
+const objThat = {
+  something: function() {
+    console.log(this);
+  },
+};
+// objThat.something();
+
+const action = objThat.something;
+// action();
+
+
+
 // 正向代理 理解为vpn
 // 反向代理 借钱-->> A--没有>> A从A朋友那借了之后再给到 B, A 反向代理
 
@@ -51,6 +171,59 @@
 // event.persist()
 // event.nativeEvent.stopImmediatePropagation() stopImmediatePropagation不仅会阻止顶层事件的冒泡，连自身元素绑定的其他事件也会阻止。因为同一个元素可以绑定多个事件，而事件触发顺序是根据绑定顺序来的，
 // event.nativeEvent.stopPropagation();
+// React会把同一类型的事件push到一个队列里，
+// bind的性能是堪忧的。而且你发现没有，每一次重新render都会重新bind一次。
+// 可是得额外包裹一层箭头函数，而且每次触发事件都会生成一个箭头函数。
+// 当然事件需要传参的时候没的说，必须得包裹一层箭头函数。
+// 缺点是如果事件比较多，构造函数里会有点拥挤。
+// 而且往深层处想，这个回调被挂载在了原型上，同时也被挂载在了实例上。重复挂载。
+// 属性初始化器的写法不会将回调重复挂载，不需要重复绑定，语法也相当优雅。
+// 先把createRef的执行结果返回给一个实例属性，然后通过该实例属性获得DOM元素的引用。
+// createRef初始化动作要在组件挂载之前，如果是挂载之后初始化，则无法得到DOM元素的引用。
+// 真正的DOM元素引用在current属性上。
+// 出于不可描述的原因，如果你想获取一个子组件的ref引用，那么子组件必须是class组件。
+// 因为你获取的实际上是子组件的实例，而函数式组件是没有实例的。
+// 所有获取ref引用的方式，如果想要获取子组件而不是DOM元素，子组件都不能是函数式组件。
+// 需要特别注意，使用forwardRef时，该组件必须是函数式组件。原因可能是React不想破坏class组件的参数体系。
+// 初始挂载的时候，React确实是会使用innerHTML接口，但是一旦挂载完毕，后续的更新都是打补丁，也就是精准的局部更新。
+// 每次setState都会触发diff算法吗？
+// 当然不会
+// React生命周期大致可以分为三个阶段：挂载，更新，卸载。在挂载阶段内和一次更新阶段内，diff算法只会运行一次，这就是打补丁的频率。
+// React不推荐使用列表的索引来充当key属性值，因为对列表进行插入或者删除操作时，索引也会相应的改变，它是不稳定的，key存在的意义也就没有了
+// React这个开源项目大体上可以分为两部分，一部分是构建抽象UI，并提供变化检测，叫Reconciler。
+// 另一部分是将抽象UI渲染到具体的平台上，叫Renderer。
+// Reconciler的主要工作是计算，Renderer的主要工作是排版和绘制。
+// requestAnimationFrame && requestIdleCallbackAPI
+
+// 单向数据流:
+// 用户触发View上的事件发送Action，Action只能通过Dispatcher.dispatch方法发送出去，Store更新自身的数据然后View根据Store重新渲染。一环扣一环，只能按照这个流程走下去。
+
+// 执行某个任务不会对外部产生影响，也就是所谓的没有副作用。
+// Store是存储State的容器。
+// Redux是基于观察者模式的
+// Redux的规矩：createStore的默认值优先级更高，所以不会打架。
+// 当我们使用Redux时，我们希望每发射一个动作，应用的状态自动发生改变，从而触发页面的重新渲染。
+// connect接口的意义主要有三点：
+// 封装用context从根组件获取数据的细节。
+// 封装Redux订阅器的细节。
+// 作为一个容器组件真正连接React和Redux。
+// 现在Action有两种，纯对象和异步请求函数。
+// compose传入的函数是从右到左依次执行的。
+// export default function compose(...funcs) {
+//   if (funcs.length === 0) {
+//     return arg => arg;
+//   }
+//   if (funcs.length === 1) {
+//     return funcs[0];
+//   }
+//   return funcs.reduce((a, b) => (...args) => a(b(...args)));
+// }
+
+// applyMiddleware的目的只有一个：用所有中间件组装成一个超级dispatch，并将它覆盖原生的dispatch。
+// 中间件是在dispatch前后植入一段逻辑的话，那么增强器顾名思义是要增强整个Store的能力。很明显它的侵入性更强。
+// 如果说中间件改造的是dispatch，那么增强器改造的就是Store。
+
+
 
 // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 let objArrow = {
@@ -848,7 +1021,7 @@ const phoneHandler = {
 
 const phoneNumber = new Proxy({}, phoneHandler);
 
-phoneNumber.home='139 1553 1553';
+// phoneNumber.home='139 1553 1553';
 
 // console.log(phoneNumber);
 // console.log(phoneNumber.home);
