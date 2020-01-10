@@ -1,16 +1,79 @@
+//es6模块中，导出的并不是模块的值拷贝，而是这个模块的引用
+//
+// 在结合es6模块和commonJS模块的区别之后，我们知道es6的特点是静态解析，而commonJS模块的特点是动态解析的，因此，借于es6模块的静态解析，tree-shaking的实现才能成为可能。
+// 在webpack中，tree-shaking指的就是按需加载，即没有被引用的模块不会被打包进来，减少我们的包大小，缩小应用的加载时间，呈现给用户更佳的体验。
+
+
+// fetch 不支持 timeout
+const controller = new AbortController();
+const options = {
+  method: 'POST',
+  signal: controller.signal,
+  body: JSON.stringify({
+    firstName: 'David',
+    lastName: 'Pollock'
+  })
+};
+const promise = fetch('/login', options);
+const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+promise
+  .then(response => {/* handle the response */})
+  .catch(error => console.error('timeout exceeded'));
+
+// Create an instance.
+// const controller = new AbortController();
+// const signal = controller.signal;
+
+// Our timeout function
+// const urlFetch = 'https://my-json-server.typicode.com/wkylin/angular-json-server/posts';
+// const data = {};
+// timeout(200, fetch(urlFetch, {
+//   method: 'POST',
+//   signal: signal,
+//   body: data
+// }))
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('fetchData', data);
+//   })
+//   .catch(error => {
+//     // Error Log
+//     console.error('error>>',error);
+//
+//     // This can be because of request timed out
+//     // so we abort the request for any case
+//     controller.abort();
+//   });
+
+// https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
+// https://medium.com/@szantoboldizsar/es6-fetch-with-timeout-and-abort-45476bcf6880
+/**
+ * Timeout function
+ * @param {Integer} time (miliseconds)
+ * @param {Promise} promise
+ */
+const timeout = (time, promise) => {
+  return new Promise(function (resolve, reject) {
+    setTimeout(() => {
+      reject(new Error('Request timed out.'));
+    }, time);
+    promise.then(resolve, reject);
+  });
+};
 
 let objArr = [{
   name: '小王',
   age: 14
-},{
+}, {
   name: '大王',
   age: 41
-},{
+}, {
   name: '老王',
   age: 61
 }];
 
-function objFn(obj, objIndex, objs){
+function objFn(obj, objIndex, objs) {
   console.log('obj', obj);
   console.log('objIndex', objIndex);
   console.log('objs', objs);
@@ -18,8 +81,6 @@ function objFn(obj, objIndex, objs){
 }
 
 // console.log(objArr.findIndex(objFn));
-
-
 
 
 // window.onhashchange = function(event){
@@ -61,13 +122,12 @@ function objFn(obj, objIndex, objs){
 // componentDidCatch 捕获错误并进行处理。
 
 
-
 function duplicates(arr) {
   let newArr = [];
-  for(let j = 0;j < arr.length;j++){
-    for(let i = j+1;i < arr.length;i++){
+  for (let j = 0; j < arr.length; j++) {
+    for (let i = j + 1; i < arr.length; i++) {
       console.log(arr[i], arr[j]);
-      if(arr[i].a == arr[j].a){
+      if (arr[i].a == arr[j].a) {
         newArr.push(arr[i]);
       }
       // if(arr[j] == arr[i]){
@@ -81,11 +141,11 @@ function duplicates(arr) {
 // console.log(duplicates([{a:1}, {a:2}, {a:1}, {a:2}, {a:3}]));
 
 
-function fnTime(){
-  for(let i=0; i<5; i++){
+function fnTime() {
+  for (let i = 0; i < 5; i++) {
     setTimeout(() => {
-      console.log('innerI',i);
-      console.log('inner',new Date());
+      console.log('innerI', i);
+      console.log('inner', new Date());
     }, 5000);
   }
 }
@@ -96,7 +156,8 @@ function fnTime(){
 
 
 // 'use strict';
-function Person() {}
+function Person() {
+}
 
 // console.log(Person.prototype);
 // console.log(Person.__proto__);
@@ -107,15 +168,14 @@ function Person() {}
 // (function() {}).prototype; // {constructor: f}
 
 const objThat = {
-  something: function() {
+  something: function () {
     console.log(this);
-  },
+  }
 };
 // objThat.something();
 
 const action = objThat.something;
 // action();
-
 
 
 // 正向代理 理解为vpn
@@ -224,23 +284,24 @@ const action = objThat.something;
 // 如果说中间件改造的是dispatch，那么增强器改造的就是Store。
 
 
-
 // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 let objArrow = {
   i: 10,
   b: () => console.log(this.i, this),
-  c: function() {
-    console.log( this.i, this)
+  c: function () {
+    console.log(this.i, this);
   }
 };
 // objArrow.b();
 // undefined, Window{...}
 // objArrow.c();
 // 10, Object {...}
-let FooArrow = () => {};
+let FooArrow = () => {
+};
 // console.log(FooArrow.prototype); // undefined
 
-let FooArrowNew = () => {};
+let FooArrowNew = () => {
+};
 // let foo = new FooArrowNew(); // TypeError: Foo is not a constructor
 let callback;
 // callback = callback || (() => {});
@@ -260,46 +321,7 @@ let callback;
 // Session 的运行依赖Session ID，而 Session ID 是存在 Cookie 中的，也就是说，如果浏览器禁用了 Cookie，Session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 Session ID，也就是地址重写）
 //
 
-// https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
-// https://medium.com/@szantoboldizsar/es6-fetch-with-timeout-and-abort-45476bcf6880
-/**
- * Timeout function
- * @param {Integer} time (miliseconds)
- * @param {Promise} promise
- */
-const timeout = (time, promise) => {
-  return new Promise(function(resolve, reject) {
-    setTimeout(() => {
-      reject(new Error('Request timed out.'))
-    }, time);
-    promise.then(resolve, reject);
-  });
-};
 
-// Create an instance.
-const controller = new AbortController();
-const signal = controller.signal;
-
-// Our timeout function
-const urlFetch = 'https://my-json-server.typicode.com/wkylin/angular-json-server/posts';
-const data = {};
-// timeout(200, fetch(urlFetch, {
-//   method: 'POST',
-//   signal: signal,
-//   body: data
-// }))
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log('fetchData', data);
-//   })
-//   .catch(error => {
-//     // Error Log
-//     console.error('error>>',error);
-//
-//     // This can be because of request timed out
-//     // so we abort the request for any case
-//     controller.abort();
-//   });
 
 
 
@@ -307,6 +329,7 @@ const data = {};
 function isPromise(val) {
   return val && typeof val.then === 'function';
 }
+
 // const array = [1, 2, 3, 4];
 // const reducer = (accumulator, currentValue) => accumulator + currentValue;
 // 1 + 2 + 3 + 4
@@ -326,7 +349,8 @@ function isPromise(val) {
 // console.log(obj);
 
 
-const asyncFunction = async () => {};
+const asyncFunction = async () => {
+};
 // console.log(typeof asyncFunction); // 'function'
 // console.log(asyncFunction.constructor.name); //"AsyncFunction"
 // console.log(Object.getPrototypeOf(async function(){}).constructor);
@@ -337,7 +361,9 @@ const asyncFunction = async () => {};
 // 每一个构造函数都有一个原型对象 F.prototype，原型对象都包含一个指向构造构造的指针 constructor，
 // 而实例都包含一个指向原型对象的内部指针 __proto__。
 
-function F() {}
+function F() {
+}
+
 let newF = new F();
 // console.log(F.prototype.constructor === F);
 // console.log(newF.__proto__ === F.prototype);
@@ -359,10 +385,12 @@ function _new() {
   // 返回处理
   return typeof res === "object" ? res : o;
 }
+
 // 测试
 function Person() {
-  this.name = "my person"
+  this.name = "my person";
 }
+
 let p = _new(Person);
 // console.log(p.name); // my person
 // console.log(p.constructor);  // Person
@@ -385,36 +413,32 @@ let p = _new(Person);
 // {} == !{} => false  !{} -> false -> 0    {} -> "[object Object]" -> NaN
 
 
-
-
-
-
 //单元测试、功能测试 集成测试
 // xxx starter kit
 
 const debounce = (cb, delay) => {
   let timer = null;
-  return function(...args){
+  return function (...args) {
     const context = this;
-    if(timer) clearTimeout(timer);
+    if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       cb.apply(context, args);
       timer = null;
-    }, delay)
-  }
+    }, delay);
+  };
 };
 
 const throttleUserTimer = (cb, delay) => {
   let timer = null;
-  return function(...args){
+  return function (...args) {
     const context = this;
-    if(!timer){
+    if (!timer) {
       timer = setTimeout(() => {
         cb.apply(context, args);
         timer = null;
-      },delay)
+      }, delay);
     }
-  }
+  };
 };
 
 
@@ -486,58 +510,59 @@ const throttleUserTimer = (cb, delay) => {
 //"script start" "f" "g" "a" "c" "d" "h" "j" "k" "b" "e" "i" "l" "m" "n" "o"
 
 
-
-
-function middle1(api){
+function middle1(api) {
   return (next) => (num3) => {
-    return next(num3)
-  }
+    return next(num3);
+  };
 }
+
 //这里改写   不在中间件的地方求值
-function middle2(api){
+function middle2(api) {
   return (num2) => (num) => {
     return num2(num);
-  }
+  };
 }
+
 //将处理函数封装
-function applyMiddleware(arg1,arg2){
+function applyMiddleware(arg1, arg2) {
   const api = {};
-  let b = arg2(api)(function(num){
-    console.log(num+'：我是外面传来的数据')
+  let b = arg2(api)(function (num) {
+    console.log(num + '：我是外面传来的数据');
   });
   let newDispatch = arg1(api)(b);
   return {
-    dispatch:newDispatch
-  }
+    dispatch: newDispatch
+  };
 }
+
 // applyMiddleware(middle1,middle2).dispatch(6); //=>6：我是外面传来的数据
 
 
-
-function createStore (stateChanger) {
+function createStore(stateChanger) {
   let state = null;
   const listeners = [];
   const getState = () => state;
   const subscribe = (listener) => {
-    listeners.push(listener)
+    listeners.push(listener);
   };
   const dispatch = (action) => {
     state = stateChanger(state, action);
-    listeners.forEach((listener) => listener())
+    listeners.forEach((listener) => listener());
   };
   dispatch({});
-  return { getState, dispatch, subscribe }
+  return { getState, dispatch, subscribe };
 }
-function reducer(state, action){
-  if(!state){
+
+function reducer(state, action) {
+  if (!state) {
     return {
-      people:{
+      people: {
         eyes: '有点疼',
         color: 'red'
       }
-    }
+    };
   }
-  switch (action.type){
+  switch (action.type) {
     case 'EYES_QUESTION_LOG':
       return Object.assign({}, state, {
         people: {
@@ -558,15 +583,17 @@ function reducer(state, action){
       break;
   }
 }
-function render(data){
-  let ele = document.getElementById('cont')
+
+function render(data) {
+  let ele = document.getElementById('cont');
   ele.innerHTML = data.people.eyes;
   ele.style.color = data.people.color;
 }
+
 //将现有的数据集合和处理方式传入进去
 const store = createStore(reducer);
-store.subscribe(()=>{
-  render(store.getState())
+store.subscribe(() => {
+  render(store.getState());
 });
 store.dispatch({
   type: "EYES_QUESTION_LOG",
@@ -574,13 +601,12 @@ store.dispatch({
 });
 
 
-
 const addPlus = (obj, y) => {
   obj.x = 3;
-  return obj.x + y
+  return obj.x + y;
 };
 const objX = {
-  x:1
+  x: 1
 };
 // console.log(addPlus(objX,2)); //5
 // console.log(objX.x) ; // 3
@@ -590,10 +616,10 @@ const objX = {
 // }
 // add(1, 2, 3) //=>6
 //改为柯里化形式
-function addCre(num1){
+function addCre(num1) {
   return (num2) => (num3) => {
-    return num1 + num2 + num3
-  }
+    return num1 + num2 + num3;
+  };
 }
 
 // console.log(addCre(1)(2)(3));  //=>6
@@ -633,7 +659,7 @@ function MathHelper() {
 
 MathHelper.PI = 3.1415926;
 
-MathHelper.areaOfCircle = function(radius){
+MathHelper.areaOfCircle = function (radius) {
   // return radius * radius * this.constructor.PI;
   console.log(this);
   console.log(this === MathHelper.prototype);
@@ -646,13 +672,11 @@ let math = new MathHelper();
 // console.log(math.areaOfCircle(5));
 
 
-
-
-
 function ObjPerson(age, sex) {
   this.age = age;
   this.sex = sex;
 }
+
 let me = new ObjPerson('wk', 'man');
 me.email = 'wkylin@qq.com';
 
@@ -662,25 +686,22 @@ me.email = 'wkylin@qq.com';
 // }
 
 
-
-
 const v1 = "abc";
 const v2 = true;
 const v3 = 10;
-const v4 = Symbol("foo")
+const v4 = Symbol("foo");
 
 const objaa = Object.assign({}, v1, null, v2, undefined, v3, v4);
 // console.log(objaa);
 
-const aas = { name: 'json', things:[1,2,3], age: 2};
-const bb = Object.assign(aas, {sex:1});
+const aas = { name: 'json', things: [1, 2, 3], age: 2 };
+const bb = Object.assign(aas, { sex: 1 });
 // console.log(bb);
 // console.log(aas === bb);
 // console.log(bb.things.push(111));
 // console.log(aas.things);
 // console.log(aas);
 // console.log(bb);
-
 
 
 // https://medium.com/@fastphrase/when-to-use-redux-f0aa70b5b1e2
@@ -715,21 +736,21 @@ const bb = Object.assign(aas, {sex:1});
 
 const timeoutScheduler = store => next => action => {
   if (!action.meta || !action.meta.delay) {
-    return next(action)
+    return next(action);
   }
   
-  const timeoutId = setTimeout(() => next(action), action.meta.delay)
+  const timeoutId = setTimeout(() => next(action), action.meta.delay);
   
   return function cancel() {
-    clearTimeout(timeoutId)
-  }
+    clearTimeout(timeoutId);
+  };
 };
 const crashReporter = store => next => action => {
   try {
-    return next(action)
+    return next(action);
   } catch (err) {
     console.error('Caught an exception!', err);
-    throw err
+    throw err;
   }
 };
 // function logger({ getState }) {
@@ -751,7 +772,7 @@ const crashReporter = store => next => action => {
 // console.log(Math.random().toString(36).substring(2, 15));
 
 // Mixin（混入）是一种通过扩展收集功能的方式，它本质上是将一个对象的属性拷贝到另一个对象上面去，
-Object.assign({}, {name: 'wkylin', age:23});
+Object.assign({}, { name: 'wkylin', age: 23 });
 
 // 不过你可以拷贝任意多个对象的任意个方法到一个新对象上去，这是继承所不能实现的。
 
@@ -779,6 +800,7 @@ function passthru(literals, ...values) {
   output += literals[index];
   return output;
 }
+
 // let total = 30;
 // let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
 // console.log(msg);
@@ -821,12 +843,12 @@ class foosss {
   }
 }
 
-const fo= new foosss();
+const fo = new foosss();
 // console.log(fo.getBar());
 
 
+const aArray = ['1', '2'];
 
-const aArray=['1', '2'];
 // console.log(typeof(aArray));
 
 class Fooo {
@@ -835,6 +857,7 @@ class Fooo {
     // console.log(typeof(args));
     this.args = args;
   }
+  
   * [Symbol.iterator]() {
     for (let arg of this.args) {
       yield arg;
@@ -845,7 +868,6 @@ class Fooo {
 for (let x of new Fooo('hello', 'world')) {
   // console.log(x);
 }
-
 
 
 class PointCl {
@@ -892,21 +914,21 @@ const dogs = new Dogs();
 // 而let命令是不提升的
 // 对象展开还有其它一些意想不到的限制。 首先，它仅包含对象 自身的可枚举属性。
 
-const objAa={
-  name:'wkylin',
+const objAa = {
+  name: 'wkylin',
   age: 23,
-  getName: function (){
+  getName: function () {
     return (() => console.log(this.name))();
     // console.log(this.name);
   }
 };
 
-objAa.getAge = function(){
+objAa.getAge = function () {
   console.log(this.age);
 };
 // console.log(objAa);
 // objAa.getName();
-const objAb = {...objAa};
+const objAb = { ...objAa };
 // console.log(objAb);
 // objAb.getName();
 
@@ -918,11 +940,11 @@ class classA {
   getName() {
     console.log(this.name);
   }
-
+  
 }
 
 let ca = new classA('wkylin');
-let caClone = {...ca};
+let caClone = { ...ca };
 // console.log(ca.getName());
 // console.log(caClone.getName());
 
@@ -944,13 +966,12 @@ function fak() {
 // console.log(fak()); // returns 2
 
 
-
 function fff() {
   let a = 10;
   return function g() {
     let b = a + 1;
     return b;
-  }
+  };
 }
 
 let g = fff();
@@ -963,7 +984,7 @@ let strss = "The rain in SPAIN stays mainly in the plain";
 
 let str1 = "ab";
 let str2 = "ab";
-let obj3 = {name:'wkylin', age: 23};
+let obj3 = { name: 'wkylin', age: 23 };
 let n = str1.localeCompare(str2);
 // console.log(n);
 // console.log(obj3.valueOf());
@@ -985,8 +1006,8 @@ const newMap = new Map();
 
 // console.log(newMap);
 
-let jelly = {name:'jelly', age: 20};
-let mary = {name:'mary', age: 25};
+let jelly = { name: 'jelly', age: 20 };
+let mary = { name: 'mary', age: 25 };
 
 const people = new WeakSet([jelly, mary]);
 
@@ -1011,11 +1032,11 @@ newSet.add(4);
 // console.log(newSet);
 
 const phoneHandler = {
-  set(target, key, value){
+  set(target, key, value) {
     target[key] = value.match(/[0-9]/g).join('');
   },
-  get(target, key){
-    return target[key].replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
+  get(target, key) {
+    return target[key].replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
   }
 };
 
@@ -1051,12 +1072,12 @@ const phoneNumber = new Proxy({}, phoneHandler);
 
 
 const classRoom = {
-  [Symbol('lily')]:{ grade:60, gender:'female'},
-  [Symbol('nina')]:{ grade:30, gender:'male'},
-  [Symbol('nina')]:{ grade:90, gender:'female'},
+  [Symbol('lily')]: { grade: 60, gender: 'female' },
+  [Symbol('nina')]: { grade: 30, gender: 'male' },
+  [Symbol('nina')]: { grade: 90, gender: 'female' }
 };
 
-for(let key in classRoom){
+for (let key in classRoom) {
   console.log(key);
 }
 
@@ -1065,24 +1086,21 @@ const syms = Object.getOwnPropertySymbols(classRoom).map((room) => classRoom[roo
 // console.log(syms); 不能遍历，可以内部使用
 
 
-
-const fruitss =['apple', 'banana', 'pear'];
+const fruitss = ['apple', 'banana', 'pear'];
 const newFruits = ['orange', 'mongo'];
 
 // fruitss.push.apply(fruitss, newFruits);
 // fruitss.push(...newFruits);
 // console.log(fruitss);
 
-const iKeys=['name', 'age', 'birthday'];
-const iValues=['wkylin', 2, '2015-09-03'];
+const iKeys = ['name', 'age', 'birthday'];
+const iValues = ['wkylin', 2, '2015-09-03'];
 const wObj = {
   [iKeys.shift()]: iValues.shift(),
   [iKeys.shift()]: iValues.shift(),
-  [iKeys.shift()]: iValues.shift(),
+  [iKeys.shift()]: iValues.shift()
 };
 // console.log(wObj);
-
-
 
 
 // 可迭代对象 接口/ [Symbol.iterator]
@@ -1090,7 +1108,7 @@ const wObj = {
 function sums() {
   let total = 0;
   console.log(arguments);
-  for(let num of arguments){
+  for (let num of arguments) {
     total = total + num;
   }
   
@@ -1102,24 +1120,23 @@ function sums() {
 // for of 不支持对象/ 支持string nodeList
 
 const objb = {
-  a:1,
-  b:2
+  a: 1,
+  b: 2
 };
 // for(let value of objb){
 //   // console.log(value);
 // }
 
 
-
 // Array.prototype.myPro = 'my prototype'
-const fruits = ['apple', 'Banana','Orange', 'Mango']
+const fruits = ['apple', 'Banana', 'Orange', 'Mango'];
 fruits.myFruits = ' my fruits';
 
-for(let [index, fruit] of fruits.entries()){
+for (let [index, fruit] of fruits.entries()) {
   // console.log(`${index} is ${fruit}`);
 }
 
-for(let i=0; i<fruits.length; i++){
+for (let i = 0; i < fruits.length; i++) {
   // console.log(fruits[i]);
 }
 
@@ -1132,34 +1149,33 @@ fruits.forEach((fruit) => {
   
 });
 
-for (let fruit in fruits){
+for (let fruit in fruits) {
   // console.log(fruit);
   // console.log(fruits[fruit]);
 }
 
-for(let fruit of fruits){
+for (let fruit of fruits) {
   // console.log(fruit);
 }
-
 
 
 const obja = {
   // sister:0,
   // sister:null,
-  sister:undefined,
+  sister: undefined,
   father: 'wkylin'
 };
 
-const {sister='aa', father} = obja;
+const { sister = 'aa', father } = obja;
 
 // console.log(sister);
 // console.log(father);
 
-const sum = function() {
+const sum = function () {
   return Array.from(arguments)
     .reduce((prevSum, value) => {
       return prevSum + value;
-  }, 0)
+    }, 0);
 };
 
 // const sum = (...args) => {
@@ -1170,7 +1186,7 @@ const sum = function() {
 // console.log(sum(1,2,3));
 // sum(1,2,3);
 
-function multiply(a = 3,b =5){
+function multiply(a = 3, b = 5) {
   return a * b;
 }
 
@@ -1179,8 +1195,7 @@ function multiply(a = 3,b =5){
 // console.log(multiply(null, 2));
 
 
-
-function highlight(strings, ...values){
+function highlight(strings, ...values) {
   // console.log('strings', strings);
   // console.log('values', values);
 }
@@ -1194,7 +1209,7 @@ const sentence = highlight`Jhone ${users} has commmened on your topic ${topic} a
 // let name = 'wkylin';
 // console.log(window.name);
 
-(function() {
+(function () {
   let a = 'aaa';
   // console.log(a);
 })();
@@ -1221,8 +1236,8 @@ function fetchWithTimeout(fetch_promise, timeout) {
   let abortFn = null;
   
   //这是一个可以被reject的promise
-  let abortPromise = new Promise(function(resolve, reject) {
-    abortFn = function() {
+  let abortPromise = new Promise(function (resolve, reject) {
+    abortFn = function () {
       reject('abort promise');
     };
   });
@@ -1233,7 +1248,7 @@ function fetchWithTimeout(fetch_promise, timeout) {
     abortPromise
   ]);
   
-  setTimeout(function() {
+  setTimeout(function () {
     abortFn();
   }, timeout);
   
@@ -1241,39 +1256,39 @@ function fetchWithTimeout(fetch_promise, timeout) {
 }
 
 
-function fetchWithTimeout () {
+function fetchWithTimeout() {
   const FETCH_TIMEOUT = 5000;
   let didTimeOut = false;
   
-  new Promise(function(resolve, reject) {
-    const timeout = setTimeout(function() {
+  new Promise(function (resolve, reject) {
+    const timeout = setTimeout(function () {
       didTimeOut = true;
       reject(new Error('Request timed out'));
     }, FETCH_TIMEOUT);
     
     fetch('https://davidwalsh.name/?xx1')
-      .then(function(response) {
+      .then(function (response) {
         // Clear the timeout as cleanup
         clearTimeout(timeout);
-        if(!didTimeOut) {
+        if (!didTimeOut) {
           console.log('fetch good! ', response);
           resolve(response);
         }
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('fetch failed! ', err);
         
         // Rejection already happened with setTimeout
-        if(didTimeOut) return;
+        if (didTimeOut) return;
         // Reject with error
         reject(err);
       });
   })
-    .then(function() {
+    .then(function () {
       // Request success and no timeout
       console.log('good promise, no timeout! ');
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // Error: response error, request timeout or runtime error
       console.log('promise error! ', err);
     });
@@ -1282,21 +1297,22 @@ function fetchWithTimeout () {
 
 // console.log('1');
 
-setTimeout(function () {
+setTimeout(function () {
   // console.log('2');
-}, 100);
+}, 100);
 
 // console.log('3');
 
-async function test() {
+async function test() {
   console.log('4');
-  await Promise.resolve();
+  await Promise.resolve();
   console.log('5');
 }
+
 // test();
 
-let abcc = new Promise(function (resolve) {
-  setTimeout(() => {
+let abcc = new Promise(function (resolve) {
+  setTimeout(() => {
     resolve();
     // console.log('6');
   });
@@ -1304,42 +1320,38 @@ let abcc = new Promise(function (resolve) {
 
 // console.log('7');
 
-abcc.then(function () {
+abcc.then(function () {
   // console.log('8');
 });
 
 // 13475862
 
 
-
-
-
-
-let isValid = function(s) {
+let isValid = function (s) {
   let stack = [];
   let map = {
-    '(' : ')',
+    '(': ')',
     '[': ']',
     '{': '}'
   };
   
   for (let char of s) {
-    if(char in map) {
-      stack.push(char)
+    if (char in map) {
+      stack.push(char);
     } else {
-      if( !stack.length || char != map[stack.pop()]) {
-        return false
+      if (!stack.length || char != map[stack.pop()]) {
+        return false;
       }
     }
   }
   
   // 如果最后stack 里没有元素了， 就一定是匹配的
-  return !stack.length
+  return !stack.length;
 };
 
 // console.log(isValid('{(){}[]}'));
 
-function getSum(arr,sum) {
+function getSum(arr, sum) {
   if (arr == '' || arr.length == 0) {
     return false;
   }
@@ -1361,33 +1373,33 @@ function getSum(arr,sum) {
 // action依然是普通的redux action，不破坏redux对action的定义。
 
 
-let longestPalindrome = function(s) {
+let longestPalindrome = function (s) {
   let len = s.length;
   let result;
-  let i,j,L;
-  let dp=Array(len).fill(0).map(x=>Array(len).fill(0));
+  let i, j, L;
+  let dp = Array(len).fill(0).map(x => Array(len).fill(0));
   //console.log(dp);
-  if(len<=1){
-    return s
+  if (len <= 1) {
+    return s;
   }
   // 只有一个字符的情况是回文
-  for(i = 0;i<len;i++){
+  for (i = 0; i < len; i++) {
     dp[i][i] = 1;
-    result = s[i]
+    result = s[i];
   }
   
   // L是i和j之间的间隔数（因为间隔数从小到大渐增，所以大的间隔数总能包含小的间隔数）
   // i     j
   // abcdcba.length = L   所以 L = j-i+1; => j = i+L-1;
-  for ( L = 2; L <= len; L++) {
+  for (L = 2; L <= len; L++) {
     // 从0开始
-    for ( i = 0; i <= len - L; i++) {
+    for (i = 0; i <= len - L; i++) {
       j = i + L - 1;
-      if(L == 2 && s[i] == s[j]) {
+      if (L == 2 && s[i] == s[j]) {
         dp[i][j] = 1;
         result = s.slice(i, i + L);
-      }else if(s[i] == s[j] && dp[i + 1][j - 1] == 1) {
-        dp[i][j] = 1
+      } else if (s[i] == s[j] && dp[i + 1][j - 1] == 1) {
+        dp[i][j] = 1;
         result = s.slice(i, i + L);
       }
       
@@ -1434,12 +1446,13 @@ strNumber = strNumber.split('').sort().join('');
 
 // 定义正则表达式
 let re = /(\w)\1+/g;
-strNumber.replace(re,($0,$1) => {
-  if(num < $0.length){
+strNumber.replace(re, ($0, $1) => {
+  if (num < $0.length) {
     num = $0.length;
     char = $1;
   }
 });
+
 // console.log(`字符最多的是${char}，出现了${num}次`);
 
 function parseToMoney(num) {
@@ -1450,9 +1463,8 @@ function parseToMoney(num) {
 }
 
 
-
-
 let url = 'http://www.domain.com/?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&enabled';
+
 // console.log(parseParam(url));
 
 function parseParam(url) {
