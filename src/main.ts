@@ -120,12 +120,12 @@ type Coordinates = [number, number];
 type Callback = (data: string) => void;
 
 let arr : Coordinates;
-arr = [3, 2]
+arr = [3, 2];
 
 let text: Text;
 text = '111';
 
-let text2 = {
+let text2: Text = {
   text: '22'
 };
 
@@ -140,7 +140,7 @@ sample = '123';
 
 
 
-import {someType, someVar} from 'src/foo';
+import {someType, someVar} from '../src/foo';
 
 const bar = someVar;
 
