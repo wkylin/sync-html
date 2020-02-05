@@ -1,17 +1,27 @@
 {
   "name": "sync-html",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "wkylin",
   "license": "MIT",
   "scripts": {
     "start": "browser-sync start --server --files '*.css, *.html, *.js'",
     "start-main": "node main.js",
-    "ts-start": "tsc main.ts --outFile main.js --watch"
+    "ts-start": "tsc src/main.ts --outFile main.js --watch",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "yarn.cmd run compile",
+    "pretest": "yarn.cmd run compile",
+    "posttest": "yarn.cmd run check"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "concurrently": "^5.0.1"
+    "concurrently": "^5.0.1",
+    "gts": "^1.1.2",
+    "typescript": "~3.7.0",
+    "@types/node": "^10.0.3"
   },
   "dependencies": {
     "nodemon": "^2.0.2",

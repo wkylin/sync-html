@@ -140,7 +140,7 @@ sample = '123';
 
 
 
-import {someType, someVar} from './foo';
+import {someType, someVar} from 'src/foo';
 
 const bar = someVar;
 

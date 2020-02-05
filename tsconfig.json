@@ -1,5 +1,6 @@
 {
   "compileOnSave": true,
+  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
@@ -66,7 +67,7 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "files":[
-    "main.ts"
+    "src/main.ts"
   ],
   "include": [
     "src/**/*"
