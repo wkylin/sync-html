@@ -3,6 +3,7 @@
 // 在结合es6模块和commonJS模块的区别之后，我们知道es6的特点是静态解析，而commonJS模块的特点是动态解析的，因此，借于es6模块的静态解析，tree-shaking的实现才能成为可能。
 // 在webpack中，tree-shaking指的就是按需加载，即没有被引用的模块不会被打包进来，减少我们的包大小，缩小应用的加载时间，呈现给用户更佳的体验。
 
+// nrm add github https://npm.pkg.github.com
 
 // fetch 不支持 timeout
 const controller = new AbortController();

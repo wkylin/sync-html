@@ -1,4 +1,67 @@
 
+// 初始化TS Project
+// $ npm i typescript -g
+// # or, using Yarn:
+// $ yarn global add typescript
+// $ npm i typescript --save-dev
+// # or, using Yarn:
+// $ yarn add typescript --dev
+// $ tsc --init
+//$ ./node_modules/.bin/tsc --init
+//  even better, simply using npx to ensure that the local version of tsc is used:
+// $ npx tsc --init
+// {
+//   "compilerOptions": {
+//     "target": "es5",
+//     "module": "commonjs",
+//     "strict": true,
+//     "outDir": "dist",
+//     "sourceMap": true
+//   }
+// }
+
+// $ tsc
+// # or, for local tsc:
+// $ npx tsc
+// $ tsc -w
+// # or, for local tsc:
+// $ npx tsc -w
+//# for installing globally:
+// $ npm i tslint --g
+// # for installing locally:
+// $ npm i tslint --save-dev
+// # global:
+// $ yarn global add tslint
+// # or local:
+// $ yarn add tslint --dev
+// # if using global tslint:
+// $ tslint --init
+// # if using local tslint:
+// $ npx tslint --init
+// {
+//   "defaultSeverity": "error",
+//   "extends": [
+//     "tslint:recommended"
+//   ],
+//   "jsRules": {},
+//   "rules": {},
+//   "rulesDirectory": []
+// }
+// $ npm install tslint-config-airbnb
+// # or, using Yarn:
+// $ yarn add tslint-config-airbnb
+// {
+//     "defaultSeverity": "error",
+//     "extends": "tslint-config-airbnb",
+//     "jsRules": {},
+//     "rules": {
+//         "eofline": false
+//     },
+//     "rulesDirectory": []
+// }
+
+
+
 // 每个对象都有__proto__ ( 除了 var obj = Object.create(null) )
 // 每个函数对象都有 prototype。这个属性用于实现“实例化”（函数对象也是对象所以也有__proto__，即 Func.__proto__ = Function.prototype）
 // 函数对象的 prototype 所指向的也是对象，所以也有 __proto__，即 Func.prototype.__proto__。这个属性用于实现“继承”
@@ -12,7 +75,7 @@ class MyError extends Error {
   constructor(m: string) {
     super(m);
     // Set the prototype explicitly.
-    Object.setPrototypeOf(this, MyError.prototype);
+    // Object.setPrototypeOf(this, MyError.prototype);
   }
   sayHello() {
     return 'hello ' + this.message;
