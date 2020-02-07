@@ -397,7 +397,7 @@ let p = _new(Person);
 // console.log(p.constructor);  // Person
 
 
-// {} + {} 		// "[object Object][object Object]"
+// {} + {} 		// "[object Object][object Object]" NaN
 // [1,2,3] + [] 	//	 "1,2,3" + "" -> "1,2,3"
 // [] + {} 		// "" + "[object Object]" -> "[object Object]"
 // {} + []		    // 0 -> {} 被当做一个块（表达式），相当于执行 ({},+[])，返回值为小括号最后面的表达式的返回值。
@@ -412,6 +412,37 @@ let p = _new(Person);
 // [] == []  => false  比较引用地址
 // {} == {}  => false  比较引用地址
 // {} == !{} => false  !{} -> false -> 0    {} -> "[object Object]" -> NaN
+// "hello" - 1 // NaN
+// [] + [] // ''
+// console.log(undefined == undefined); // true
+// console.log(null == undefined); // true
+// console.log(0 == undefined); // false
+// console.log('' == undefined); // false
+// console.log(false == undefined); // false
+
+function outerFunction(arg) {
+  let variableInOuterFunction = arg;
+  
+  function bar() {
+    console.log(variableInOuterFunction); // 访问了外部域的变量
+  }
+  
+  // 调用本地函数来演示它访问了 arg
+  bar();
+}
+
+// outerFunction("hello closure"); // 输出 hello closure！
+
+// JavaScript 中所有的对象都包含 __proto__ 成员。这个成员在旧浏览器中是常常不可访问的（有的时候文档引用这个魔法属性为 [[prototype]]）它有一个目的：如果一个属性在查找时在一个对象上找不到（例如 obj.property）那么它会去查找 obj.__proto__.property。如果还是找不到那么去找 obj.__proto__.__proto__.property 直到两者之一被满足：找到了或者是最后的.__proto__自身为 null。这解释了为什么 JavaScript 表示支持自带的原型继承。
+// let foo = {};
+// // 在 foo 和 foo.__proto__ 中设置
+// foo.bar = 123;
+// foo.__proto__.bar = 456;
+// console.log(foo.bar); // 123
+// delete foo.bar; // 从对象中删除
+// console.log(foo.bar); // 456
+// delete foo.__proto__.bar; // 从 foo.__proto__ 中删除
+// console.log(foo.bar); // undefined
 
 
 //单元测试、功能测试 集成测试

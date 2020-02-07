@@ -1,4 +1,68 @@
 
+class Father {
+  public name: string;  //类里面 子类 其它任何地方外边都可以访问
+  protected age: number; //类里面 子类 都可以访问,其它任何地方不能访问
+  private money: number; //类里面可以访问， 子类和其它任何地方都不可以访问
+  constructor(name:string,age:number,money:number) {//构造函数
+    this.name=name;
+    this.age=age;
+    this.money=money;
+  }
+  getName():string {
+    return this.name;
+  }
+  setName(name:string): void{
+    this.name=name;
+  }
+}
+class Child extends Father{
+  constructor(name:string,age:number,money:number) {
+    super(name,age,money);
+  }
+  desc() {
+    // console.log(`${this.name} ${this.age} ${this.money}`);
+  }
+}
+
+let child = new Child('zfpx',10,1000);
+// console.log(child.name);
+// console.log(child.age);
+// console.log(child.money);
+
+
+class C {
+  p =12;
+  m(){
+    return 'abc'
+  }
+}
+
+let c = new C();
+// console.log(c.m());
+let cl = {...c};
+// console.log(cl.m());
+
+
+const foo = {
+  name: 'jim',
+  age:18
+};
+
+let extInfo = {
+  gender: 'male',
+  height: 100
+};
+
+let stud = {
+  ...foo,
+  ...extInfo
+};
+
+// console.log(stud);
+
+
+
+
 // 初始化TS Project
 // $ npm i typescript -g
 // # or, using Yarn:
@@ -77,13 +141,13 @@ class MyError extends Error {
     // Set the prototype explicitly.
     // Object.setPrototypeOf(this, MyError.prototype);
   }
-  sayHello() {
-    return 'hello ' + this.message;
-  }
+  // sayHello() {
+  //   return 'hello ' + this.message;
+  // }
 }
 
-const myError = new MyError('my error');
-console.log(myError.sayHello());
+// const myError = new MyError('my error');
+// console.log(myError.sayHello());
 // TypeError: myError.sayHello is not a function
 
 //
@@ -113,26 +177,26 @@ let e2: Empty = 22;
 // 快速的定义一个全局模块
 // declare module 'jquery';
 
-// 别名
-type StrOrNum = string | number;
-type Text = string | { text: string };
-type Coordinates = [number, number];
-type Callback = (data: string) => void;
+// // 别名
+// type StrOrNum = string | number;
+// type Text = string | { text: string };
+// type Coordinates = [number, number];
+// type Callback = (data: string) => void;
+//
+// let arr : Coordinates;
+// arr = [3, 2];
+//
+// let text: Text;
+// text = '111';
 
-let arr : Coordinates;
-arr = [3, 2];
-
-let text: Text;
-text = '111';
-
-let text2: Text = {
-  text: '22'
-};
+// let text2: Text = {
+//   text: '22'
+// };
 
 // 使用
-let sample: StrOrNum;
-sample = 123;
-sample = '123';
+// let sample: StrOrNum;
+// sample = 123;
+// sample = '123';
 
 // 会检查类型
 // sample = true; // Error
@@ -140,11 +204,11 @@ sample = '123';
 
 
 
-import {someType, someVar} from '../src/foo';
+// import {someType, someVar} from '../src/foo';
 
-const bar = someVar;
+// const bar = someVar;
 
-console.log(bar);
+// console.log(bar);
 // console.log(someType)
 
 function logClass(target:any){
@@ -168,17 +232,17 @@ function logClass(target:any){
   // return f;
 }
 
-@logClass
-class Base{
-  name:string;
-  sex: number;
-  constructor(name:string, sex:number) {
-    this.name = name;
-    this.sex = sex;
-  }
-  public method1() { return 1;};
-  public method2() { return 2;};
-}
+// @logClass
+// class Base{
+//   name:string;
+//   sex: number;
+//   constructor(name:string, sex:number) {
+//     this.name = name;
+//     this.sex = sex;
+//   }
+//   public method1() { return 1;};
+//   public method2() { return 2;};
+// }
 
 // let base = new Base('w', 1);
 
