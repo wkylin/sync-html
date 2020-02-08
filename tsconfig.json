@@ -68,7 +68,7 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "files":[
-    "src/**/*"
+    "src/main.ts"
   ],
   "include": [
     "src/**/*"
