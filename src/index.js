@@ -1,3 +1,61 @@
+
+type C = { a: string, b?: number }
+function f({ a, b }: C): void {
+  // ...
+}
+// let {a, b}: {a: string, b: number} = o
+
+function f({ a = '', b = 0 } = {}): void {
+  // ...
+}
+// f()
+
+
+//yarn global add ts-node
+
+let arrayLike = {
+  "0": 1,
+  "1": 2,
+  "length": 2
+};
+let newAry = Array.from(arrayLike, item => item *2)//[2,4]
+
+
+
+var arr = [];
+for (var i = 0; i < 2; i++) {
+  arr[i] = function () {
+    console.log(i);
+  }
+}
+
+
+// arr[0](); // 2
+// arr[1](); // 2
+let age = 100;
+let obj = {
+  age: 20,
+  say: () => {
+    console.log(this);
+    console.log(this.age)
+  }
+};
+// obj.say(); // this.==>>window let声明的不在window对象上
+
+
+var age = 100;
+var obj = {
+  age: 20,
+  say: () => {
+    alert(this.age)
+  }
+};
+
+// obj.say(); //100//箭头函数this指向的是被声明的作用域里面，而对象没有作用域的，所以箭头函数虽然在对象中被定义，但是this指向的是全局作用域
+
+
+
+
 //es6模块中，导出的并不是模块的值拷贝，而是这个模块的引用
 //
 // 在结合es6模块和commonJS模块的区别之后，我们知道es6的特点是静态解析，而commonJS模块的特点是动态解析的，因此，借于es6模块的静态解析，tree-shaking的实现才能成为可能。
