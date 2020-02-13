@@ -1,13 +1,32 @@
 
-type C = { a: string, b?: number }
-function f({ a, b }: C): void {
-  // ...
-}
+const user = {
+  firstName: "Sebastian",
+  lastName: "McKenzie",
+  getFullName: () => {
+    // whoops! `this` doesn't actually reference `user` here
+    console.log('this', this);
+    return this.firstName + " " + this.lastName;
+  },
+  // use the method shorthand in objects
+  getFullName2() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+// console.log(user.getFullName());
+// console.log(user.getFullName2());
+
+
+
+// type C = { a: string, b?: number }
+// function f({ a, b }: C): void {
+//   // ...
+// }
 // let {a, b}: {a: string, b: number} = o
 
-function f({ a = '', b = 0 } = {}): void {
-  // ...
-}
+// function f({ a = '', b = 0 } = {}): void {
+//   // ...
+// }
 // f()
 
 
@@ -32,14 +51,14 @@ for (var i = 0; i < 2; i++) {
 
 // arr[0](); // 2
 // arr[1](); // 2
-let age = 100;
-let obj = {
-  age: 20,
-  say: () => {
-    console.log(this);
-    console.log(this.age)
-  }
-};
+// let age = 100;
+// let obj = {
+//   age: 20,
+//   say: () => {
+//     console.log(this);
+//     console.log(this.age)
+//   }
+// };
 // obj.say(); // this.==>>window let声明的不在window对象上
 
 
@@ -2145,17 +2164,17 @@ aSet.add('2');
 // }
 
 
-let user = {
-  name: 'Daily'
-};
+// let user = {
+//   name: 'Daily'
+// };
+// // console.log(user.name);
+// user = null;
 // console.log(user.name);
-user = null;
-// console.log(user.name);
+//
+// let weakMap = new WeakMap();
+// let obj = {};
 
-let weakMap = new WeakMap();
-let obj = {};
-
-weakMap.set(obj, 'Private');
+// weakMap.set(obj, 'Private');
 // console.log(weakMap.get(obj));
 
 // for(let [key, value] of weakMap){
@@ -2925,7 +2944,7 @@ let sayHiToJon = sayHi('Jon');
 // console.log(sayHiToJon);
 // console.log(sayHiToJon());
 
-const arr = [10, 12, 15, 21];
+// const arr = [10, 12, 15, 21];
 // for(let i = 0; i<arr.length; i++){
 //   setTimeout(() => {
 //     console.log(`The value ${arr[i]} is at index: ${i}`);
