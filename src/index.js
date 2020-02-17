@@ -1,3 +1,10 @@
+// 在 GraphQL 语法中，字段的间隔是通过换行符而不是逗号实现的。
+// atob() 函数能够解码通过base-64编码的字符串数据。相反地，
+// btoa() 函数能够从二进制数据“字符串”创建一个base-64编码的ASCII字符串。
+
+// Non-blocking, for example, just means a request from another interaction can be processed without waiting for the prior interaction request to finish.
+// This allowed web servers to serve countless requests concurrently.
+// node --v8-options | grep "in progress"
 
 const user = {
   firstName: "Sebastian",
