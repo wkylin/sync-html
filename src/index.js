@@ -1,3 +1,26 @@
+// Fiber
+// 这个是React 16新出的一个非常重要的概念，完全理解了它，就相当于搞懂了React的一半。它和Element是一对一的关系，代表了Element要做的事情。
+// Fiber主要做了两件事：Fiber解析了Element，更具象的描述了虚拟DOM树；
+// 通过队列批处理state操作，然后产出的是effect list(可以想象成将老的View更新到新的状态所需要做的DOM操作的列表)。
+
+// reconciler是React三大模块(即react、reconciler、renderer)中最复杂的模块:
+// 1. React-- 这一模块主要是介绍 Element 和 Component 是如何构成的。
+// 2. Reconciler-- 渲染器主要负责初始化虚拟DOM、更新虚拟DOM(涉及到更新diff算法)、发送消息给renderer。
+// 3. Renderer-- 根据虚拟DOM渲染为平台特定的元素。
+
+// JSX --> createElement(type, config, children) ---> render(element,container, callback)
+
+// React将DOM抽象为虚拟DOM, 然后通过新旧虚拟DOM 这两个对象的差异(Diff算法),最终只把变化的部分重新渲染,提高渲染效率的过程;
+// 1. 两个不同类型的元素会产生不同的树 和
+// 2. 对于同一层级的一组子节点，它们可以通过唯一 key 进行区分
+// React 分别对 tree diff、component diff 以及 element diff
+
+// constructor: 构造函数，组件被创建时执行；
+// componentDidMount: 当组件添加到 DOM 树之后执行；
+// componentWillUnmount: 当组件从 DOM 树中移除之后执行，在 React 中可以认为组件被销毁；
+// componentDidUpdate: 当组件更新时执行。
+
+
 // 在 GraphQL 语法中，字段的间隔是通过换行符而不是逗号实现的。
 // atob() 函数能够解码通过base-64编码的字符串数据。相反地，
 // btoa() 函数能够从二进制数据“字符串”创建一个base-64编码的ASCII字符串。
