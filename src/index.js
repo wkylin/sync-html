@@ -1,3 +1,49 @@
+function handlePromise(promiseList) {
+  return promiseList.map(promise =>
+    promise.then((res) => ({ status: 'ok', res }), (err) => ({ status: 'not ok', err }))
+  )
+}
+Promise.all(handlePromise([Promise.reject(1),Promise.resolve(2),Promise.resolve(3)]))
+  .then(res => console.log(res),err=>console.log(err))
+
+if (!promise.allSettled) {
+  Promise.allSettled = promises =>
+    Promise.all(
+      promises.map((promise, i) =>
+        promise
+          .then(value => ({
+            status: "fulfilled",
+            value,
+          }))
+          .catch(reason => ({
+            status: "rejected",
+            reason,
+          }))
+      )
+    );
+}
+
+Promise.allSettled(promises).then(console.log);
+
+const delay = n => new Promise(resolve => setTimeout(resolve, n));
+
+const promises = [
+  delay(100).then(() => 1),
+  delay(200).then(() => 2),
+  delay(300).then(() => {
+    throw new Error("Boom");
+  }),
+];
+
+Promise.all(promises).then(console.log).catch(console.error);
+Promise.race(promises).then(console.log).catch(console.error);
+// https://medium.com/trabe/using-promise-allsettled-now-e1767d43e480
+// https://dev.to/vitalets/what-s-wrong-with-promise-allsettled-and-promise-any-5e6o
+// Promise.all        -> Promise.allFulfilled
+// Promise.allSettled -> Promise.allSettled
+// Promise.race       -> Promise.oneSettled
+// Promise.any        -> Promise.oneFulfilled
+
 // Fiber
 // 这个是React 16新出的一个非常重要的概念，完全理解了它，就相当于搞懂了React的一半。它和Element是一对一的关系，代表了Element要做的事情。
 // Fiber主要做了两件事：Fiber解析了Element，更具象的描述了虚拟DOM树；
