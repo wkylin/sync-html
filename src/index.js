@@ -1,3 +1,36 @@
+useEffect(() => {
+  // logic here
+  
+  return () => {
+    // clean up
+  };
+}, []); // no dependencies!
+
+useEffect(() => {
+  const abortController = new AbortController();
+  
+  const fetchData = async () => {
+    dispatch(requestStarted());
+    
+    try {
+      fetch(url, { signal: abortController.signal });
+      
+      // code omitted for brevity
+      
+      dispatch(requestSuccessful({ data }));
+    } catch (e) {
+      dispatch(requestFailed({ error: e.message }));
+    }
+  };
+  
+  fetchData();
+  
+  return () => {
+    abortController.abort();
+  };
+}, [url]);
+
+
 function handlePromise(promiseList) {
   return promiseList.map(promise =>
     promise.then((res) => ({ status: 'ok', res }), (err) => ({ status: 'not ok', err }))
