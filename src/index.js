@@ -1,3 +1,20 @@
+
+const getUsers = async () => {
+  const users = await axios.get('https://randomuser.me/api/?page=1&results=10&nat=us');
+  setUsers(users.data.results);
+};
+useEffect(() => {
+  getUsers();
+}, []);
+
+useEffect(() => {
+  (async () => {
+    const users = await axios.get("https://randomuser.me/api/?page=1&results=10&nat=us");
+    setUsers(users.data.results);
+  })();
+}, []);
+
+
 useEffect(() => {
   // logic here
   
