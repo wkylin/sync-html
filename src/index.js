@@ -1,3 +1,27 @@
+// @ts-check
+
+
+// const boo = a ? a : b;
+// const boo = a || b;
+
+// ES2020引入import()函数，支持动态加载模块。  import()返回一个 Promise 对象。
+// 一句话，defer是“渲染完再执行”，async是“下载完就执行”。另外，如果有多个defer脚本，会按照它们在页面出现的顺序加载，而多个async脚本是不能保证加载顺序的。
+// CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
+// ES6 模块是动态引用，并且不会缓存值，模块里面的变量绑定其所在的模块。
+// ES6 输入的模块变量，只是一个“符号连接”，所以这个变量是只读的，对它进行重新赋值会报错。
+// 总结：.mjs文件总是以 ES6 模块加载，.cjs文件总是以 CommonJS 模块加载，.js文件的加载取决于package.json里面type字段的设置。
+// es6
+class Point {
+  constructor(x, y) {...}
+  toString() {...}
+}
+
+Object.keys(Point.prototype)
+// []
+Object.getOwnPropertyNames(Point.prototype)
+// ["constructor","toString"]
+
+
 
 const getUsers = async () => {
   const users = await axios.get('https://randomuser.me/api/?page=1&results=10&nat=us');
