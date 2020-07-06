@@ -13,6 +13,7 @@
 // let jsonStr = JSON.stringify(wObjs);
 // console.log(jsonStr);
 
+
 let wObjs = {
   name :"Harry Potter",
   age : 13,
