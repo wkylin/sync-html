@@ -1,3 +1,55 @@
+// npm install --save-dev @babel/plugin-proposal-class-properties
+// { "plugins": ["@babel/plugin-proposal-class-properties"] }
+
+// Using the class properties syntax is a new standard in React world now and everyone is actively using it.
+
+// As you know the arrow functions does not have its own context. It takes the this context from where the function is placed. So we can convert the event handlers to arrow function syntax which will use the class context which will remove the need of binding this.
+
+// let wObjs = {
+//   name:"Harry Potter",
+//   age : 13,
+//   nextBook : undefined
+// }
+// let jsonStr = JSON.stringify(wObjs);
+// console.log(jsonStr);
+
+let wObjs = {
+  name :"Harry Potter",
+  age : 13,
+  "author" : `JK Rowling`
+}
+// console.log(JSON.stringify(wObjs, ['name', 'author']));
+//{"name":"Harry Potter","author":"JK Rowling"}
+// console.log(JSON.stringify(wObjs, []));
+//{}
+
+// console.log(JSON.stringify(wObjs, null, 2));
+//{
+//  "name": "Harry",
+//  "age": 13,
+//  "author": "JK Rowling"
+//}
+// console.log(JSON.stringify(wObjs, ['name'], '\t'));
+
+var jsonString = JSON.stringify(wObjs);
+var jsonObj = JSON.parse(jsonString, myReviver);
+
+function myReviver(key, value) {
+  if(key == 'age')  {
+    var newAge = 14;
+    return newAge;
+  }
+  return value;
+}
+
+// console.log(jsonObj);
+
+
+// JSON.stringify(restaurant, function replacer(key, value){
+//   if(key == 'author'){ return undefined};
+//   return value;
+// })
+
 // @ts-check
 
 
@@ -11,106 +63,106 @@
 // ES6 输入的模块变量，只是一个“符号连接”，所以这个变量是只读的，对它进行重新赋值会报错。
 // 总结：.mjs文件总是以 ES6 模块加载，.cjs文件总是以 CommonJS 模块加载，.js文件的加载取决于package.json里面type字段的设置。
 // es6
-class Point {
-  constructor(x, y) {...}
-  toString() {...}
-}
+// class Point {
+//   constructor(x, y) {...}
+//   toString() {...}
+// }
 
-Object.keys(Point.prototype)
+// Object.keys(Point.prototype)
 // []
-Object.getOwnPropertyNames(Point.prototype)
+// Object.getOwnPropertyNames(Point.prototype)
 // ["constructor","toString"]
 
 
 
-const getUsers = async () => {
-  const users = await axios.get('https://randomuser.me/api/?page=1&results=10&nat=us');
-  setUsers(users.data.results);
-};
-useEffect(() => {
-  getUsers();
-}, []);
+// const getUsers = async () => {
+//   const users = await axios.get('https://randomuser.me/api/?page=1&results=10&nat=us');
+//   setUsers(users.data.results);
+// };
+// useEffect(() => {
+//   getUsers();
+// }, []);
+//
+// useEffect(() => {
+//   (async () => {
+//     const users = await axios.get("https://randomuser.me/api/?page=1&results=10&nat=us");
+//     setUsers(users.data.results);
+//   })();
+// }, []);
+//
+//
+// useEffect(() => {
+//   // logic here
+//
+//   return () => {
+//     // clean up
+//   };
+// }, []); // no dependencies!
+//
+// useEffect(() => {
+//   const abortController = new AbortController();
+//
+//   const fetchData = async () => {
+//     dispatch(requestStarted());
+//
+//     try {
+//       fetch(url, { signal: abortController.signal });
+//
+//       // code omitted for brevity
+//
+//       dispatch(requestSuccessful({ data }));
+//     } catch (e) {
+//       dispatch(requestFailed({ error: e.message }));
+//     }
+//   };
+//
+//   fetchData();
+//
+//   return () => {
+//     abortController.abort();
+//   };
+// }, [url]);
 
-useEffect(() => {
-  (async () => {
-    const users = await axios.get("https://randomuser.me/api/?page=1&results=10&nat=us");
-    setUsers(users.data.results);
-  })();
-}, []);
 
+// function handlePromise(promiseList) {
+//   return promiseList.map(promise =>
+//     promise.then((res) => ({ status: 'ok', res }), (err) => ({ status: 'not ok', err }))
+//   )
+// }
+// Promise.all(handlePromise([Promise.reject(1),Promise.resolve(2),Promise.resolve(3)]))
+//   .then(res => console.log(res),err=>console.log(err))
+//
+// if (!promise.allSettled) {
+//   Promise.allSettled = promises =>
+//     Promise.all(
+//       promises.map((promise, i) =>
+//         promise
+//           .then(value => ({
+//             status: "fulfilled",
+//             value,
+//           }))
+//           .catch(reason => ({
+//             status: "rejected",
+//             reason,
+//           }))
+//       )
+//     );
+// }
+//
+// Promise.allSettled(promises).then(console.log);
+//
+// const delay = n => new Promise(resolve => setTimeout(resolve, n));
+//
+// const promises = [
+//   delay(100).then(() => 1),
+//   delay(200).then(() => 2),
+//   delay(300).then(() => {
+//     throw new Error("Boom");
+//   }),
+// ];
 
-useEffect(() => {
-  // logic here
-  
-  return () => {
-    // clean up
-  };
-}, []); // no dependencies!
-
-useEffect(() => {
-  const abortController = new AbortController();
-  
-  const fetchData = async () => {
-    dispatch(requestStarted());
-    
-    try {
-      fetch(url, { signal: abortController.signal });
-      
-      // code omitted for brevity
-      
-      dispatch(requestSuccessful({ data }));
-    } catch (e) {
-      dispatch(requestFailed({ error: e.message }));
-    }
-  };
-  
-  fetchData();
-  
-  return () => {
-    abortController.abort();
-  };
-}, [url]);
-
-
-function handlePromise(promiseList) {
-  return promiseList.map(promise =>
-    promise.then((res) => ({ status: 'ok', res }), (err) => ({ status: 'not ok', err }))
-  )
-}
-Promise.all(handlePromise([Promise.reject(1),Promise.resolve(2),Promise.resolve(3)]))
-  .then(res => console.log(res),err=>console.log(err))
-
-if (!promise.allSettled) {
-  Promise.allSettled = promises =>
-    Promise.all(
-      promises.map((promise, i) =>
-        promise
-          .then(value => ({
-            status: "fulfilled",
-            value,
-          }))
-          .catch(reason => ({
-            status: "rejected",
-            reason,
-          }))
-      )
-    );
-}
-
-Promise.allSettled(promises).then(console.log);
-
-const delay = n => new Promise(resolve => setTimeout(resolve, n));
-
-const promises = [
-  delay(100).then(() => 1),
-  delay(200).then(() => 2),
-  delay(300).then(() => {
-    throw new Error("Boom");
-  }),
-];
-
-Promise.all(promises).then(console.log).catch(console.error);
-Promise.race(promises).then(console.log).catch(console.error);
+// Promise.all(promises).then(console.log).catch(console.error);
+// Promise.race(promises).then(console.log).catch(console.error);
 // https://medium.com/trabe/using-promise-allsettled-now-e1767d43e480
 // https://dev.to/vitalets/what-s-wrong-with-promise-allsettled-and-promise-any-5e6o
 // Promise.all        -> Promise.allFulfilled
@@ -242,12 +294,12 @@ const options = {
     lastName: 'Pollock'
   })
 };
-const promise = fetch('/login', options);
-const timeoutId = setTimeout(() => controller.abort(), 4000);
-
-promise
-  .then(response => {/* handle the response */})
-  .catch(error => console.error('timeout exceeded'));
+// const promise = fetch('/login', options);
+// const timeoutId = setTimeout(() => controller.abort(), 4000);
+//
+// promise
+//   .then(response => {/* handle the response */})
+//   .catch(error => console.error('timeout exceeded'));
 
 // Create an instance.
 // const controller = new AbortController();
@@ -2618,9 +2670,9 @@ function getNumberParts(number) {
 // console.log(getNumberParts(1234.56));
 
 
-let str = 'aabb bb';
-let strCopy = str.split();
-str = 'aaa ccc';
+// let str = 'aabb bb';
+// let strCopy = str.split();
+// str = 'aaa ccc';
 // console.log(str);
 // console.log(strCopy);
 
@@ -3225,22 +3277,22 @@ const will = person('Will');
 // setTimeout方法传入的时间参数并不是函数延迟执行的时间，
 // 而是事件管理器将函数移入调用栈的等待时间。
 
-const isGreater = (a, b) => {
-  return new Promise((resolve, reject) => {
-    if (a > b) {
-      resolve(true);
-    } else {
-      reject(false);
-    }
-  });
-};
-isGreater(1, 2)
-  .then(result => {
-    // console.log('greater')
-  })
-  .catch(result => {
-    // console.log('smaller')
-  });
+// const isGreater = (a, b) => {
+//   return new Promise((resolve, reject) => {
+//     if (a > b) {
+//       resolve(true);
+//     } else {
+//       reject(false);
+//     }
+//   });
+// };
+// isGreater(1, 2)
+//   .then(result => {
+//     // console.log('greater')
+//   })
+//   .catch(result => {
+//     // console.log('smaller')
+//   });
 
 function putDookieInAnyArray(arr) {
   return [...arr, 'dookie'];
