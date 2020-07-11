@@ -1,3 +1,10 @@
+
+
+// For arrays: use [].concat or es6 [ ...params]
+// For objects: use Object.assign({}, ...) or es6 {...params}
+
+
+
 // npm install --save-dev @babel/plugin-proposal-class-properties
 // { "plugins": ["@babel/plugin-proposal-class-properties"] }
 
