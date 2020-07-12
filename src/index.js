@@ -1,3 +1,116 @@
+// const colors = { red: 3, blue: 5, green: 2, yellow: 6 };
+
+// for (let [color, numberOfOccurences] of Object.entries(colors)) {
+//   console.log(`${color} showed up ${numberOfOccurences} times`);
+// }
+
+
+function twoSecondFunction() {
+  console.log(`Start time: ${new Date()}`);
+  return new Promise((resolve, reject) => {
+  setTimeout(() => {
+      console.log(`End time: ${new Date()}`);
+        resolve();
+        }, 2000)
+  })
+
+}
+
+async function execute(){
+    for(let i = 0; i < 5; i++){
+        await twoSecondFunction();
+    }
+}
+
+async function execute2(){
+    const promises = [];
+    for(let i = 0; i < 5; i++){
+        promises.push(twoSecondFunction());
+    }
+    await Promise.all(promises);
+}
+
+// execute();
+// execute2();
+//The first function waits for each promise to resolve before continuing to the next one. The second function initiates all the promises together and waits for them all to finish.
+
+
+//const letters = ['a', 'b', 'd', 'b', 'a'];
+//
+// const summarize = (letters) => {
+//  return letters.reduce((acc, letter) => {
+//    if(acc[letter]){
+//     acc[letter]++;
+//    }else{
+//     acc[letter] = 1;
+//    }
+//    return acc;
+//  }, {})
+// };
+//
+// console.log(summarize(letters));
+
+
+
+
+//
+// 'use strict'
+//
+// const programmer = {
+//   languages: ["JavaScript", "Python", "Go", "Java"],
+//   name: "raz",
+//
+//   printLanguages() {
+//     this.languages.forEach(function(language) {
+//       console.log(this.name + ' knows: ' + language)
+//     });
+//   }
+// };
+
+// programmer.printLanguages();
+//// Error: Cannot read property 'name' of undefined
+
+'use strict'
+
+// const programmer = {
+//   languages: ["JavaScript", "Python", "Go", "Java"],
+//   name: "raz",
+//
+//   printLanguages() {
+//     this.languages.forEach(
+//       language => console.log(this.name + ' knows: ' + language)
+//     );
+//   }
+// };
+//
+// programmer.printLanguages();
+
+
+// export const validateFields = (fieldsToValidate) => {
+//   return fieldsToValidate.every((field) => Object.values(field)[0] !== '');
+// };
+// const fieldsToValidate = [{ email }, { password }];
+// const allFieldsEntered = validateFields(fieldsToValidate);
+
+//const isInvalidField = (receivedFields, validFieldsToUpdate) => {
+//   return receivedFields.some(
+//     (field) => validFieldsToUpdate.indexOf(field) === -1
+//   );
+// };
+
+//const generateAuthToken = async (user) => {
+//   const { userid, email } = user;
+//   const secret = process.env.secret;
+//   const token = await jwt.sign({ userid, email }, secret);
+//   return token;
+// };
+
+//const myTrulyEmptyObject = Object.create(null)
+//const myEmptyObject = {}
+//function getAppleExpirationDate(obj) {
+//   return food?.fruits?.apple?.dates?.expired
+// }
+
 //function debounce( callback, delay ) {
 //     let timeout;
 //     return function() {
