@@ -1,3 +1,51 @@
+//import React from 'react'
+// function areEqual(prevProps, nextProps) {
+//   /*
+//   return true if passing nextProps to render would return
+//   the same result as passing prevProps to render,
+//   otherwise return false
+//   */
+// }
+// const Weather = ({weather}) => {
+//     return (<div>
+//              <p>{weather.city}</p>
+//              <p>{weather.temperature}</p>
+//              {console.log('Render')}
+//             </div>
+//     )
+// }
+//
+// export default React.memo(Weather, areEqual)
+
+
+
+// const numbers = [1,2,3,4];
+
+// const doubleNumbersByMap = numbers.map(number => number * 2);
+
+// const doubleNumbersByForEach = numbers.forEach(number => number * 2);
+
+// for(let number of numbers){
+//   number *= 2;
+// }
+
+// console.log(numbers);
+//
+// console.log(doubleNumbersByMap);
+
+// console.log(doubleNumbersByForEach);
+
+
+// const numbers = [1,2,3,4];
+//
+// numbers.forEach((number, index, originalArray) => originalArray[index] = number * 2);
+//
+// console.log(numbers);
+
+
+// getElementsBy* return a HtmlCollection which auto-updates as the DOM changes. querySelectorAll returns a NodeList which doesn’t auto-update.
+//Session storage is specific for tabs. Local storage is specific for browsers.
+
 // const colors = { red: 3, blue: 5, green: 2, yellow: 6 };
 
 // for (let [color, numberOfOccurences] of Object.entries(colors)) {
