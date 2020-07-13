@@ -1,3 +1,25 @@
+// a = [1,2]
+// b = [3,4,5]
+// console.log(a + b); // [1,23,4,5,6]
+// Array.prototype.hello = "hey!";
+// var array = ['a', 'b', 'c'];
+//
+// for (var i in array) {
+//   console.log(array[i]);
+// }
+// a b c hey!
+
+// Array.prototype.hello = "hey!";
+// var array = ['a', 'b', 'c'];
+//
+// for ( i of array) {
+//   console.log(i);
+// }
+// a b c
+
+// null == undefined //true
+// null == NaN //false
+
 //import React from 'react'
 // function areEqual(prevProps, nextProps) {
 //   /*
