@@ -1,3 +1,38 @@
+//
+// class Fetch extends React.Component {
+//   state = {
+//     data: void 0,
+//     error: void 0,
+//     loading: false
+//   }
+//
+//   componentDidMount() {
+//     this.fetchData();
+//   }
+//
+//   async fetchData() {
+//     try {
+//       this.setState({ loading: true });
+//       const response = await fetch(this.props.url);
+//       const json = await response.json();
+//       this.setState({ data: json });
+//       this.setState({ loading: false });
+//     catch (err) {
+//         this.setState({ error: err })
+//       }
+//     }
+//
+//     render() {
+//       const { error, data, loading } = this.state;
+//       if(loading) return <div>Loading...</div>
+//       if(error) return this.props.error(error);
+//       if (data) return this.props.render(data);
+//       else return null;
+//     }
+//   }
+
+
+
 // // theme.js
 // import React from 'react';
 // const ThemeContext = React.createContext('light');
@@ -69,7 +104,21 @@
 //
 // // 2 - Use .splice() on disered array before mapping
 // // array.splice(0, infiniteScroll).map()
-
+//import React, { useState } from 'react';
+//
+// const useFlags = () => {
+//   let flags = localStorage.getItem("flags");
+//   flags = flags ? JSON.parse(flags) : {};
+//
+//   const [ flagsValue, setFlagsValue ] = useState(flags);
+//
+//   const updateFlags = (f) => {
+//     localStorage.setItem("flags", JSON.stringify(f));
+//     setFlagsValue(f);
+//   }
+//
+//   return [flagsValue, updateFlags];
+// }
 
 // a = [1,2]
 // b = [3,4,5]
