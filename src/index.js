@@ -1,3 +1,76 @@
+// // theme.js
+// import React from 'react';
+// const ThemeContext = React.createContext('light');
+// export default ThemeContext;
+// Sample.js
+
+// ThemedButton.js
+// import Theme from 'theme.js';
+// const ThemedButton = (props) => (
+//   <Theme.Consumer>
+//     {theme => <button { ...props }>button with them: {theme}</button>}
+//   </Theme.Consumer>
+// );
+// export default ThemedButton
+
+// import React from 'react';
+// import Theme from './theme';
+// import ThemedButton from './ThemedButton';
+// const Sample = () => (
+//   <Theme.Provider value='dark'>
+//     <ThemedButton />
+//   </Theme.Provider>
+// );
+//
+// export default Sample;
+
+//React.memo(...) is to functional components what React.PureComponent is to class components.
+
+
+// utils/useDeviceDetect.js
+// import React from "react";
+//
+// export default function useDeviceDetect() {
+//   const [isMobile, setMobile] = React.useState(false);
+//
+//   React.useEffect(() => {
+//     const userAgent =
+//       typeof window.navigator === "undefined" ? "" : navigator.userAgent;
+//     const mobile = Boolean(
+//       userAgent.match(
+//         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+//       )
+//     );
+//     setMobile(mobile);
+//   }, []);
+//
+//   return { isMobile };
+// }
+
+//import { useState } from "react";
+//
+// export const useInfiniteScroll = (start = 30, pace = 10) => {
+//   const [limit, setLimit] = useState(start);
+//   window.onscroll = () => {
+//     if (
+//       window.innerHeight + document.documentElement.scrollTop ===
+//       document.documentElement.offsetHeight
+//     ) {
+//       setLimit(limit + pace);
+//     }
+//   };
+//   return limit;
+// };
+//
+// // Instructions
+//
+// // 1 - Call hook on a variable inside the component
+// // let inifiniteScroll = useInfiniteScroll()
+//
+// // 2 - Use .splice() on disered array before mapping
+// // array.splice(0, infiniteScroll).map()
+
+
 // a = [1,2]
 // b = [3,4,5]
 // console.log(a + b); // [1,23,4,5,6]
