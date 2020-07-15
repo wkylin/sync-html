@@ -1,3 +1,36 @@
+
+//const loadGMaps = (callback) => {
+//   const existingScript = document.getElementById('googleMaps');
+//   if (!existingScript) {
+//     const script = document.createElement('script');
+//     script.src = 'https://maps.googleapis.com/maps/api/js';
+//     script.id = 'googleMaps';
+//     document.body.appendChild(script);
+//     script.onload = () => {
+//       if (callback) callback();
+//     };
+//   }
+//   if (existingScript && callback) callback();
+// };
+// export default loadGMaps;
+//import React, { useEffect, useState } from 'react';
+// import GoogleMap from '../GoogleMap';
+// import loadGMaps from '../scripts/loadGMaps.js';
+// const Maps = (props) => {
+//   const [loaded, setLoaded] = useState(false);
+//   useEffect(() => {
+//     loadGMaps(() => {
+//       setLoaded(true);
+//     });
+//   });
+//   return (
+//     <div className="maps-component">
+//       {loaded ? <GoogleMap /> : ''}
+//     </div>
+//   );
+// }
+
+
 //
 // class Fetch extends React.Component {
 //   state = {
