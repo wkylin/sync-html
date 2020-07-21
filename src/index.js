@@ -1,3 +1,92 @@
+// const obj = {
+// ​​    name: "JavaScript",
+// ​​    printName: function () {
+// ​​        console.log(this.name);
+// ​​    },
+// ​​    printNameIn2Secs: function () {
+// ​​        setTimeout(() => {
+//   ​​            console.log(this.name);
+// ​​        }, 2000);
+// ​​    },
+// ​​};
+// ​​obj.printName();
+​​// JavaScript
+// ​​obj.printNameIn2Secs();
+​​// JavaScript
+
+
+// const obj = {
+// ​​    name: "JavaScript",
+// ​​    printName: function () {
+// ​​        console.log(this.name);
+// ​​    },
+// ​​    printNameIn2Secs: function () {
+// ​​        setTimeout(function () {
+//   ​​            console.log(this.name);
+// ​​        }, 2000);
+// ​​    },
+// ​​};
+// ​​obj.printName();
+​​// JavaScript
+// ​​obj.printNameIn2Secs();
+​​// undefined
+
+
+// function addTwoNumbers() {
+// ​​    let firstNumber = 5;
+// ​​    let secondNumber;
+// ​​    setTimeout(function () {
+//   ​​        secondNumber = 10;
+// ​​    }, 200);
+// ​​    console.log(firstNumber + secondNumber);
+// ​​}
+// ​​addTwoNumbers();
+​​// NaN
+
+// const delay = (time = 1500) => {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       resolve(true);
+//     }, time);
+//   });
+// };
+
+
+//const number = 1;
+// const result = (function (number) {
+//   delete number;
+//   return number;
+// })(10);
+// console.log(result); // 10
+//function display() {
+//   var a = b = 10;
+// }
+// display();
+// console.log('b', typeof b === 'undefined'); // false
+// console.log('a', typeof a === 'undefined'); // true
+
+
+//const user = {
+//   name: 'Raj',
+//   location: {
+//     city: 'NY',
+//     state: 'NY'
+//   }
+// };
+// const copy = Object.assign({}, user);
+// // OR
+// // const copy = { ...user };
+// copy.location.city = 'Albany';
+// console.log('original: ', user.location);
+// console.log('copy:', copy.location);
+//original:  {
+//   city: 'Albany',
+//   state: 'NY'
+// }
+// copy: {
+//   city: 'Albany',
+//   state: 'NY'
+// }
 
 //const loadGMaps = (callback) => {
 //   const existingScript = document.getElementById('googleMaps');
