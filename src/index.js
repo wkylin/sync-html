@@ -1,3 +1,36 @@
+// Initial setup
+// const [counterValue, setCounterValue] = useState(0)
+// // Later, modifying the state
+// setCounterValue(counterValue => counterValue + 1)
+
+///**
+//  * Identical to React.useEffect, except that it never runs on mount. This is
+//  * the equivalent of the componentDidUpdate lifecycle function.
+//  *
+//  * @param {function:function} effect - A useEffect effect.
+//  * @param {array} dependencies - useEffect dependency list.
+//  */
+// export const useEffectExceptOnMount = (effect, dependencies) => {
+//   const mounted = React.useRef(false);
+//   React.useEffect(() => {
+//     if (mounted.current) {
+//       const unmount = effect();
+//       return () => unmount && unmount();
+//     } else {
+//       mounted.current = true;
+//     }
+//   }, dependencies);
+//
+//   // Reset on unmount for the next mount.
+//   React.useEffect(() => {
+//     return () => mounted.current = false;
+//   }, []);
+// };
+
+
+
+
+
 // const obj = {
 // ​​    name: "JavaScript",
 // ​​    printName: function () {
