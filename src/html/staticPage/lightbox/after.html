@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+ <style>
+ nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ nav ul li {
+    display: inline-block;
+    position: relative;
+}
+ .active:after, nav ul li:after {
+    position: absolute;
+    content: "";
+    background: #2d5ba9;
+    transition: width .2s;
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+    display: block;
+    top: 40px;
+  }
+
+  .active:after, nav ul li:hover:after {
+    width: 60%;
+  }
+ </style>
+</head>
+<body>
+  <nav style="line-height: inherit; margin-top: 10px; position: relative; text-align: center;">
+  <ul>
+    <li class='active'>
+      关于我们
+    </li>
+    <li>
+      行业洞察
+    </li>
+  </ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="20px" viewBox="0 0 22 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>triangle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="方案最终版" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="创建-上传未全部成功提示框" transform="translate(-621.000000, -305.000000)">
+            <g id="提示" transform="translate(-1.000000, 0.000000)">
+                <g id="triangle" transform="translate(623.000000, 306.000000)">
+                    <path d="M8.24461269,0.945239568 L0.252884829,14.8281487 C-0.082407663,15.4323592 -0.0844095522,16.1763293 0.247626064,16.7824841 C0.579661681,17.388639 1.19586344,17.765935 1.86632694,17.7736032 L17.8497827,17.7736032 C18.5202462,17.765935 19.1364479,17.388639 19.4684835,16.7824841 C19.8005192,16.1763293 19.7985173,15.4323592 19.4632248,14.8281487 L11.4714969,0.945239568 C11.1294041,0.358388501 10.517666,0 9.8580548,0 C9.19844365,0 8.5867055,0.358388501 8.24461269,0.945239568 Z" id="Shape" stroke="#DE3E12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <rect id="Rectangle" fill="#DE3E12" x="8.8" y="4.8" width="2.4" height="6.4" rx="1.2"></rect>
+                    <circle id="Oval-2" fill="#DE3E12" cx="10" cy="14" r="1.2"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

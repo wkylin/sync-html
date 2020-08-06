@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+
+        li {
+            display: inline-block;
+            position: relative;
+            color: #343434;
+            transition: color .15s ease-in-out;
+        }
+        li:after {
+            transform: translateY(-150%);
+            opacity: 0;
+            display: block;
+            position: absolute;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            transition: transform .15s ease-in-out,opacity .15s ease-in-out;
+            background-color: #fd256e;
+            content: "";
+        }
+        li.is-active:after, li:active:after, li:focus:after, li:hover:after {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .zell span{
+            display: inline-block;
+            font-size:36px;
+            padding: 0 10px;
+        }
+        .zell .e, .zell .l1, .zell .l2{
+            transform: translateX(-.5em);
+            opacity: 0;
+            transition: transform .15s ease-in-out, opacity .15s ease-in-out;
+        }
+        .zell .l1 {
+            transition-delay: 75ms;
+        }
+        .zell .l1 {
+            transition-delay: 125ms;
+        }
+        .zell .l2 {
+            transition-delay: 200ms;
+        }
+        .zell:hover .e,
+        .zell:hover .l1,
+        .zell:hover .l2 {
+            opacity: 1;
+        }
+
+        .gradient-text {
+            font-size: 36px;
+        }
+        .gradient-text:hover {
+            background: linear-gradient(120deg, #ab4e19, blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-box-decoration-break: clone;
+            font-size: 36px;
+        }
+        /* .selector {
+            &:hover,
+            &:focus,
+            &:active {
+                // Styles here
+            }
+        } */
+
+        /* noscript styles */
+        noscript {
+            display: block;
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+        [hidden] {
+            display: none !important;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        embed,
+        iframe,
+        img,
+        object,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+
+        :placeholder-shown {
+            border: 2px solid silver;
+        }
+        input:placeholder-shown {
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>Learn JS</li>
+        <li>About</li>
+    </ul>
+
+    <div class="zell">
+        <span>Z</span>
+        <span class='e'>E</span>
+        <span class='l1'>L</span>
+        <span class='l2'>L</span>
+    </div>
+
+    <div class='gradient-text'>
+        linear-gradient is now supported across all browsers. We don't need to add the -webkit prefix anymore. The code
+    </div>
+
+    <input placeholder="Enter something into this field, if you please!">
+</body>
+</html>
