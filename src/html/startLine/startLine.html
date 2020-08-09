@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .page-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 40px auto;
+      text-align: center;
+      background: none;
+      border: 1px dashed #9ac6c9;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      /* text-shadow: 0 2px 3px rgba(246, 73, 167, .5); */
+      font-weight: 800;
+      transition: all .3s ease-in;
+      position: relative;
+      background-color: transparent;
+    }
+
+    a,
+    a:active,
+    a:focus,
+    a:link,
+    a:visited {
+      color: #f649a7;
+    }
+
+    a:active,
+    a:hover {
+      outline-width: 0;
+    }
+
+    a:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #f649a7;
+      transform-origin: bottom right;
+      transform: scaleX(0);
+      transition: transform .5s ease;
+      /* box-shadow: 0 2px 5px rgba(246, 73, 167, .6); */
+    }
+
+    a:hover:before {
+      transform-origin: bottom left;
+      transform: scaleX(1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-footer">
+    <a href="#"> Start </a>
+  </div>
+
+</body>
+
+</html>

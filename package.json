@@ -14,7 +14,7 @@
     "fix": "gts fix",
     "prepare": "yarn.cmd run compile",
     "pretest": "yarn.cmd run compile",
-    "posttest": "yarn.cmd run check"
+    "post-test": "yarn.cmd run check"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",

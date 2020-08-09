@@ -1,3 +1,10 @@
+
+// this.setState((prevState, props) => {
+// return {ischecked: !prevState.ischecked}
+// })
+
+
+
 // Initial setup
 // const [counterValue, setCounterValue] = useState(0)
 // // Later, modifying the state
@@ -1261,11 +1268,11 @@ let p = _new(Person);
 
 function outerFunction(arg) {
   let variableInOuterFunction = arg;
-  
+
   function bar() {
     console.log(variableInOuterFunction); // 访问了外部域的变量
   }
-  
+
   // 调用本地函数来演示它访问了 arg
   bar();
 }
@@ -1609,9 +1616,9 @@ const timeoutScheduler = store => next => action => {
   if (!action.meta || !action.meta.delay) {
     return next(action);
   }
-  
+
   const timeoutId = setTimeout(() => next(action), action.meta.delay);
-  
+
   return function cancel() {
     clearTimeout(timeoutId);
   };
@@ -1659,7 +1666,7 @@ const compose = (...fns) => fns.reduce((f, g) => (...args) => g(f(...args)));
 //高阶组件并不能像透传props那样将refs透传，我们可以用一个回调函数来完成ref的传递：
 
 function passthru(literals, ...values) {
-  
+
   console.log(literals);
   console.log(values);
   let output = "";
@@ -1667,7 +1674,7 @@ function passthru(literals, ...values) {
   for (index = 0; index < values.length; index++) {
     output += literals[index] + values[index];
   }
-  
+
   output += literals[index];
   return output;
 }
@@ -1704,11 +1711,11 @@ function func(a) {
 class foosss {
   bar = 'hello';
   baz = 'world';
-  
+
   constructor() {
     // ...
   }
-  
+
   getBar() {
     console.log(this.bar);
   }
@@ -1728,7 +1735,7 @@ class Fooo {
     // console.log(typeof(args));
     this.args = args;
   }
-  
+
   * [Symbol.iterator]() {
     for (let arg of this.args) {
       yield arg;
@@ -1745,7 +1752,7 @@ class PointCl {
   constructor(x, y) {
     // ...
   }
-  
+
   toString() {
     // ...
   }
@@ -1807,11 +1814,11 @@ class classA {
   constructor(name) {
     this.name = name;
   }
-  
+
   getName() {
     console.log(this.name);
   }
-  
+
 }
 
 let ca = new classA('wkylin');
@@ -1822,13 +1829,13 @@ let caClone = { ...ca };
 
 function fak() {
   let a = 1;
-  
+
   a = 2;
   let b = g();
   a = 3;
-  
+
   return b;
-  
+
   function g() {
     return a;
   }
@@ -1982,7 +1989,7 @@ function sums() {
   for (let num of arguments) {
     total = total + num;
   }
-  
+
   console.log(total);
   return total;
 }
@@ -2012,12 +2019,12 @@ for (let i = 0; i < fruits.length; i++) {
 }
 
 fruits.forEach((fruit) => {
-  
+
   // if(fruit == 'apple'){
   //   break;
   // }
   // console.log(fruit);
-  
+
 });
 
 for (let fruit in fruits) {
@@ -2105,24 +2112,24 @@ ffa().then(v => console.log(v)).catch(e => console.log(e));
 
 function fetchWithTimeout(fetch_promise, timeout) {
   let abortFn = null;
-  
+
   //这是一个可以被reject的promise
   let abortPromise = new Promise(function (resolve, reject) {
     abortFn = function () {
       reject('abort promise');
     };
   });
-  
+
   //这里使用Promise.race，以最快 resolve 或 reject 的结果来传入后续绑定的回调
   let aborTablePromise = Promise.race([
     fetch_promise,
     abortPromise
   ]);
-  
+
   setTimeout(function () {
     abortFn();
   }, timeout);
-  
+
   return aborTablePromise;
 }
 
@@ -2130,13 +2137,13 @@ function fetchWithTimeout(fetch_promise, timeout) {
 function fetchWithTimeout() {
   const FETCH_TIMEOUT = 5000;
   let didTimeOut = false;
-  
+
   new Promise(function (resolve, reject) {
     const timeout = setTimeout(function () {
       didTimeOut = true;
       reject(new Error('Request timed out'));
     }, FETCH_TIMEOUT);
-    
+
     fetch('https://davidwalsh.name/?xx1')
       .then(function (response) {
         // Clear the timeout as cleanup
@@ -2148,7 +2155,7 @@ function fetchWithTimeout() {
       })
       .catch(function (err) {
         console.log('fetch failed! ', err);
-        
+
         // Rejection already happened with setTimeout
         if (didTimeOut) return;
         // Reject with error
@@ -2205,7 +2212,7 @@ let isValid = function (s) {
     '[': ']',
     '{': '}'
   };
-  
+
   for (let char of s) {
     if (char in map) {
       stack.push(char);
@@ -2215,7 +2222,7 @@ let isValid = function (s) {
       }
     }
   }
-  
+
   // 如果最后stack 里没有元素了， 就一定是匹配的
   return !stack.length;
 };
@@ -2226,7 +2233,7 @@ function getSum(arr, sum) {
   if (arr == '' || arr.length == 0) {
     return false;
   }
-  
+
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++) {
       if (arr[i] + arr[j] == sum) {
@@ -2258,7 +2265,7 @@ let longestPalindrome = function (s) {
     dp[i][i] = 1;
     result = s[i];
   }
-  
+
   // L是i和j之间的间隔数（因为间隔数从小到大渐增，所以大的间隔数总能包含小的间隔数）
   // i     j
   // abcdcba.length = L   所以 L = j-i+1; => j = i+L-1;
@@ -2273,7 +2280,7 @@ let longestPalindrome = function (s) {
         dp[i][j] = 1;
         result = s.slice(i, i + L);
       }
-      
+
     }
   }
   //console.log(result);
@@ -2348,7 +2355,7 @@ function parseParam(url) {
       let [key, val] = param.split('='); // 分割 key 和 value
       val = decodeURIComponent(val); // 解码
       val = /^\d+$/.test(val) ? parseFloat(val) : val; // 判断是否转为数字
-      
+
       if (paramsObj.hasOwnProperty(key)) { // 如果对象有 key，则添加一个值
         paramsObj[key] = [].concat(paramsObj[key], val);
       } else { // 如果对象没有这个 key，创建 key 并设置值
@@ -2358,7 +2365,7 @@ function parseParam(url) {
       paramsObj[param] = true;
     }
   });
-  
+
   return paramsObj;
 }
 
@@ -2444,7 +2451,7 @@ Array.from({ length: 5 }, (v, i) => i);
 function Archiver() {
   let temperature = null;
   let archive = [];
-  
+
   Object.defineProperty(this, 'temperature', {
     get: function () {
       // console.log('get!');
@@ -2527,12 +2534,12 @@ class Logger {
   constructor() {
     this.printName = this.printName.bind(this);
   }
-  
+
   printName(name = 'there') {
     console.log('this>>', this);
     this.print(`Hello ${name}`);
   }
-  
+
   print(text) {
     console.log(text);
   }
@@ -2550,7 +2557,7 @@ class Fooss {
     this.args = args;
     console.log(this.args);
   }
-  
+
   // * [Symbol.iterator]() {
   //   for (let arg of this.args) {
   //     yield arg;
@@ -2570,7 +2577,7 @@ const MyClass = class Me {
   // constructor(name) {
   //   this.name = name;
   // }
-  
+
   getClassName() {
     return Me.name;
   }
@@ -2593,7 +2600,7 @@ class PointClass {
     this.x = x;
     this.y = y;
   }
-  
+
   toString() {
     return `${this.x}, ${this.y}`;
   }
@@ -2621,7 +2628,7 @@ class Points {
   constructor(x, y) {
     // ...
   }
-  
+
   toString() {
     // ...
   }
@@ -2693,10 +2700,10 @@ class Point {
 function objectFactory() {
   let obj = new Object(),
     Constructor = [].shift().call(arguments);
-  
+
   obj.__proto__ = Constructor.prototype;
   let ret = Constructor.apply(obj, arguments);
-  
+
   return typeof ret === 'object' ? ret : obj;
 }
 
@@ -2841,7 +2848,7 @@ const regNull = Object.create({ name: 'Dim' });
 
 regNull[Symbol.iterator] = () => {
   const keys = Object.keys(regNull);
-  
+
   return {
     next() {
       const done = keys.length === 0;
@@ -2968,7 +2975,7 @@ class Em {
     this.name = name;
     this.age = age;
   }
-  
+
   getEm() {
     console.log(`Em name: ${this.name}`);
   }
@@ -2979,7 +2986,7 @@ class Me extends Em {
     super(name, age);
     this.salary = salary;
   }
-  
+
   // getEm(){
   //   console.log(`Me name: ${this.name}, salary: ${this.salary}`);
   // }
@@ -3032,7 +3039,7 @@ class child extends Parent {
     super('Harry', 'Dim');
     this.age = age;
   }
-  
+
   showUp() {
     console.log(this.fname);
     console.log(`Your age is ${this.age}`);
@@ -3046,16 +3053,16 @@ const children = new child(23);
 
 
 class oClass {
-  
+
   constructor() {
     // console.log(oClass.onCall());
     // console.log(this.constructor.onCall());
   }
-  
+
   static onCall() {
     return 'this is a static Method';
   }
-  
+
   static onCall2() {
     return `${this.onCall()} called using another static method`;
   }
@@ -3095,7 +3102,7 @@ class Model {
     this.Mno = Mno;
     this.Mname = Mname;
   }
-  
+
   show() {
     console.log('Model Number', this.Mno);
   }
@@ -3348,7 +3355,7 @@ function createRandomNumber(num, maxNum) {
   for (let i = 0; i < maxNum; i++) {
     arr[i] = i - 0 + 1;
   }
-  
+
   arr.sort(function (p1, p2) {
     return 0.5 - Math.random();
   });
@@ -3572,7 +3579,7 @@ function parseQueryString(url) {
 function query(str) {
   let obj = {};
   for (let i = 0; i < str.length; i++) {
-    
+
     if (!obj[str.charAt(i)]) {
       obj[str.charAt(i)] = 1;
     } else {
@@ -3660,19 +3667,19 @@ let aRaa = array.sort((a, b) => a.id - b.id > 0 ? 1 : -1);
 
 function outer() {
   let a = 1;
-  
+
   function inner() {
     let b = 2;
-    
+
     function innermost() {
       let c = 3;
       // console.log(a, b, c);
     }
-    
+
     innermost();
     // console.log(a,b);
   }
-  
+
   inner();
   // console.log(a)
 }
@@ -3694,11 +3701,11 @@ let g2 = 'g2';
 
 function sayHi(name) {
   let message = `Hi, ${name}`;
-  
+
   function greeting() {
     console.log(message);
   }
-  
+
   return greeting;
 }
 
@@ -3723,11 +3730,11 @@ function myScope() {
 this.prop = 1;
 
 function myContext() {
-  
+
   this.prop = 2;
   // console.log(this);
   console.log(prop);
-  
+
 }
 
 // let myInstance = new myContext();
@@ -3739,7 +3746,7 @@ function Dinosaur(name) {
   this.name = name;
   let self = this;
   inner();
-  
+
   function inner() {
     console.log(this);
     console.log(self);
@@ -3897,16 +3904,16 @@ function add(a, b) {
 function deepFreeze(obj) {
   // 取回定义在obj上的属性名
   let propNames = Object.getOwnPropertyNames(obj);
-  
+
   // 在冻结自身之前冻结属性
   propNames.forEach(function (name) {
     let prop = obj[name];
-    
+
     // 如果prop是个对象，冻结它
     if (typeof prop == 'object' && prop !== null)
       deepFreeze(prop);
   });
-  
+
   // 冻结自身(no-op if already frozen)
   return Object.freeze(obj);
 }
