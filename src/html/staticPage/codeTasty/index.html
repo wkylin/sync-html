@@ -105,7 +105,9 @@
     };
   }
     const animateCubes = function () {
-      requestAnimationFrame(animateCubes);
+      let aaa = null;
+      cancelAnimationFrame(aaa);
+      aaa = requestAnimationFrame(animateCubes);
 
       const inner = document.querySelector('.inner');
 
