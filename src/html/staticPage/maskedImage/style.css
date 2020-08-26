@@ -1,0 +1,63 @@
+
+html, body{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+html {
+  overflow-x: hidden;
+  background: black;
+  color: #FFF;
+}
+
+.masked-image {
+  position: absolute;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: auto;
+  z-index: 2;
+
+  background: url('https://unsplash.it/1000/1000/?image=802');
+  background-position: center center;
+  background-size: cover;
+
+}
+
+.masked-image {
+  mask-image: radial-gradient(#000 60%, transparent 61%);
+  mask-position: center center;
+  mask-repeat: no-repeat;
+  animation: mask-move 3s cubic-bezier(.5,0,.5,1) infinite alternate;
+  animation-fill-mode: both;
+}
+
+@keyframes mask-move {
+
+  0%, 30% {
+    mask-size: 160vmax 160vmax;
+  }
+  70%, 100% {
+    mask-size: 0% 0%;
+  }
+}
+
+
+body:before {
+  content: '';
+  display: block;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.container {
+  padding: 2em; max-width: 30em; margin: auto;
+
+}
+.container p { margin-bottom: 2em; }

@@ -1,0 +1,20 @@
+
+#background {
+  background: url('images/foreground.png') 5% 5%,
+    url('images/midground.png') 20% 20%,
+    url('images/background.png') 90% 110%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  -webkit-transition: left 300s linear;
+}
+
+#experiment:target #background {
+  left: -5000px;
+}
+
+#experiment:hover #background {
+  left: -9999px;
+}
