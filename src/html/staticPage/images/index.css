@@ -1,0 +1,110 @@
+.hEQBI {
+  width: 300px;
+  box-sizing: border-box;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 40px;
+  cursor: pointer;
+  z-index: 1;
+  justify-self: center;
+  backface-visibility: hidden;
+  transform: translate3d(0px, 0px, 0px);
+  border-radius: 20px;
+  padding: 20px;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0s;
+  cursor: pointer;
+  height: 225px;
+  /* background: black; */
+}
+.hEQBI:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 30px 60px;
+  transform: scale(1.1, 1.1);
+}
+.eaTTFn .image {
+  width: 120%;
+  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0s;
+}
+
+.hEQBI:hover .image {
+  transform: translateY(20px);
+}
+
+.doYMCS {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 225px;
+  background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.hAmApj {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  transform: translateY(100px);
+  background: url(/images/Reflection.png) 0% 0% / 100%;
+  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0s;
+}
+
+.hOCGfT {
+  display: flex;
+}
+
+.eigImy {
+  position: relative;
+}
+
+.cOFgaG {
+  align-self: end;
+}
+
+.eSJaaK {
+  position: relative;
+}
+
+.eSJaaK p {
+  line-height: 150%;
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0px;
+  background: linear-gradient(104.74deg, rgb(148, 164, 186) 0%, rgb(148, 164, 186) 100%) text;
+}
+
+.jEOgrM:hover .reflection {
+  transform: translateY(-50px) scale(1.2, 1.2);
+  opacity: 1;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-transition: color 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    fill 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: color 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    fill 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bbcuGc {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 360px;
+  height: 265px;
+  background: url('images/Swiftui3.jpg') center center / cover;
+  background-position: center center;
+}
+.jEOgrM:hover .reflection {
+  transform: translateY(-50px) scale(1.2, 1.2);
+  opacity: 1;
+}
+
+.hEQBI:hover .image {
+  transform: translateY(20px);
+}
