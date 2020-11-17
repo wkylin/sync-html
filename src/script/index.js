@@ -1,7 +1,7 @@
-// window.addEventListener("load", function(){
-//   alert('aaa');
-//   console.log("The page is visible: ", document.visibilityState);
-// });
+
+window.addEventListener("load", function(){
+  console.log("The page is visible: ", document.visibilityState);
+});
 
 
 // function eventCounter() {
@@ -4012,4 +4012,3 @@ let arrObj = [{
 
 // console.log(distinctObj(arrObj, 'name'));
 // console.log(distinctObj([{ "name": 1, 'b':2 }, { "name": 3, "c":2 }, { "name": 2 }, { "name": 3 }, { "name": 1 }], 'name'));
-
