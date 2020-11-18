@@ -1,3 +1,65 @@
+const twoSum1 = function(nums, target) {
+  if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== '[object Number]' ) return;
+
+  let i, j, len = nums.length;
+
+  for (i = 0; i < len; i++) {
+    for (j = i + 1; j < len; j++) {
+      if (nums[i] + nums[j] === target) return [i, j];
+    }
+  }
+};
+
+const result1 = twoSum1([2, 3, 7, 6], 9);
+console.log(result1);
+
+
+// const twoSum3 = function(nums, target) {
+//   if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== '[object Number]' ) return;
+
+//   var arr = [],
+//     i,
+//     j,
+//     len = nums.length;
+
+//   for (i = 0; i < len; i++) {
+//     j = arr[target - nums[i]];
+//     if (j !== undefined) return [j, i];
+//     arr[nums[i]] = i;
+//   }
+// };
+
+// const result3 = twoSum3([2, 7, 8, 7], 9);
+
+// console.log(result3);
+
+
+// const twoSum2 = function(nums, target){
+//   if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== "[object Number]" ) return;
+
+//   var arr = [],
+//       i,
+//       j,
+//       len = nums.length;
+
+//   for ( i = 0; i < len; i ++ ){
+//     arr[nums[i]] = i;
+//   }
+
+//   for ( i = 0; i < len; i ++ ){
+//     j = arr[ target - nums[i] ];
+//     if ( j !== undefined && i !== j ) return [ i, j ];
+//   }
+// }
+
+// const result = twoSum2([2, 7, 8], 9);
+
+// console.log(result);
+
+
+
+
+
 function lastItem(list) {
   if (Array.isArray(list)) {
     return list.slice(-1)[0];
