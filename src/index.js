@@ -1,6 +1,6 @@
 const fixToFixed = (value = 0, holdLen = 2) => {
 
-  if (!isFinite(+value) || (!value && value !== 0)) return '--';
+  if (!Number.isFinite(+value) || (!value && value !== 0)) return '--';
 
   let valueStr = `${value}`
 
@@ -29,9 +29,9 @@ const fixToFixed = (value = 0, holdLen = 2) => {
     if (digit >= 5) {
       const temp = Math.pow(10, 0 - holdLen);
       valueStr =
-        parseFloat(valueStr) > 0
-          ? parseFloat(valueStr) + temp
-          : parseFloat(valueStr) - temp;
+        Number.parseFloat(valueStr) > 0
+          ? Number.parseFloat(valueStr) + temp
+          : Number.parseFloat(valueStr) - temp;
     }
     result = `${valueStr}`.substr(0, dotIndex + holdLen + 1);
   }
@@ -41,10 +41,10 @@ const fixToFixed = (value = 0, holdLen = 2) => {
 
 const numberFormatThousands = (number = 0, decimals = 2) => {
 
-  if (!isFinite(+number) || (!number && number !== 0)) return '--';
+  if (!Number.isFinite(+number) || (!number && number !== 0)) return '--';
   const numberFix = `${number}`.replace(/[^0-9+-Ee.]/g, '');
-  const num = !isFinite(+numberFix) ? 0 : +numberFix;
-  const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+  const num = !Number.isFinite(+numberFix) ? 0 : +numberFix;
+  const prec = !Number.isFinite(+decimals) ? 0 : Math.abs(decimals);
   const sep = ',';
   const dec = '.';
   const str = (prec ? fixToFixed(num, prec) : `${Math.round(num)}`).split('.');
@@ -59,6 +59,12 @@ const numberFormatThousands = (number = 0, decimals = 2) => {
   return str.join(dec);
 };
 
+// console.log(numberFormatThousands('0', 2));
+// console.log(numberFormatThousands(null, 2));
+// console.log(numberFormatThousands(false, 2));
+// console.log(numberFormatThousands('dfaf', 2));
+// console.log(numberFormatThousands('-23232.3342', 2));
+// console.log(numberFormatThousands('00s23232.3352', 2));
 
 
 // const twoSum1 = function(nums, target) {
