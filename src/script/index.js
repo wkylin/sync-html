@@ -2322,9 +2322,6 @@ let longestPalindrome = function (s) {
 // };
 
 
-// console.log(longestPalindrome('abcbamoneaaenom'));
-
-
 function isCardNo(number) {
   let regx = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
   return regx.test(number);
