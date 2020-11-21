@@ -1,17 +1,80 @@
-const twoSum1 = function(nums, target) {
-  if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== '[object Number]' ) return;
+const fixToFixed = (value = 0, holdLen = 2) => {
 
-  let i, j, len = nums.length;
+  if (!isFinite(+value) || (!value && value !== 0)) return '--';
 
-  for (i = 0; i < len; i++) {
-    for (j = i + 1; j < len; j++) {
-      if (nums[i] + nums[j] === target) return [i, j];
+  let valueStr = `${value}`
+
+  let dotIndex = valueStr.indexOf('.');
+  if (dotIndex === -1) {
+    let integerStr = '.';
+    for (let i = 0; i < holdLen; i++) {
+      integerStr = integerStr + '0';
     }
+    return valueStr + integerStr;
   }
+
+  const dotBefore = valueStr.split('.')[0];
+  let dotAfter = valueStr.split('.')[1];
+  let result = '';
+  if (dotAfter.length === holdLen) {
+    result = valueStr;
+  } else if (dotAfter.length < holdLen) {
+    const forLength = holdLen - dotAfter.length;
+    for (let i = 0; i < forLength; i++) {
+      dotAfter = dotAfter + '0';
+    }
+    result = dotBefore + '.' + dotAfter;
+  } else {
+    const digit = valueStr.substr(dotIndex + holdLen + 1, 1);
+    if (digit >= 5) {
+      const temp = Math.pow(10, 0 - holdLen);
+      valueStr =
+        parseFloat(valueStr) > 0
+          ? parseFloat(valueStr) + temp
+          : parseFloat(valueStr) - temp;
+    }
+    result = `${valueStr}`.substr(0, dotIndex + holdLen + 1);
+  }
+  return result;
 };
 
-const result1 = twoSum1([2, 3, 7, 6], 9);
-console.log(result1);
+
+const numberFormatThousands = (number = 0, decimals = 2) => {
+
+  if (!isFinite(+number) || (!number && number !== 0)) return '--';
+  const numberFix = `${number}`.replace(/[^0-9+-Ee.]/g, '');
+  const num = !isFinite(+numberFix) ? 0 : +numberFix;
+  const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+  const sep = ',';
+  const dec = '.';
+  const str = (prec ? fixToFixed(num, prec) : `${Math.round(num)}`).split('.');
+  const re = /(-?\d+)(\d{3})/;
+  while (re.test(str[0])) {
+    str[0] = str[0].replace(re, '$1' + sep + '$2');
+  }
+  if ((str[1] || '').length < prec) {
+    str[1] = str[1] || '';
+    str[1] += new Array(prec + 1 - str[1].length).join('0');
+  }
+  return str.join(dec);
+};
+
+
+
+// const twoSum1 = function(nums, target) {
+//   if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== '[object Number]' ) return;
+
+//   let i, j, len = nums.length;
+
+//   for (i = 0; i < len; i++) {
+//     for (j = i + 1; j < len; j++) {
+//       if (nums[i] + nums[j] === target) return [i, j];
+//     }
+//   }
+// };
+
+// const result1 = twoSum1([2, 3, 7, 6], 9);
+// console.log(result1);
 
 
 // const twoSum3 = function(nums, target) {
