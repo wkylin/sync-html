@@ -59,12 +59,13 @@ const numberFormatThousands = (number = 0, decimals = 2) => {
   return str.join(dec);
 };
 
-// console.log(numberFormatThousands('0', 2));
-// console.log(numberFormatThousands(null, 2));
-// console.log(numberFormatThousands(false, 2));
-// console.log(numberFormatThousands('dfaf', 2));
-// console.log(numberFormatThousands('-23232.3342', 2));
-// console.log(numberFormatThousands('00s23232.3352', 2));
+console.log(numberFormatThousands('0', 2));
+console.log(numberFormatThousands(null, 2));
+console.log(numberFormatThousands(false, 2));
+console.log(numberFormatThousands('dfaf', 2));
+console.log(numberFormatThousands('-23232.3342', 2));
+console.log(numberFormatThousands('23232.3352', 2));
+console.log(numberFormatThousands('23232.342', 2));
 
 
 // const twoSum1 = function(nums, target) {
