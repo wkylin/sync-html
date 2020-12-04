@@ -1,63 +1,91 @@
-const fixToFixed = (value = 0, holdLen = 2) => {
 
-  if (!Number.isFinite(+value) || (!value && value !== 0)) return '--';
+// var fruits = ["banana", "apple", "orange"];
+// var fruitsObj = { ...fruits };
+// console.log(fruitsObj);
+// Returns : {0: "banana", 1: "apple", 2: "orange"}
 
-  let valueStr = `${value}`
-
-  let dotIndex = valueStr.indexOf('.');
-  if (dotIndex === -1) {
-    let integerStr = '.';
-    for (let i = 0; i < holdLen; i++) {
-      integerStr = integerStr + '0';
-    }
-    return valueStr + integerStr;
-  }
-
-  const dotBefore = valueStr.split('.')[0];
-  let dotAfter = valueStr.split('.')[1];
-  let result = '';
-  if (dotAfter.length === holdLen) {
-    result = valueStr;
-  } else if (dotAfter.length < holdLen) {
-    const forLength = holdLen - dotAfter.length;
-    for (let i = 0; i < forLength; i++) {
-      dotAfter = dotAfter + '0';
-    }
-    result = dotBefore + '.' + dotAfter;
-  } else {
-    const digit = valueStr.substr(dotIndex + holdLen + 1, 1);
-    if (digit >= 5) {
-      const temp = Math.pow(10, 0 - holdLen);
-      valueStr =
-        Number.parseFloat(valueStr) > 0
-          ? Number.parseFloat(valueStr) + temp
-          : Number.parseFloat(valueStr) - temp;
-    }
-    result = `${valueStr}`.substr(0, dotIndex + holdLen + 1);
-  }
-  return result;
-};
+// var newArray = new Array(5).fill("Hi");
+// console.log(newArray);
+// Returns: ["Hi", "Hi", "Hi", "Hi", "Hi"]
 
 
-const numberFormatThousands = (number = 0, decimals = 2) => {
+// const colors = ["red", "pink", "yellow", "black", "blue"];
+// const randomColor = colors[Math.floor(Math.random() * colors.length)];
+// console.log(randomColor);
+// Returns a random color from the "colors" array.
 
-  if (!Number.isFinite(+number) || (!number && number !== 0)) return '--';
-  const numberFix = `${number}`.replace(/[^0-9+-Ee.]/g, '');
-  const num = !Number.isFinite(+numberFix) ? 0 : +numberFix;
-  const prec = !Number.isFinite(+decimals) ? 0 : Math.abs(decimals);
-  const sep = ',';
-  const dec = '.';
-  const str = (prec ? fixToFixed(num, prec) : `${Math.round(num)}`).split('.');
-  const re = /(-?\d+)(\d{3})/;
-  while (re.test(str[0])) {
-    str[0] = str[0].replace(re, '$1' + sep + '$2');
-  }
-  if ((str[1] || '').length < prec) {
-    str[1] = str[1] || '';
-    str[1] += new Array(prec + 1 - str[1].length).join('0');
-  }
-  return str.join(dec);
-};
+// var numOne = [0, 2, 4, 6, 8, 8];
+// var numTwo = [1, 2, 3, 4, 5, 6];
+// var duplicateValues = [...new Set(numOne)].filter(item => numTwo.includes(item));
+// console.log(duplicateValues);
+// Returns [2, 4, 6]
+
+// var entries = [1, 2, 3, 4, 5, 6, 7];
+// console.log(entries.length); // 7
+// entries.length = 4;
+// console.log(entries.length); // 4
+// console.log(entries); // [1, 2, 3, 4]
+
+// const fixToFixed = (value = 0, holdLen = 2) => {
+
+//   if (!Number.isFinite(+value) || (!value && value !== 0)) return '--';
+
+//   let valueStr = `${value}`
+
+//   let dotIndex = valueStr.indexOf('.');
+//   if (dotIndex === -1) {
+//     let integerStr = '.';
+//     for (let i = 0; i < holdLen; i++) {
+//       integerStr = integerStr + '0';
+//     }
+//     return valueStr + integerStr;
+//   }
+
+//   const dotBefore = valueStr.split('.')[0];
+//   let dotAfter = valueStr.split('.')[1];
+//   let result = '';
+//   if (dotAfter.length === holdLen) {
+//     result = valueStr;
+//   } else if (dotAfter.length < holdLen) {
+//     const forLength = holdLen - dotAfter.length;
+//     for (let i = 0; i < forLength; i++) {
+//       dotAfter = dotAfter + '0';
+//     }
+//     result = dotBefore + '.' + dotAfter;
+//   } else {
+//     const digit = valueStr.substr(dotIndex + holdLen + 1, 1);
+//     if (digit >= 5) {
+//       const temp = Math.pow(10, 0 - holdLen);
+//       valueStr =
+//         Number.parseFloat(valueStr) > 0
+//           ? Number.parseFloat(valueStr) + temp
+//           : Number.parseFloat(valueStr) - temp;
+//     }
+//     result = `${valueStr}`.substr(0, dotIndex + holdLen + 1);
+//   }
+//   return result;
+// };
+
+
+// const numberFormatThousands = (number = 0, decimals = 2) => {
+
+//   if (!Number.isFinite(+number) || (!number && number !== 0)) return '--';
+//   const numberFix = `${number}`.replace(/[^0-9+-Ee.]/g, '');
+//   const num = !Number.isFinite(+numberFix) ? 0 : +numberFix;
+//   const prec = !Number.isFinite(+decimals) ? 0 : Math.abs(decimals);
+//   const sep = ',';
+//   const dec = '.';
+//   const str = (prec ? fixToFixed(num, prec) : `${Math.round(num)}`).split('.');
+//   const re = /(-?\d+)(\d{3})/;
+//   while (re.test(str[0])) {
+//     str[0] = str[0].replace(re, '$1' + sep + '$2');
+//   }
+//   if ((str[1] || '').length < prec) {
+//     str[1] = str[1] || '';
+//     str[1] += new Array(prec + 1 - str[1].length).join('0');
+//   }
+//   return str.join(dec);
+// };
 
 // console.log(numberFormatThousands('0', 2));
 // console.log(numberFormatThousands(null, 2));
