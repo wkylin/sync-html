@@ -1,4 +1,19 @@
 
+let test = "Test";
+test[0] = "R";
+console.log(test);
+
+let numberTen = 10;
+numberTen = "Ten";
+console.log(numberTen);
+
+// https://dev.to/aravindan07/introduction-to-javascript-universe-3h
+// Primitive values are immutable
+// Primitive values are immutable(cannot be changed).
+// Variables are not values. variables point to values and thus we can control where we need to point the variable.
+// There are special numbers in Javascript which are Infinity,-Infinity, NaN, and -0.
+
+
 // var fruits = ["banana", "apple", "orange"];
 // var fruitsObj = { ...fruits };
 // console.log(fruitsObj);
