@@ -1,18 +1,46 @@
+// function display(name = 'David', age = 35, location = 'NY') {
+//   console.log(name, age, location);
+// }
+// display('David', 35); // David 35 NY
+// display('David', 35, undefined); // David 35 NY
 
-let test = "Test";
-test[0] = "R";
-console.log(test);
+// display('David', 35, undefined); // David 35 NY
+// display('David', 35, null); // David 35 null
 
-let numberTen = 10;
-numberTen = "Ten";
-console.log(numberTen);
+// let i = 10;
+// {
+//   let i = 20;
+//   console.log('inside:', i); // inside: 20
+//   i = 30;
+//   console.log('i again:', i); // i again: 30
+// }
+// console.log('outside:', i); // outside: 10
+
+// ES6 Code
+// for (let i = 0; i < 10; i++) {
+//   console.log(i);
+// }
+// console.log('outside:', i); // Uncaught ReferenceError: i is not defined
+
+// ES5 Code
+// for(var i = 0; i < 10; i++){
+//  console.log(i);
+// }
+// console.log('outside:', i); // 10
+
+// let test = "Test";
+// test[0] = "R";
+// console.log(test);
+
+// let numberTen = 10;
+// numberTen = "Ten";
+// console.log(numberTen);
 
 // https://dev.to/aravindan07/introduction-to-javascript-universe-3h
 // Primitive values are immutable
 // Primitive values are immutable(cannot be changed).
 // Variables are not values. variables point to values and thus we can control where we need to point the variable.
 // There are special numbers in Javascript which are Infinity,-Infinity, NaN, and -0.
-
 
 // var fruits = ["banana", "apple", "orange"];
 // var fruitsObj = { ...fruits };
@@ -22,7 +50,6 @@ console.log(numberTen);
 // var newArray = new Array(5).fill("Hi");
 // console.log(newArray);
 // Returns: ["Hi", "Hi", "Hi", "Hi", "Hi"]
-
 
 // const colors = ["red", "pink", "yellow", "black", "blue"];
 // const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -81,7 +108,6 @@ console.log(numberTen);
 //   return result;
 // };
 
-
 // const numberFormatThousands = (number = 0, decimals = 2) => {
 
 //   if (!Number.isFinite(+number) || (!number && number !== 0)) return '--';
@@ -102,9 +128,6 @@ console.log(numberTen);
 //   return str.join(dec);
 // };
 
-
-
-
 // const twoSum1 = function(nums, target) {
 //   if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== '[object Number]' ) return;
 
@@ -119,7 +142,6 @@ console.log(numberTen);
 
 // const result1 = twoSum1([2, 3, 7, 6], 9);
 // console.log(result1);
-
 
 // const twoSum3 = function(nums, target) {
 //   if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== '[object Number]' ) return;
@@ -139,7 +161,6 @@ console.log(numberTen);
 // const result3 = twoSum3([2, 7, 8, 7], 9);
 
 // console.log(result3);
-
 
 // const twoSum2 = function(nums, target){
 //   if ( !Array.isArray(nums) || Object.prototype.toString.call(target) !== "[object Number]" ) return;
@@ -162,10 +183,6 @@ console.log(numberTen);
 // const result = twoSum2([2, 7, 8], 9);
 
 // console.log(result);
-
-
-
-
 
 function lastItem(list) {
   if (Array.isArray(list)) {
@@ -199,17 +216,18 @@ const asyncSequentializer = (() => {
     return Promise.resolve(x);
   };
 
-  return (list) => {
+  return list => {
     const result = [];
 
-    return list.reduce((lastPromise, currentPromise) => {
-      return lastPromise.then(res => {
-        result.push(res);
-        return toPromise(currentPromise);
-      });
-    }, toPromise(list.shift()))
-    .then(res => Promise.resolve([...result, res]));
-  }
+    return list
+      .reduce((lastPromise, currentPromise) => {
+        return lastPromise.then(res => {
+          result.push(res);
+          return toPromise(currentPromise);
+        });
+      }, toPromise(list.shift()))
+      .then(res => Promise.resolve([...result, res]));
+  };
 })();
 
 function isEmpty(x) {
