@@ -1,3 +1,338 @@
+
+// const data = [
+//   {
+//     id: '1',
+//     name: 'abc',
+//   },
+//   {
+//     id: '2',
+//     name: 'cde',
+//   },
+//   {
+//     id: '3',
+//     name: 'efg',
+//   },
+//   {
+//     id: '4',
+//     name: 'hij',
+//   },
+//   {
+//     id: '5',
+//     name: 'klm',
+//   },
+// ];
+// const data1 = [
+//   {
+//     code: '23',
+//     id: '1',
+//     name: 'abc',
+//   },
+//   {
+//     code: '45',
+//     id: '2',
+//     name: 'cde',
+//   },
+// ];
+// const result = data.filter(({ id }) => !data1.some(val => val.id === id));
+// console.log(result);
+
+// const surveyResponses = [
+//   {
+//     createdAt: new Date(),
+//     responses: [
+//       {
+//         questionId: 'data1',
+//         response: 'abc',
+//       },
+//     ],
+//   },
+//   {
+//     createdAt: new Date(),
+//     responses: [
+//       {
+//         questionId: 'data2',
+//         response: 'cde',
+//       },
+//     ],
+//   },
+// ];
+// const result = [].concat(
+//   ...surveyResponses.map(item => item.responses.map(({ response }) => response))
+// );
+// console.log(result);
+
+
+// const array1 = [
+//   {
+//     name: 'data1',
+//     amount: 10,
+//     serviceId: 'aa',
+//     result: 'SUCCESS',
+//   },
+//   {
+//     name: 'data2',
+//     amount: 9,
+//     result: 'FAIL',
+//   },
+//   {
+//     name: 'data3',
+//     amount: 15,
+//     serviceId: 'cc',
+//     result: 'SUCCESS',
+//   },
+//   {
+//     name: 'data3',
+//     amount: 15,
+//     serviceId: 'dd',
+//     result: 'FAIL',
+//   },
+// ];
+// // First group the items by name
+// const byName = array1.reduce((ob, item) => {
+//   if (!(item.name in ob)) ob[item.name] = [];
+//   ob[item.name].push({
+//     amount: item.amount,
+//     result: item.result,
+//   });
+//   return ob;
+// }, {});
+// // Then compute the total amount in each group and find if there is any FAIL in a group
+// const sumByproperty = Object.keys(byName).map(name => {
+//   // This is a way to iterate through the groups
+//   // Sum the amount in all elements of a group
+//   const amount = byName[name].reduce((sum, item) => sum + item.amount, 0);
+//   // Find if there is any FAIL in a group
+//   const result = byName[name]
+//     .map(item => item.result) // Get an array with only the result string
+//     .includes('FAIL')
+//     ? 'FAIL'
+//     : 'SUCCESS'; // Evaluate if the array includes FAIL
+//   return {
+//     name,
+//     amount,
+//     result,
+//   };
+// });
+
+// console.log(byName);
+// console.log(sumByproperty);
+
+
+
+// let arr = [{'id': "1"}, {'id': "8"}]
+// let ids =["1","2","3","4"];
+// var includes = arr.filter(f => ids.includes(f.id))
+// console.log(includes) //1
+
+// function groupBy(array, fn) {
+//   return array.reduce((acc, current) => {
+//     const groupName = typeof fn === 'string' ? current[fn] : fn(current);
+//     (acc[groupName] = acc[groupName] || []).push(current);
+//     return acc;
+//   }, {});
+// }
+// const datav = [
+//   {
+//     desc: 'a',
+//     menu: 1,
+//   },
+//   {
+//     desc: 'b',
+//     menu: 2,
+//   },
+//   {
+//     desc: 'c',
+//     menu: 1,
+//   },
+//   {
+//     desc: 'd',
+//     menu: 3,
+//   },
+//   {
+//     desc: 'e',
+//     menu: 3,
+//   },
+//   {
+//     desc: 'f',
+//     menu: 2,
+//   },
+//   {
+//     desc: 'g',
+//     menu: 1,
+//   },
+//   {
+//     desc: 'g',
+//     menu: 1,
+//   },
+//   {
+//     desc: 'g',
+//     menu: 4,
+//   },
+//   {
+//     desc: 'g',
+//     menu: 4,
+//   },
+//   {
+//     desc: 'g',
+//     menu: 4,
+//   },
+// ];
+// const groupMenu = groupBy(datav, item => item.menu);
+// console.log(groupMenu);
+
+
+
+// const ary = [
+//   '2020-08-20',
+//   '2020-08-20',
+//   '2020-08-21',
+//   '2020-08-24',
+//   '2020-08-25',
+//   '2020-08-25',
+//   '2020-08-25',
+// ];
+// const va = [];
+// ary.forEach(d => {
+//   const index = va.findIndex(r => r.date === d);
+//   if (index === -1) {
+//     va.push({
+//       date: d,
+//       count: 1,
+//     });
+//   } else {
+//     va[index].count++;
+//   }
+// });
+// console.log(va);
+
+// const arr = [
+//   { name: 'val', change: 100, price: 50 },
+//   { name: 'test', change: 50, price: 10 },
+// ];
+// const res = arr.map(({ change, ...rest }) => ({ ...rest, change: 0 }));
+// console.log(res);
+
+// const propertyName = ['id', 'createId', 'sentId'];
+// const value = [
+//     ['1', '2', '3'],
+//     ['3', '4', '5'],
+//     ['6', '7', '8'],
+// ];
+// const dataObjs = value.map(a =>
+//     Object.fromEntries(a.map((e, i) => [propertyName[i], e]))
+// );
+// console.log(dataObjs);
+
+
+// const sortedData = [
+//   {
+//     val1: 'abc',
+//     val2: 1,
+//     val3: 2,
+//   },
+//   {
+//     val1: 'def',
+//     val2: 3,
+//     val3: 4,
+//   },
+//   {
+//     val1: 'ghe',
+//     val2: 5,
+//     val3: 6,
+//   },
+// ];
+// const obj = sortedData.reduce(
+//   (acc, { val1, val2, val3 }) =>
+//     (acc[val1] = {
+//       val2,
+//       val3,
+//     }) && acc,
+//   {}
+// );
+// console.log(obj);
+
+// let str = 'abc cde ght',
+//   old_Words = ['abc', 'cde'],
+//   new_Words = ['tt', 'yy'],
+//   newstr = str;
+// for (let i = 0; i < old_Words.length; i++) {
+//   newstr = newstr.replace(old_Words[i], new_Words[i]);
+// }
+// console.log(newstr);
+
+
+// let cars = [
+//   {
+//     color: 'purple',
+//     type: 'minivan',
+//     capacity: 7,
+//   },
+//   {
+//     color: 'purple',
+//     type: 'ferrari',
+//     capacity: 3,
+//   },
+//   {
+//     color: 'green',
+//     type: 'bike',
+//     capacity: 1,
+//   },
+// ];
+// const colors = cars.map(car => car.color);
+// const unique = [...new Set(colors)];
+
+// console.log('unique', unique);
+
+// const string = 'Option 1|false|Option 2|false|Option 3|false|Option 4|true',
+//   result = [];
+// for (let i = 0, a = string.split('|'); i < a.length; i += 2) {
+//   const option = a[i],
+//     value = JSON.parse(a[i + 1]);
+//   result.push({ option, value });
+// }
+// console.log(result);
+
+// const customers = [
+//   {
+//     customer_name: 'Negan',
+//     customer_age: 45,
+//     customer_weapon: 'Bat',
+//     customer_email: 'negan@sanctuary.com',
+//     customer_city: 'Washington',
+//   },
+//   {
+//     customer_name: 'Daryl',
+//     customer_age: 41,
+//     customer_weapon: 'Crossbow',
+//     customer_email: 'daryl.dixon@kickass.com',
+//     customer_city: 'Atlanta',
+//   },
+//   {
+//     customer_name: 'Rick',
+//     customer_age: 45,
+//     customer_weapon: 'Magnum 357',
+//     customer_email: 'rick@alexandria.com',
+//     customer_city: 'King County',
+//   },
+// ];
+// const newKeys = ['firstName', 'age', 'weapon', 'email', 'city'];
+// let result = customers.map(obj =>
+//   Object.values(obj).reduce((acc, cur, i) => {
+//     acc[newKeys[i]] = cur;
+//     return acc;
+//   }, {})
+// );
+// console.log(result);
+
+// var a = [1, 2, 3], b = [101, 2, 1, 10];
+// var c = a.concat(b);
+// console.log('c', c);
+// var d = c.filter((item, pos) => c.indexOf(item) === pos);
+// console.log('d', d);
+
+// const e = [...new Set([...a ,...b])]; //   => remove duplication
+// console.log('e', e);
+
 // function display(name = 'David', age = 35, location = 'NY') {
 //   console.log(name, age, location);
 // }
