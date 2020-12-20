@@ -1,4 +1,25 @@
 
+// function sum() {
+//   this.total = 0;
+//   arr.forEach(item => {
+//     this.total += item; // all is well `this` points to outer function
+//   });
+//   return total;
+// }
+
+
+// function doSomething() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve('done');
+//     }, 3000);
+//   });
+// }
+// doSomething().then(arg => {
+//   console.log('done here', arg);
+// });
+
+
 // const data = [
 //   {
 //     id: '1',
