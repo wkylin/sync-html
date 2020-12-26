@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+    }
+
+    .banner {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-grow: 1;
+      flex-direction: row;
+      align-items: center;
+      background-color: #031321;
+    }
+
+    .banner .scan {
+      width: 7px;
+      height: 80%;
+      position: absolute;
+      left: 30px;
+      z-index: 3;
+      transition: left 50ms ease-out 0s;
+      border-radius: 15px;
+      background-color: #fff;
+      box-shadow: 0 0 15px 5px #fff,
+        /* inner white */
+        0 0 35px 15px #008cff,
+        /* inner blue */
+        0 0 350px 20px #0ff;
+      /* outer cyan */
+    }
+
+    .banner .description {
+      width: 100%;
+      color: white;
+      font-size: 3em;
+      text-align: center;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hidden {
+      background: radial-gradient(dodgerblue 10%, #031321 50%) var(--pos) 50% / 500px 500px no-repeat fixed;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="banner">
+    <div class="scan"></div>
+    <div class="description">
+      Just <span class="hidden">hidden</span> something
+    </div>
+  </div>
+  <script>
+    const e = document.getElementsByClassName('scan')[0];
+    const hidden = document.getElementsByClassName('hidden')[0];
+
+    document.onmousemove = function (event) {
+      e.style.left = `${event.clientX}px`; //               ↓ background width (500px) / 2
+      hidden.style.setProperty("--pos", `${event.clientX - 250}px`);
+    };
+  </script>
+</body>
+
+</html>

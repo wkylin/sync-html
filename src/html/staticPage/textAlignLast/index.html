@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 350px;
+      border: 1px solid #000;
+      resize: horizontal;
+      overflow: auto;
+    }
+
+    .box * {
+      /*text-align:justify; uncomment this to see the justify effect, not bad too */
+      text-align-last: right;
+      display: inline-block;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      a:hover {
+        color: red;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div><br>
+    <div>Ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
+  </div>
+
+  <a href="#">Some Link</a>
+</body>
+
+</html>
