@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #number_text {
+      padding-left: 9px;
+      letter-spacing: 31px;
+      border: 0;
+      background:
+        repeating-linear-gradient(to right, #e1e1e1 0 26px, transparent 26px 38px) bottom/100% 1px no-repeat;
+      width: 260px;
+      clip-path: polygon(0 0, calc(100% - 38px) 0, calc(100% - 38px) 100%, 0 100%);
+      box-sizing: border-box;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="number_text" maxlength="6" pattern="\d{6}" value="1234">ß
+</body>
+
+</html>

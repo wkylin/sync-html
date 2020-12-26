@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      --w: 400px;
+      /* Total width of the coaster */
+      --h: 180px;
+      /* Height of the coaster */
+      --b: 90px;
+      /* width of the small bar */
+      --t: 15px;
+      /* height of the small bar */
+      --c: blue;
+      /* Color of the small bar */
+
+      width: var(--w);
+      height: var(--h);
+    }
+
+    .box>div {
+      height: 100%;
+      position: relative;
+      width: calc(50% + var(--h)/2 + var(--b)/2);
+      border-radius: 0 1000px 1000px 0;
+      animation: hide 3s infinite linear alternate;
+      -webkit-mask:
+        linear-gradient(#fff, #fff) top left /calc(100% - var(--h)/2) var(--t),
+        linear-gradient(#fff, #fff) bottom left/calc(100% - var(--h)/2) var(--t),
+        radial-gradient(farthest-side at left, transparent calc(100% - var(--t)), #fff 0) right/calc(var(--h)/2) 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask:
+        linear-gradient(#fff, #fff) top left /calc(100% - var(--h)/2) var(--t),
+        linear-gradient(#fff, #fff) bottom left/calc(100% - var(--h)/2) var(--t),
+        radial-gradient(farthest-side at left, transparent calc(100% - var(--t)), #fff 0) right/calc(var(--h)/2) 100%;
+      mask-repeat: no-repeat;
+    }
+
+    .box>div:last-child {
+      margin-top: calc(-1*var(--h));
+      margin-left: auto;
+      transform: scaleX(-1);
+      animation-direction: alternate-reverse;
+    }
+
+    .box>div:before {
+      content: "";
+      position: absolute;
+      width: var(--b);
+      height: 50%;
+      background: var(--c);
+      bottom: -25%;
+      animation: loop 3s infinite linear alternate;
+      transform-origin: 50% -50%;
+    }
+
+    .box>div:last-child:before {
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes loop {
+      15% {
+        transform: translateX(calc(var(--w)/2)) rotate(0deg);
+      }
+
+      40% {
+        transform: translateX(calc(var(--w)/2)) rotate(-180deg);
+      }
+
+      50%,
+      100% {
+        transform: translateX(calc(var(--w)/2 - var(--b)/2)) rotate(-180deg);
+      }
+    }
+
+    @keyframes hide {
+      50% {
+        visibility: visible;
+      }
+
+      50.1%,
+      100% {
+        visibility: hidden;
+      }
+    }
+
+    body {
+      background: linear-gradient(to right, yellow, gray);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="box" style="--w:500px;--h:80px;--b:50px;--c:red;--t:5px">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="box" style="--w:90vw;--h:200px;--b:100px;--c:purple;--t:20px">
+    <div></div>
+    <div></div>
+  </div>
+</body>
+
+</html>

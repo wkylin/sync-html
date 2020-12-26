@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      --d: 4deg;
+      /* distance between dashes */
+      --n: 30;
+      /* number of dashes */
+      --b: 2px;
+      /* control the thickness of border*/
+
+      width: 180px;
+      display: inline-block;
+      border-radius: 50%;
+      background: linear-gradient(red, blue);
+      -webkit-mask:
+        radial-gradient(farthest-side, transparent calc(100% - var(--b)), #fff calc(100% - var(--b) + 1px)),
+        repeating-conic-gradient(#000 0 calc(360deg/var(--n) - var(--d)), transparent 0 calc(360deg/var(--n)));
+      -webkit-mask-composite: source-in;
+      mask:
+        radial-gradient(farthest-side, transparent calc(100% - var(--b)), #fff calc(100% - var(--b) + 1px)),
+        repeating-conic-gradient(#000 0 calc(360deg/var(--n) - var(--d)), transparent 0 calc(360deg/var(--n)));
+      mask-composite: intersect;
+    }
+
+    /* keep the element square */
+    .box:before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+
+
+    body {
+      background: linear-gradient(to right, yellow, pink);
+    }
+
+    input::-ms-reveal,
+    input::-ms-clear {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <div class="box" style="--n:20;--b:5px;width:150px;background:conic-gradient(green,orange,black)"></div>
+
+  <div class="box" style="--n:8;--d:20deg;--b:10px;width:130px;background:conic-gradient(black,white,black)"></div>
+
+  <div class="box" style="--n:18;--d:12deg;--b:8px;width:100px;background:linear-gradient(60deg,red 50%,green 0)"></div>
+
+  <div class="box" style="--n:10;--d:20deg;--b:3px;width:100px;background:#fff"></div>
+
+</body>
+
+</html>

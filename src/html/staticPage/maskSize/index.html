@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .green {
+      background: url(https://picsum.photos/id/1018/800/800) center/cover;
+      height: 100vh;
+    }
+
+    .blue {
+      background: #1b4287;
+      height: 100%;
+      -webkit-mask:
+        /* 3rd mask */
+        radial-gradient(farthest-side, #fff 99%, transparent) top 50px right 50px/ 100px 100px,
+        /**/
+        /* 2nd mask */
+        linear-gradient(#fff, #fff) bottom 50px right 50px/ 300px 20px,
+        /**/
+        /* 1st mask */
+        linear-gradient(#fff, #fff) 50px 50px/ 200px 20px,
+        /**/
+        linear-gradient(#fff, #fff);
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-composite: destination-out;
+
+      mask:
+        /* 3rd mask */
+        radial-gradient(farthest-side, #fff 99%, transparent) top 50px right 50px/ 100px 100px,
+        /**/
+        /* 2nd mask */
+        linear-gradient(#fff, #fff) bottom 50px right 50px/ 300px 20px,
+        /**/
+        /* 1st mask */
+        linear-gradient(#fff, #fff) 50px 50px/ 200px 20px,
+        /**/
+        linear-gradient(#fff, #fff);
+      mask-repeat: no-repeat;
+      mask-composite: exclude;
+      transition: .5s;
+    }
+
+    .blue:hover {
+      -webkit-mask-position:
+        100px 100px,
+        bottom 100px left 50px,
+        top 50px right 50px,
+        0 0;
+      mask-position:
+        100px 100px,
+        bottom 100px left 50px,
+        top 50px right 50px,
+        0 0;
+      -webkit-mask-size:
+        150px 150px,
+        50px 50px,
+        300px 50px,
+        auto;
+      mask-size:
+        150px 150px,
+        50px 50px,
+        300px 50px,
+        auto;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      background: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="green">
+    <div class="blue">
+    </div>
+  </div>
+</body>
+
+</html>

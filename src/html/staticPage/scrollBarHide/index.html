@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    #container1 {
+      height: 100%;
+      width: 100%;
+      border: 1px solid green;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #container2 {
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      /* exact value is given through JavaScript */
+      border: 1px solid blue;
+      overflow: auto;
+    }
+
+    html,
+    body {
+      height: 99%;
+      border: 1px solid red;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container1">
+    <div id="container2">
+      hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />hello
+      <br />I
+      <br />am
+      <br />here
+      <br />good
+      <br />bye.
+    </div>
+  </div>
+  <script>
+    var parent = document.getElementById('container1');
+    var child = document.getElementById('container2');
+    child.style.right = child.clientWidth - child.offsetWidth + "px";
+  </script>
+</body>
+
+</html>

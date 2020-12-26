@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .form-section .form-control {
+
+      font-size: 16px;
+      width: 100%;
+      margin-left: 9px;
+    }
+
+    .form-section .form-control:focus {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    .form-section .form-group {
+      margin-bottom: 21px;
+    }
+
+    .icon-email {
+      background-image: url('https://i.stack.imgur.com/xhx3w.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 30px;
+      height: auto;
+    }
+
+    .icon-pass {
+      background-image: url('https://i.stack.imgur.com/910l0.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 30px;
+      height: auto;
+    }
+
+    .form-btn {
+      padding: 10px;
+      background-color: #65a3fe;
+      border: none;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .input-txt {
+      padding-left: 5px;
+      float: left;
+      border-left: none;
+      outline: none;
+      border: none;
+      background-color: #f7f8fa;
+    }
+
+    .custom-input {
+      display: flex;
+      border-radius: 4px;
+      background-color: #f7f8fa !important;
+      border: none;
+      height: 51px;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px #f7f8fa inset !important;
+    }
+
+    div:not([class]) {
+      background-color: yellow;
+      width: 120px;
+      height: 120px;
+      border: 1px solid;
+    }
+
+    .exampleText {
+      writing-mode: vertical-lr;
+      margin-block-start: 20px;
+      /* we will end with a margin-left */
+      background-color: #c8c800;
+    }
+
+    .exampleText2 {
+      writing-mode: vertical-lr;
+      margin-top: 20px;
+      /* this will remain a margin-top */
+      background-color: #c8c800;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-section">
+    <form>
+      <div class="form-group custom-input">
+        <div class="icon-email"></div>
+        <input title="Email" type="email" class="form-control input-txt" name="email" placeholder="Your email address"
+          value="" />
+      </div>
+      <div class="form-group  custom-input">
+        <div class="icon-pass"></div>
+        <input title="Password" type="password" class="form-control input-txt" name="password"
+          placeholder="Your Password" />
+      </div>
+      <button type="submit" class="btn btn-primary form-btn">Log in</button>
+    </form>
+  </div>
+
+  <div>
+    <div class="exampleText">Example text</div>
+  </div>
+
+  <div>
+    <div class="exampleText2">Example text</div>
+  </div>
+</body>
+
+</html>
