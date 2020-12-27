@@ -1,3 +1,7 @@
+const arr = [12, 'hi', undefined, 0, 12.9, null, ''];
+console.log(arr.filter(Boolean));
+
+
 // Object.is('objectis', 'objectis'); // true
 // Object.is(0, -0); // false
 // const test = {a: 100};
@@ -6,12 +10,12 @@
 // console.log(Object.is(test, cloneTest)) // true;
 // console.log(Object.is(test, newTest)) // false;
 
-const entries = [
-  ['foo', [1, 2, 3, 4, 5, 6]],
-  ['baz', 42],
-];
-const obj = Object.fromEntries(entries);
-console.log(obj); // Object { foo: [ 1, 2, 3, 4, 5, 6 ], baz: 42 }
+// const entries = [
+//   ['foo', [1, 2, 3, 4, 5, 6]],
+//   ['baz', 42],
+// ];
+// const obj = Object.fromEntries(entries);
+// console.log(obj); // Object { foo: [ 1, 2, 3, 4, 5, 6 ], baz: 42 }
 
 // console.log(Object.fromEntries(undefined)); // undefined
 // console.log(Object.fromEntries(null)); // null
