@@ -1,3 +1,89 @@
+// Object.is('objectis', 'objectis'); // true
+// Object.is(0, -0); // false
+// const test = {a: 100};
+// const cloneTest = test;
+// const newTest = {a: 100};
+// console.log(Object.is(test, cloneTest)) // true;
+// console.log(Object.is(test, newTest)) // false;
+
+const entries = [
+  ['foo', [1, 2, 3, 4, 5, 6]],
+  ['baz', 42],
+];
+const obj = Object.fromEntries(entries);
+console.log(obj); // Object { foo: [ 1, 2, 3, 4, 5, 6 ], baz: 42 }
+
+// console.log(Object.fromEntries(undefined)); // undefined
+// console.log(Object.fromEntries(null)); // null
+// console.log(Object.fromEntries(true)); // boolean
+// console.log(Object.fromEntries(100)); // number
+// console.log(Object.fromEntries("hi")); // string
+// console.log(Object.fromEntries({key: "value"})); // object
+// console.log(Object.fromEntries([1,2,3])); // single value array
+
+// const compress = (txt = "") => {
+//   return txt.replace(/(\w)(\1+)/g, (_, m1, m2) => `${m1}${m2.length + 1}`);
+// };
+// console.log(compress("aaabbbb")); // a3b4
+
+// const abbrev = (text = "") => {
+//   if (text.length < 3) return text;
+//   const first = text.charAt(0);
+//   const last = text.slice(-1);
+//   const remLen = text.length - 2;
+//   return `${first}${remLen}${last}`;
+// };
+// console.log(abbrev("internationalization")); // i18n
+
+// const word = /\w+/g;
+// const abbrevPlus = (text = "") => {
+//   return text.replace(word, (matched) => abbrev(matched));
+// };
+// console.log(abbrevPlus("I love javascript!")); // I l2e j8t!
+
+// const isUniqueChars2 = (txt = "") => {
+//   const chars = new Map();
+//   // [...txt] is equivalent of Array.from(txt)
+//   return ![...txt].some((char) => {
+//     if (chars.has(char)) return true;
+//     chars.set(char, true);
+
+//     console.log('chars',chars);
+//   });
+// };
+// console.log(isUniqueChars2("background")); // true
+// console.log(isUniqueChars2("bawdyhouse")); // true
+// console.log(isUniqueChars2("rhythm")); //false
+
+// const sort = (str) => [...str].sort().join();
+// const isPermuted = (str1, str2) => {
+//   if (str1.length !== str2.length) return false;
+//   return sort(str1) === sort(str2);
+// };
+// console.log(isPermuted("abc", "acb")); // true
+
+// const isPermuted2 = (str1, str2) => {
+//   if (str1.length !== str2.length) return false;
+//   // map to keep count
+//   const chars = {};
+//   for (let i = 0; i < str1.length; i++) {
+//     if (!chars[str1.charAt(i)]) chars[str1.charAt(i)] = 0;
+//     chars[str1.charAt(i)]++;
+//   }
+//   for (let i = 0; i < str2.length; i++) {
+//     if (!chars[str2.charAt(i)]) chars[str2.charAt(i)] = 0;
+//     chars[str2.charAt(i)]--;
+//     if (chars[str2.charAt(i)] < 0) return false;
+//   }
+//   return true;
+// };
+// console.log(isPermuted2("abc", "acb")); // true
+// console.log(isPermuted2("abc", "acd")); // false
+
+// const fixToFixed = num => Math.round(num * 100 + Number.EPSILON) / 100;
+
+// console.log(fixToFixed(10.2345));
+
 // 循环方式
 // function cloneDeep3(source) {
 //   if (!(typeof source === 'object' && source !== null)) {
@@ -104,7 +190,7 @@
 //   return timer;
 // };
 // Example
-counter('#my-id', 1, 1000, 5, 2000); // 为 id="my-id" 的元素创建一个两秒的计时器
+// counter('#my-id', 1, 1000, 5, 2000); // 为 id="my-id" 的元素创建一个两秒的计时器
 
 // const httpGet = (url, callback, err = console.error) => {
 //   const request = new XMLHttpRequest();
@@ -192,8 +278,8 @@ counter('#my-id', 1, 1000, 5, 2000); // 为 id="my-id" 的元素创建一个两�
 // };
 
 // Examples
-elementIsVisibleInViewport(el); // (不完全可见)
-elementIsVisibleInViewport(el, true); // (部分可见)
+// elementIsVisibleInViewport(el); // (不完全可见)
+// elementIsVisibleInViewport(el, true); // (部分可见)
 
 // function CopyToClipboard(containerId) {
 //   if (window.getSelection) {
