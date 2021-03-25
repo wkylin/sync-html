@@ -1,5 +1,15 @@
 
 
+
+const logToConsole = (msg) => {
+  console.log(msg);
+  logToConsole(msg); // <- recursive function call
+}
+
+logToConsole("Hello World!");
+
+
+
 // function sum() {
 //   this.total = 0;
 //   arr.forEach(item => {
