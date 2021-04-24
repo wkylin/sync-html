@@ -1,12 +1,12 @@
+const stripHTMLTags = str => str.replace(/<[^>]*>/g, '');
 
 
+// const logToConsole = (msg) => {
+//   console.log(msg);
+//   logToConsole(msg); // <- recursive function call
+// }
 
-const logToConsole = (msg) => {
-  console.log(msg);
-  logToConsole(msg); // <- recursive function call
-}
-
-logToConsole("Hello World!");
+// logToConsole("Hello World!");
 
 
 
