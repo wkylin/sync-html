@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      padding:0;
+      margin: 0;
+    }
+    .header {
+      height: 30px;
+      line-height: 30px;
+      background: #aaa;
+    }
+
+    .content {
+      height: calc(100vh - 60px);
+      overflow: auto;
+    }
+
+    .container {
+      margin: 0 auto;
+      background-color: #ddd;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .left {
+      flex: 0 0 100px;
+      padding: 2px;
+    }
+
+    .right {
+      flex: 1;
+      padding: 2px;
+      margin-left: 10px;
+      font-size: 16px;
+      line-height: 24px;
+      color: #333;
+    }
+
+    .left {
+      background-color: deeppink;
+      min-height: calc(100vh - 64px);
+    }
+
+    .right {
+      background-color: yellowgreen;
+      min-height: calc(100vh - 64px);
+    }
+
+    .footer {
+      background: #aaa;
+      height: 30px;
+      line-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">header</div>
+  <div class="content">
+    <div class="container">
+      <div class="left">多列等高布局</div>
+      <div class="right">
+        多行文本
+        <div style="height: 1000px">高试很高哦</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">footer</div>
+</body>
+
+</html>
