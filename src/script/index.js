@@ -1,4 +1,8 @@
-const stripHTMLTags = str => str.replace(/<[^>]*>/g, '');
+
+
+
+
+// const stripHTMLTags = str => str.replace(/<[^>]*>/g, '');
 
 
 // const logToConsole = (msg) => {

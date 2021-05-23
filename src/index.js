@@ -1,6 +1,30 @@
-const arr = [12, 'hi', undefined, 0, 12.9, null, ''];
-console.log(arr.filter(Boolean));
+class MyClass {
+  static nameMethod() {
+    return this.name;
+  }
+  constructor() {
+    this.name = 'Mohit';
+  }
+}
+console.log(MyClass.nameMethod())
 
+
+// let x;
+// if(x= false === true) {
+//   console.log(x)
+// } else {
+//   console.log('not x')
+// }
+
+// const roadMap = new Map();
+// roadMap.set('a', 1);
+// roadMap.b = 2;
+// console.log(roadMap.size);
+
+// console.log(JSON.stringify(roadMap, null, 2));
+
+// const arr = [12, 'hi', undefined, 0, 12.9, null, ''];
+// console.log(arr.filter(Boolean));
 
 // Object.is('objectis', 'objectis'); // true
 // Object.is(0, -0); // false
