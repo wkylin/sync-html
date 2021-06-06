@@ -1,13 +1,56 @@
-class MyClass {
-  static nameMethod() {
-    return this.name;
-  }
-  constructor() {
-    this.name = 'Mohit';
-  }
-}
-console.log(MyClass.nameMethod())
 
+// const foo = ['foo', Symbol.for('bar'), 'baz'];
+// const foobar = foo.reduce((a, b) => ({ ...a, [b]: undefined }), {});
+
+// const foobaz = [...Object.keys(foobar)].join('');
+
+// console.log('foobar', foobar);
+// console.log('foobaz', foobaz);
+
+// console.log('' + Symbol('id'))
+//Cannot convert a Symbol value to a string
+
+// '' + null
+//'null'
+// '' + undefined
+//'undefined'
+
+// null.toString()
+//Cannot read property 'toString' of null
+// undefined.toString()
+//Cannot read property 'toString' of undefined
+
+// Symbol('id').toString();
+//'Symbol(id)'
+// const prototype = {
+//   toString(){
+//     return JSON.stringify(this);
+//   }
+// }
+// const obj = Object.create(prototype);
+// obj.msg = 'Hi';
+// console.log(obj.toString());
+//''{"msg":"Hi"}''
+
+// String({ msg: 'Hi' });
+//'[object Object]'
+// String(Symbol('id'));
+//'Symbol(id)'
+
+// `${{ msg: 'Hi' }}`
+//'[object Object]'
+
+// `${Symbol('id')}`
+//Cannot convert a Symbol value to a string
+// class MyClass {
+//   static nameMethod() {
+//     return this.name;
+//   }
+//   constructor() {
+//     this.name = 'Mohit';
+//   }
+// }
+// console.log(MyClass.nameMethod())
 
 // let x;
 // if(x= false === true) {
