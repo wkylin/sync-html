@@ -1,5 +1,26 @@
 
+// const toArray = num => [...`${num}`].map(elem=> parseInt(elem))
+// toArray(1234); //returns [1, 2, 3, 4]
+// toArray(758999); //returns [7, 5, 8, 9, 9, 9]
 
+
+// const obj = [1, 2, 2, 4, 3, 4]
+//   .map((val) => {
+//     return {
+//       count: 1,
+//       val
+//     }
+//   })
+//   .reduce((a, b) => {
+//     a[b.val] = (a[b.val] || 0) + b.count
+//     return a
+//   }, {})
+// const duplicates = Object.entries(obj)
+//   .filter(([, val]) => {
+//     return val > 1
+//   })
+//   .map(([key]) => +key)
+// console.log(duplicates)
 
 
 // const stripHTMLTags = str => str.replace(/<[^>]*>/g, '');
